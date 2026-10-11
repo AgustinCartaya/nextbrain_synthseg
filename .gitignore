@@ -32,8 +32,9 @@ __pycache__
 __temp__
 __ignore__
 softwares
-project/wp1
-project/wp3/old
+project/dev/wp1
+project/data
+project/dev/wp3/old
 
 !project/dev/wp3/simple_generator/data/inputs/sub-ADNI002S0295_ses-m000_space-MNI_T1wdseg_synthsr.nii.gz
 
