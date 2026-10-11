@@ -1,0 +1,43 @@
+# Ignore image data
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.wav
+*.npy
+*.npz
+*.zip
+*.lta
+*.git
+*.nii.gz
+*.nii
+
+
+# Ignore model weights
+*.safetensors
+*.pkl
+*.bin
+*.pt
+*.h5
+*.pth
+*.ckpt
+*events.out.tfevents*
+
+# Ignore visual studio
+*.pyc
+__pycache__
+
+# Ignore specific folders and files
+__temp__
+__ignore__
+softwares
+project/wp1
+project/wp3/old
+
+!project/dev/wp3/simple_generator/data/inputs/sub-ADNI002S0295_ses-m000_space-MNI_T1wdseg_synthsr.nii.gz
+
+
+
+
+

@@ -1,0 +1,193 @@
+SIMPLE GENERATOR — TREE-BASED, RESOLUTION-AWARE INTENSITY SAMPLING (WP3)
+==========================================================================
+
+Purpose
+-------
+This folder has a small, self-contained synthetic MRI generator in the style of SynthSeg.
+It takes a label map (segmentation) and produces a synthetic intensity image by giving each
+label a Gaussian (mean, sigma) and sampling every voxel from it.
+
+Where it differs from SynthSeg: the label -> intensity model is not a flat table of independent
+Gaussians. It is an ONTOLOGY TREE. Related structures share intensity statistics through their
+common ancestors, and structures that cannot be resolved at the simulated voxel size / contrast
+automatically MERGE into their parent's Gaussian. The same tree also tells the segmentation
+network (WP4) which labels must be merged in the loss at that resolution.
+
+
+Files
+-----
+tree_sampling.py          Core library: LabelTree (the ontology) and TreeSampling (the sampler).
+tree_plot.py              Draws a tree and shows which nodes are visible / collapsed at a resolution.
+_build_synthseg_tree.py   Script that builds a FreeSurfer/SynthSeg tree in code and writes it to JSON.
+example_toy.py            2D toy demo (nested squares), multiple resolutions and random contrasts.
+example_synthseg.py       3D demo on a real SynthSeg/FreeSurfer segmentation (NIfTI in, NIfTI out).
+FreeSurferColorLUT.txt    FreeSurfer color table, used to color the tree and the class maps.
+data/inputs/*.json        Ready-made trees:
+                            toy_tree.json          toy example (9 nodes)
+                            synthseg_tree.json     SynthSeg labels, deep GM / ventricles / etc. (31 nodes)
+                            synthseg_ctx_tree.json same, plus 34 bilateral cortical parcels (DK atlas,
+                                                   labels 1001-1035 / 2001-2035) under 'cortex'
+data/outputs/             Figures and NIfTI images produced by the examples.
+
+
+1. The label tree (LabelTree)
+-----------------------------
+The tree is stored as JSON (or built in Python with LabelTree.new + add_node). Global fields:
+
+  colors     names of the N "principal colors", e.g. ["GM", "WM", "CSF"]
+  contrasts  optional list of contrast names (T1, T2, FLAIR, PD, ...) allowed as r_max keys
+  root       name of the root node (level 0, has no labels or colors)
+
+Each node has:
+
+  parent / children   tree structure (must be consistent with each other)
+  level               0 = root, 1 = main tissue classes, 2+ = substructures
+  labels              label-map values painted with this node's Gaussian
+                      (a node may have no labels and act as a pure group, e.g. 'deep_gm', 'striatum')
+  w_mu, w_sigma       level 1 only: weights over the principal colors (non-negative, sum to 1).
+                      E.g. deep GM = 0.7*GM + 0.3*WM. w_sigma defaults to w_mu.
+  wr_mu, wr_sigma     size of the random deviation added to the mean / sigma at this node
+  r_max               coarsest voxel size (mm) at which the node can still be told apart from its
+                      parent. null = always visible; a number = same for every contrast;
+                      a dict {"default": x, "T2": y, ...} = per-contrast values.
+  null                "null color" (mean = sigma = 0), inherited by all descendants (e.g. background)
+  description         free text
+
+Capabilities of LabelTree:
+  - Load / save: from_json, from_dict, to_json (readable, one field per line), to_dict.
+  - Build in code: LabelTree.new(colors=...), then add_node(name, parent, ...) sets level and
+    children for you (see _build_synthseg_tree.py).
+  - Strict validation (validate()), which fails with a list of every problem found:
+      * root present, parent/children agree, levels = parent level + 1, no duplicate children
+      * every node reachable from the root (no cycles, no orphans)
+      * level-1 nodes have w_mu / w_sigma of length N, non-negative, summing to 1
+      * level >= 2 nodes have no weights (they inherit from the parent)
+      * wr_mu, wr_sigma >= 0
+      * r_max keys are known contrasts
+      * every label belongs to exactly one node
+    It also warns (does not fail) when an r_max on a level-1 node is ignored, or when a child
+    has a larger r_max than its parent (it can never be seen beyond the parent's limit).
+  - Queries: order() (breadth-first, parents before children), ancestors, descendants, leaves,
+    label_to_node.
+  - Resolution-dependent queries, for a voxel size r and contrast c:
+      visibility(r, c)      {node: visible?}. A node is visible iff r <= r_max(c) AND its parent
+                            is visible. Level-1 nodes are always visible.
+      representative(r, c)  {node: deepest visible node whose Gaussian it uses}
+      label_groups(r, c)    {visible node: [labels]}: labels that share one Gaussian at this
+                            resolution (= the merged label sets for the WP4 loss)
+      print_tree(r, c)      text view of the tree, marking visible nodes and "-> parent" for
+                            collapsed ones
+  - Anisotropic voxels: a resolution can be a per-axis spacing, e.g. (1, 1, 5). The coarsest
+    axis is used (conservative choice).
+
+
+2. The sampler (TreeSampling)
+-----------------------------
+TreeSampling(input_labels, tree, std_noise=None, min_sigma=0, unassigned='error', seed=None)
+
+Inputs at sampling time:
+  C = principal means  (one per color, in tree.colors order), e.g. [GM, WM, CSF]
+  V = principal sigmas (one per color)
+  resolution (mm, scalar or per axis) and contrast name
+
+Sampling rules, applied top-down:
+  level 1   : mu = sum_i w_mu[i]*C[i]    + wr_mu   * N(0,1)
+              sd = sum_i w_sigma[i]*V[i] + wr_sigma* N(0,1)
+  level >= 2, visible   : mu = mu_parent + wr_mu * N(0,1),  sd = sd_parent + wr_sigma * N(0,1)
+  level >= 2, collapsed : exactly (mu_parent, sd_parent)  -> the whole subtree merges
+  null nodes            : mu = sd = 0
+  sd is clipped at min_sigma; then a global noise term is added in quadrature:
+              sigma_final = sqrt(sd^2 + std_noise^2)   (std_noise defaults to 8 + N(0,1))
+
+So the tree controls how similar structures are: children start from the parent's intensity
+and move away by an amount set by wr_mu. Small wr_mu = subtle contrast (e.g. caudate vs
+putamen); large wr_mu = nearly independent (e.g. extra-cerebral tissue, wr_mu = 40, which
+behaves like SynthSeg's fully random intensities).
+
+Main methods:
+  sample_node_stats(C, V, r, c)  {node: (mu, sigma)} for every node.
+  compute_stats(C, V, r, c)      per-input-label arrays (mus, sigmas), the same convention as
+                                 sampling_scheme_v2 (drop-in replacement for
+                                 GenericHierarchicalSampling).
+  sample_image(labelmap, C, V, r, c)
+                                 piecewise-Gaussian image on the label-map grid
+                                 (before any blur / downsampling / bias field).
+  label_set_lut(r, c)            (group index per input label, group names): the merged label
+                                 sets at that resolution, ready for building the WP4 loss.
+  convert_labelmap, get_class_weights (inherited from SamplingScheme): raw labels -> indices,
+                                 and median-frequency class weights over a set of subjects.
+
+Useful properties:
+  - Consistency across resolutions: two random numbers are drawn for every node even when it
+    collapses. With the same seed, a node that is visible at both 1 mm and 3 mm gets exactly
+    the same intensity in both images; only the nodes that collapse change.
+  - Contrast-dependent visibility: a structure can be separable in T2 but not in T1 at the
+    same voxel size (per-contrast r_max).
+  - Fixed or random contrasts: pass realistic C/V (e.g. T1-like GM=110, WM=170, CSF=40) for
+    readable images, or draw them at random (SynthSeg-style domain randomisation).
+  - Labels in the image but missing from the tree: unassigned='error' (default) stops;
+    unassigned='zero' paints them with mean 0 and only noise.
+
+
+3. Tree visualisation (tree_plot.py)
+------------------------------------
+plot_tree(tree, resolution, contrast, orientation='horizontal'|'vertical', colors=None|'freesurfer'|dict,
+          lut=..., cmap=..., show_labels=True, show_root=False, save='file.png')
+
+  - Visible nodes: solid colored boxes (one color per generation class).
+  - Collapsed nodes: faded, dashed, drawn in the color of the node they copy, with "-> <node>".
+  - Null nodes: dark grey.
+  - colors='freesurfer' uses FreeSurferColorLUT.txt: a node takes the color of its first label;
+    pure group nodes take the mean of their children's colors. The same function
+    (_node_color_freesurfer) gives the colormap for the "generation classes" images, so the tree
+    and the label maps use matching colors.
+
+
+4. Examples
+-----------
+example_toy.py (2D, no external data needed)
+  - Builds a toy tree (background, WM, CSF, a nucleus with part_A -> A1/A2 and part_B) with
+    r_max values of 0.5 / 1 / 2 mm and a T2-specific r_max for A2.
+  - Paints a 240x240 label map of nested squares on a 0.33 mm grid.
+  - Figure 1 (toy_resolutions.png): same draw at 0.33, 0.7, 1.5 and 3 mm, showing the
+    generation classes, the synthetic image and a simulated acquisition (Gaussian PSF +
+    downsampling + resampling back to the grid). The number of distinct Gaussians goes down as
+    the voxel size goes up.
+  - Figure 2 (toy_random_draws.png): 4 random contrasts at 0.33 mm.
+  - Prints the label groups at (0.7 mm, T1), (0.7 mm, T2), (1.5 mm, T1) and plots the tree.
+
+example_synthseg.py (3D, real segmentation)
+  - Loads a SynthSeg/FreeSurfer segmentation (NIfTI), reorients it to RAS and crops it to the
+    brain bounding box.
+  - Loads synthseg_tree.json (or synthseg_ctx_tree.json for cortical parcels) and checks that
+    every label in the segmentation is in the tree.
+  - For each resolution in RESOLUTIONS (e.g. 1 mm and 3 mm; anisotropic tuples are supported)
+    it generates a synthetic volume with the same seed and saves synth_<res>.nii.gz, plus
+    tree_<res>.png.
+  - Saves synthetic_images.png: generation classes and synthetic image in axial, coronal and
+    sagittal slices through the thalami.
+  - RANDOM_CONTRAST switches between T1-like fixed colors and random ones.
+  - Includes an acquisition model (smooth multiplicative bias field + PSF blur + downsampling +
+    resampling). It is currently commented out, so the saved images are the clean
+    piecewise-Gaussian volumes.
+
+Outputs already in data/outputs/:
+  toy_example/                    toy_resolutions.png, toy_random_draws.png, arbol_0.7mm.png
+  example_synthseg/               T1-like colors, synthseg_tree, 1 mm and 3 mm
+  example_synthseg_random/        random colors,  synthseg_tree
+  example_synthseg_ctx/           T1-like colors, synthseg_ctx_tree (with cortical parcels)
+  example_synthseg_ctx_random/    random colors,  synthseg_ctx_tree
+
+
+5. Current limitations / notes
+------------------------------
+  - The r_max values in the SynthSeg trees are illustrative, not measured (WP1 will estimate
+    them). All values in the trees are hand-set.
+  - Left and right homologous structures share a node (same intensity on both sides).
+  - Single channel only (n_channels is accepted but not used).
+  - Intensities only: no spatial deformation, no label-map augmentation. Blur, downsampling and
+    bias field exist only as simple functions inside the example scripts, not in the library.
+  - r_max on level-1 nodes is ignored (level-1 nodes are always visible). Structures that should
+    merge at coarse resolution must be grouped under a common parent at level >= 1.
+  - Sigmas are only clipped at min_sigma (default 0); the global std_noise term keeps the final
+    sigma positive.
