@@ -14,7 +14,7 @@ flat table of independent Gaussians:
 - The same tree tells the segmentation network (WP4) **which labels must be merged in the loss**
   at that resolution (`label_groups` / `label_set_lut`).
 
-![toy example at several resolutions](data/outputs/toy_example/toy_resolutions.png)
+<!-- ![toy example at several resolutions](data/outputs/toy_example/toy_resolutions.png) -->
 
 ---
 
