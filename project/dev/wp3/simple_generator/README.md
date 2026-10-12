@@ -363,7 +363,7 @@ Builds the SynthSeg tree in code and writes it to JSON. It currently writes
 - The `r_max` values (and all other values) in the SynthSeg trees are **hand-set and
   illustrative, not measured**. WP1 will estimate them.
 - Left and right homologous structures share a node, so both sides get the same intensity.
-- Single channel only (`n_channels` is accepted but ignored).
+<!-- - Single channel only (`n_channels` is accepted but ignored). -->
 - Intensities only: no spatial deformation and no label-map augmentation. Blur, downsampling and
   bias field exist only as simple helper functions inside the example scripts.
 - `r_max` on level-1 nodes is ignored. Structures that should merge at coarse resolution must be
@@ -371,7 +371,7 @@ Builds the SynthSeg tree in code and writes it to JSON. It currently writes
 - Sigmas are only clipped at `min_sigma` (default 0); the global `std_noise` keeps the final sigma
   positive.
 
-## 7. Known issues
+<!-- ## 7. Known issues
 
 - **`tree_plot.py` CLI:** the file has two `if __name__ == '__main__':` blocks, and both run.
   - Positional form (`python tree_plot.py tree.json 0.7 T1`) saves `tree_0.7mm_T1.png`, then
@@ -383,4 +383,4 @@ Builds the SynthSeg tree in code and writes it to JSON. It currently writes
   Until one of the blocks is removed, the simplest option is to call `plot_tree(...)` from Python.
 - Docstrings in `example_toy.py` / `example_synthseg.py` still use the old names
   (`toy_example.py`, `synthseg_example.py`), old output folders and a CLI that no longer exists.
-  This README describes the current behaviour.
+  This README describes the current behaviour. -->
