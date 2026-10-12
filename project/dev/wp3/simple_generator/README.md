@@ -15,7 +15,7 @@ flat table of independent Gaussians:
   at that resolution (`label_groups` / `label_set_lut`).
 
 <!-- ![toy example at several resolutions](data/outputs/toy_example/toy_resolutions.png) -->
-
+![synthetic images with cortical parcels](data/outputs/example_synthseg_ctx/synthetic_images.png)
 ---
 
 ## Contents
@@ -336,7 +336,7 @@ corresponding plotting lines.
 | `example_synthseg_ctx/` | `synthseg_ctx_tree` | T1-like |
 | `example_synthseg_ctx_random/` | `synthseg_ctx_tree` | random |
 
-![synthetic images with cortical parcels](data/outputs/example_synthseg_ctx/synthetic_images.png)
+<!-- ![synthetic images with cortical parcels](data/outputs/example_synthseg_ctx/synthetic_images.png) -->
 
 ### `_build_synthseg_tree.py`
 
