@@ -1,4 +1,5 @@
 # conda create -y --name nxb python=3.11
-# pip install matplotlib nibabel numpy scipy
+# conda activate nxb
+# pip install matplotlib nibabel numpy scipy pandas
 # pip install torch torchvision --index-url https://download.pytorch.org/whl/cu129
 # pip install cornucopia
