@@ -3,7 +3,7 @@
     "target_voxel_mm": 0.6
   },
   "labels": {
-    "tree": "../complete/nextbrain_complete_tree.json",
+    "tree": "../complete/nextbrain_tree.json",
     "background": 0,
     "unassigned": "background",
     "output_labels": "templates"
