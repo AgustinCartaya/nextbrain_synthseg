@@ -1,3 +1,7 @@
+git rm -r --cached .
+git add .
+git commit -m "Refresh gitignore rules"
+
 # Ignore image data
 # *.png
 *.jpg
