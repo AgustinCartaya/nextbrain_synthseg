@@ -1,0 +1,22 @@
+conda activate nxb
+
+# 1. offline, once per label map: HR template (0.2 mm, cropped, smoothed)
+python -m nxgen.cli.build_templates \
+    --config __data_test__/inputs/complete_smoothed/nextbrain.json \
+    --seg __data_test__/inputs/complete/changed_recon_0.2mm/case-1.nii.gz \
+    --out __data_test__/outputs/complete_0.4mm/templates \
+    --device cuda:0
+
+
+
+# 2. online: 10 images as an nnU-Net v2 raw dataset
+
+python -m nxgen.cli.generate \
+    --config __data_test__/inputs/complete_smoothed/nextbrain.json \
+    --templates __data_test__/inputs/complete/changed_recon_0.6mm \
+    --out __data_test__/outputs/complete_smoothed_0.6mm \
+    --dataset-id 1 \
+    --dataset-name NextBrain_complete_half_smoothed \
+    -n 3 \
+    --device cuda:0
+

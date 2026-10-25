@@ -1,0 +1,25 @@
+{
+  "background": 0,
+  "values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "names": [
+    "background",
+    "brainstem",
+    "csf_ventricles",
+    "cerebellar_gm",
+    "cerebellar_wm",
+    "cerebral_gm",
+    "cerebral_wm",
+    "deep_gm",
+    "other"
+  ]
+}

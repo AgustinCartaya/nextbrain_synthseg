@@ -194,10 +194,15 @@ def steps_figure(gen, point, lkw, path):
     """
     r = gen.cfg.target_voxel
     sp, th, sg = [r] * 3, [r] * 3, [0.] * 3
-    sp[2], th[2] = 5., 4.
-    sg[2] = tg.sigma_thick_vox(4., 1., r)
+    # sp[2], th[2] = 5., 4.
+    # sg[2] = tg.sigma_thick_vox(4., 1., r)
+    # acq = dict(mode='aniso', axis=2, spacing_mm=sp, thickness_mm=th,
+    #            alpha=[1.] * 3, sigma_vox=sg)
+    
+    sp[2], th[2] = 1.5, 1.5
+    sg[2] = tg.sigma_thick_vox(sp[2], 1., r)
     acq = dict(mode='aniso', axis=2, spacing_mm=sp, thickness_mm=th,
-               alpha=[1.] * 3, sigma_vox=sg)
+            alpha=[1.] * 3, sigma_vox=sg)
     img, seg, aff, info = gen(template_index=0, acquisition=acq, motion=True,
                               return_steps=True)
     st = info['steps']
@@ -263,6 +268,7 @@ def main():
     if not args.no_figures:
         steps_figure(gen, point, lkw, os.path.join(args.out, 'steps.png'))
 
+    # return  # only the steps figure for now
     # --- samples -----------------------------------------------------------
     has_t1 = bool(args.t1) and not args.no_figures
     ncol = args.n + int(has_t1)

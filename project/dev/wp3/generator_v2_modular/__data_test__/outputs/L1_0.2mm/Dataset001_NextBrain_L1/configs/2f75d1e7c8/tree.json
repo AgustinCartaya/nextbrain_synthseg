@@ -1,0 +1,108 @@
+{
+  "version": "synthseg-0.1",
+  "description": "NextBrain L1 segmentation tree",
+  "colors": ["GM", "WM", "CSF"],
+  "contrasts": ["T1", "T2", "FLAIR", "PD"],
+  "root": "root",
+  "nodes": {
+    "root": {
+      "parent": null,
+      "children": ["background", "brainstem", "csf_ventricles", "cerebellar_gm", "cerebellar_wm", "cerebral_gm", "cerebral_wm", "deep_gm", "other"],
+      "level": 0,
+      "labels": [],
+      "wr_mu": 0.0,
+      "wr_sigma": 0.0,
+      "r_max": null
+    },
+    "background": {
+      "parent": "root",
+      "children": [],
+      "level": 1,
+      "labels": [0],
+      "wr_mu": 0.0,
+      "wr_sigma": 0.0,
+      "r_max": null,
+      "null": true
+    },
+    "brainstem": {
+      "parent": "root",
+      "children": [],
+      "level": 1,
+      "labels": [1],
+      "wr_mu": 6.0,
+      "wr_sigma": 1.0,
+      "r_max": null,
+      "w_mu": [0.3, 0.7, 0.0]
+    },
+    "csf_ventricles": {
+      "parent": "root",
+      "children": [],
+      "level": 1,
+      "labels": [2],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [0.0, 0.0, 1.0]
+    },
+    "cerebellar_gm": {
+      "parent": "root",
+      "children": [],
+      "level": 1,
+      "labels": [3],
+      "wr_mu": 6.0,
+      "wr_sigma": 1.0,
+      "r_max": null,
+      "w_mu": [0.9, 0.1, 0.0]
+    },
+    "cerebellar_wm": {
+      "parent": "root",
+      "children": [],
+      "level": 1,
+      "labels": [4],
+      "wr_mu": 6.0,
+      "wr_sigma": 1.0,
+      "r_max": null,
+      "w_mu": [0.1, 0.9, 0.0]
+    },
+    "cerebral_gm": {
+      "parent": "root",
+      "children": [],
+      "level": 1,
+      "labels": [5],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [1.0, 0.0, 0.0]
+    },
+    "cerebral_wm": {
+      "parent": "root",
+      "children": [],
+      "level": 1,
+      "labels": [6],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [0.0, 1.0, 0.0]
+    },
+    "deep_gm": {
+      "parent": "root",
+      "children": [],
+      "level": 1,
+      "labels": [7],
+      "wr_mu": 6.0,
+      "wr_sigma": 1.0,
+      "r_max": null,
+      "w_mu": [0.7, 0.3, 0.0]
+    },
+    "other": {
+      "parent": "root",
+      "children": [],
+      "level": 1,
+      "labels": [8],
+      "wr_mu": 6.0,
+      "wr_sigma": 1.0,
+      "r_max": null,
+      "w_mu": [0.34, 0.33, 0.33]
+    }
+  }
+}

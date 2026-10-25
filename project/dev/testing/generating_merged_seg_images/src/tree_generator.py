@@ -17,7 +17,9 @@ Pipeline
 --------
 Offline, once per template (`prepare_template`):
     1. Keep the raw label values (no regrouping). Labels missing from the
-       tree can be sent to background.
+       tree can be sent to background. Crop around the brain with a
+       background margin (`template_margin`, fixed or computed from the
+       deformation, see `resolve_margin_mm`).
     2. Label super-resolution to `target_voxel / factor` (0.25 mm):
        one-hot -> Sinc upsampling -> Gaussian smoothing (0.5 mm) -> argmax.
        Each label is processed in its own bounding box, and background is
@@ -296,6 +298,245 @@ def super_resolve_labels(seg, factor, voxel_mm, sigma_mm=0.5, background=0,
     return out
 
 
+def affine_linear(rotations, shears, zooms):
+    """
+    Linear part of cornucopia's `AffineTransform` (3D), vectorised.
+
+    Same composition as cornucopia 0.5.1: `Rx @ Ry @ Rz @ Sx @ Sy @ Sz @ Z`,
+    including how it fills the shear matrices.
+
+    Parameters
+    ----------
+    rotations : (N, 3) array, degrees about Z/Y/X
+    shears : (N, 3) array
+    zooms : (N, 3) array, zoom about 1 per X/Y/Z
+
+    Returns
+    -------
+    (N, 3, 3) ndarray, maps output to sampling coordinates
+    """
+    r = np.deg2rad(np.asarray(rotations, float))
+    sh = np.asarray(shears, float)
+    n = len(r)
+    eye = np.broadcast_to(np.eye(3), (n, 3, 3))
+    Z = eye * (1 + np.asarray(zooms, float))[:, None, :]
+    Sz, Sy, Sx = eye.copy(), eye.copy(), eye.copy()
+    Sz[:, 0, 1] = Sz[:, 1, 0] = sh[:, 0]
+    Sy[:, 0, 2] = Sz[:, 2, 0] = sh[:, 1]
+    Sx[:, 1, 2] = Sz[:, 2, 1] = sh[:, 2]
+    c, s = np.cos(r), np.sin(r)
+    Rz, Ry, Rx = eye.copy(), eye.copy(), eye.copy()
+    Rz[:, 0, 0] = Rz[:, 1, 1] = c[:, 0]
+    Rz[:, 0, 1], Rz[:, 1, 0] = s[:, 0], -s[:, 0]
+    Ry[:, 0, 0] = Ry[:, 2, 2] = c[:, 1]
+    Ry[:, 0, 2], Ry[:, 2, 0] = s[:, 1], -s[:, 1]
+    Rx[:, 1, 1] = Rx[:, 2, 2] = c[:, 2]
+    Rx[:, 1, 2], Rx[:, 2, 1] = s[:, 2], -s[:, 2]
+    return Rx @ Ry @ Rz @ Sx @ Sy @ Sz @ Z
+
+
+def _hull_points(fg):
+    """
+    Voxel coordinates whose convex hull is that of the foreground: the
+    first and last foreground voxel of every column along the last axis
+    (reduced to the hull vertices when scipy is available).
+    """
+    fg = np.asarray(fg, bool)
+    cols = fg.any(-1)
+    first = fg.argmax(-1)
+    last = fg.shape[-1] - 1 - fg[..., ::-1].argmax(-1)
+    xy = np.argwhere(cols)
+    pts = np.concatenate([
+        np.c_[xy, first[cols]], np.c_[xy, last[cols]]]).astype(float)
+    try:
+        from scipy.spatial import ConvexHull
+        pts = pts[ConvexHull(pts).vertices]
+    except Exception:   # no scipy or degenerate (flat) foreground
+        pass
+    return pts
+
+
+def auto_margin_mm(fg, voxel_mm, cfg, n_rot=5):
+    """
+    Smallest background margin (mm, per axis) that keeps the foreground
+    inside the field of view under every deformation allowed by `cfg`.
+
+    The generator samples the labels at `phi(x) = A x + t + e(A x + t)`
+    (cornucopia's affine about the grid centre, translation `t`, elastic
+    displacement `e` with |e_j| <= elastic_dmax_mm: cubic B-spline of
+    control points drawn in [-dmax, dmax], without prefilter). A
+    foreground point p is therefore seen at `x = A^-1 (p - t - e)`. The
+    extent of x is maximised over the convex hull of the foreground, over
+    the extreme zooms and shears and over a grid of `n_rot` rotations per
+    axis. Added on top: the morphology growth (`morpho_iter[1]` HR
+    voxels) and one field voxel plus one input voxel of slack (grid
+    centring).
+
+    Parameters
+    ----------
+    fg : (X, Y, Z) bool array, foreground of the input label map
+    voxel_mm : float, isotropic voxel size of the label map
+    cfg : TreeGeneratorConfig
+    n_rot : int, rotation values tried per axis in [-rotations, rotations]
+
+    Returns
+    -------
+    (3,) ndarray of margins in mm (symmetric: same on both sides)
+    """
+    idx = np.argwhere(fg)
+    lo, hi = idx.min(0), idx.max(0)
+    centre = (lo + hi) / 2
+    half = (hi - lo) / 2 * voxel_mm                     # (3,) mm
+    pts = (_hull_points(fg) - centre) * voxel_mm         # (P, 3) mm
+
+    def values(vmax, n):
+        return np.linspace(-vmax, vmax, n) if vmax else np.zeros(1)
+    rot = values(cfg.rotations, n_rot)
+    zoom = values(cfg.zooms, 2)
+    shear = values(cfg.shears, 3)
+    grid = np.stack(np.meshgrid(rot, rot, rot, shear, shear, shear,
+                                zoom, zoom, zoom, indexing='ij'),
+                    -1).reshape(-1, 9)
+
+    shift = np.full(3, cfg.translations_mm + cfg.elastic_dmax_mm)
+    need = np.zeros(3)
+    for chunk in np.array_split(grid, max(1, len(grid) // 1000)):
+        inv = np.linalg.inv(affine_linear(chunk[:, :3], chunk[:, 3:6],
+                                          chunk[:, 6:]))   # (N, 3, 3)
+        x = np.einsum('nij,pj->npi', inv, pts)              # (N, P, 3)
+        ext = np.maximum(x.max(1), -x.min(1))               # (N, 3)
+        ext = ext + np.abs(inv) @ shift                     # translation +
+        need = np.maximum(need, ext.max(0) - half)          # elastic
+
+    return np.maximum(need, 0) + _margin_slack_mm(voxel_mm, cfg)
+
+
+def _margin_slack_mm(voxel_mm, cfg):
+    """Morphology growth + one field voxel + one input voxel (mm)."""
+    hr_voxel = cfg.target_voxel / cfg.factor
+    field_voxel = cfg.field_voxel_mm or cfg.target_voxel
+    field_voxel = max(1, round(field_voxel / hr_voxel)) * hr_voxel
+    morpho = cfg.morpho_iter[1] * hr_voxel if cfg.morpho_pairs else 0.
+    return morpho + field_voxel + voxel_mm
+
+
+def sampled_margin_mm(fg, voxel_mm, cfg, q=0.99, n=300, grid_mm=2.,
+                      seed=0, device=None):
+    """
+    Margin (mm, per axis) that keeps the foreground inside the field of
+    view in a fraction `q` of the deformations, estimated by drawing `n`
+    of them.
+
+    The foreground is max-pooled to a `grid_mm` grid, padded with the
+    worst-case margin (`auto_margin_mm`) and deformed with the same
+    cornucopia transform as the generator (nearest neighbour). For each
+    draw, the margin needed is how far the deformed foreground extends
+    past the original bounding box (worse side of each axis). The
+    `q`-quantile is returned, plus one grid voxel and the slack of
+    `auto_margin_mm`. Random states are restored afterwards.
+
+    Parameters
+    ----------
+    fg : (X, Y, Z) bool array, foreground of the input label map
+    voxel_mm : float
+    cfg : TreeGeneratorConfig
+    q : float in (0, 1]
+    n : int, number of deformations drawn
+    grid_mm : float, voxel size of the coarse grid
+    seed : int
+    device : str, optional (default: cuda if available)
+
+    Returns
+    -------
+    (3,) ndarray of margins in mm
+    """
+    worst = auto_margin_mm(fg, voxel_mm, cfg)
+    k = max(1, round(grid_mm / voxel_mm))
+    g = k * voxel_mm
+    device = device or ('cuda' if torch.cuda.is_available() else 'cpu')
+    t = torch.as_tensor(np.asarray(fg), dtype=torch.float,
+                        device=device)[None, None]
+    t = F.max_pool3d(t, k, stride=k, ceil_mode=True)[0, 0]
+    idx = torch.nonzero(t)
+    lo, hi = idx.min(0).values, idx.max(0).values
+    pad = int(np.ceil(worst.max() / g)) + 2
+    crop = t[lo[0]:hi[0] + 1, lo[1]:hi[1] + 1, lo[2]:hi[2] + 1]
+    src = F.pad(crop, [pad] * 6)[None, None]
+    deform = cc.RandomAffineElasticTransform(
+        dmax=cfg.elastic_dmax_mm / g, shape=cfg.elastic_ctrl,
+        rotations=cfg.rotations, zooms=cfg.zooms, shears=cfg.shears,
+        translations=cfg.translations_mm / g, unit='vox', returns='flow')
+
+    states = random.getstate(), np.random.get_state(), torch.get_rng_state()
+    seed_everything(seed)
+    try:
+        need = []
+        size = torch.as_tensor(crop.shape, device=device)
+        for _ in range(n):
+            flow = deform(torch.zeros_like(src[0]))
+            out = warps.apply_flow(src, flow, has_identity=True,
+                                   mode='nearest', padding_mode='zeros')
+            w = torch.nonzero(out[0, 0])
+            if len(w) == 0:
+                continue
+            before = pad - w.min(0).values
+            after = w.max(0).values - (pad + size - 1)
+            need.append(torch.maximum(before, after).clamp_min(0).cpu()
+                        .numpy())
+    finally:
+        random.setstate(states[0])
+        np.random.set_state(states[1])
+        torch.set_rng_state(states[2])
+    need = np.quantile(np.asarray(need, float), q, axis=0) * g
+    return need + g + _margin_slack_mm(voxel_mm, cfg)
+
+
+def resolve_margin_mm(spec, fg, voxel_mm, cfg):
+    """
+    Background margin (mm, per axis) from the `template_margin` config
+    field.
+
+    Parameters
+    ----------
+    spec : number, [x, y, z], {'mm': ...}, {'vox': ...}, 'auto' or
+            {'auto': q}
+        Numbers and lists are in mm; `{'vox': ...}` is in voxels of the
+        input label map; `'auto'` is the worst case of the deformation
+        (`auto_margin_mm`); `{'auto': q}` is enough for a fraction `q` of
+        the deformations (`sampled_margin_mm`).
+    fg : (X, Y, Z) bool array, foreground of the input label map
+    voxel_mm : float
+    cfg : TreeGeneratorConfig
+
+    Returns
+    -------
+    (3,) ndarray of margins in mm
+    """
+    if isinstance(spec, str):
+        if spec != 'auto':
+            raise ValueError(f"template_margin: unknown string {spec!r} "
+                             f"(only 'auto')")
+        return auto_margin_mm(fg, voxel_mm, cfg)
+    unit = 'mm'
+    if isinstance(spec, dict):
+        if len(spec) != 1 or next(iter(spec)) not in ('mm', 'vox', 'auto'):
+            raise ValueError(f"template_margin: a dict must be {{'mm': ...}}"
+                             f", {{'vox': ...}} or {{'auto': q}}, got "
+                             f"{spec!r}")
+        unit, spec = next(iter(spec.items()))
+    if unit == 'auto':
+        if not 0 < spec <= 1:
+            raise ValueError(f'template_margin: auto quantile must be in '
+                             f'(0, 1], got {spec!r}')
+        return sampled_margin_mm(fg, voxel_mm, cfg, q=spec)
+    margin = np.asarray(spec, float)
+    if margin.size not in (1, 3) or np.any(margin < 0):
+        raise ValueError(f'template_margin: expected one or three '
+                         f'non-negative values, got {spec!r}')
+    margin = np.broadcast_to(margin.reshape(-1), (3,)).copy()
+    return margin * voxel_mm if unit == 'vox' else margin
+
+
 def prepare_template(seg_path, out_path=None, target_voxel=0.75, factor=3,
                      margin_mm=16., sigma_mm=0.5, labels=None, background=0,
                      device='cpu'):
@@ -318,8 +559,10 @@ def prepare_template(seg_path, out_path=None, target_voxel=0.75, factor=3,
         Training voxel size in mm.
     factor : int
         HR voxel = target_voxel / factor.
-    margin_mm : float
-        Background margin kept around the foreground.
+    margin_mm : float, (3,) sequence or callable
+        Background margin (mm) kept around the foreground, the same for
+        all axes or per axis. A callable gets `(foreground, voxel_mm)` and
+        returns the margins (e.g. `resolve_margin_mm` bound to a config).
     sigma_mm : float
         Smoothing of the one-hot channels before argmax.
     labels : iterable of int, optional
@@ -350,7 +593,13 @@ def prepare_template(seg_path, out_path=None, target_voxel=0.75, factor=3,
 
     # crop/pad around foreground with a margin (out-of-bounds -> background)
     idx = np.argwhere(seg != background)
-    margin = int(math.ceil(margin_mm / voxel_mm))
+    if callable(margin_mm):
+        margin_mm = margin_mm(seg != background, voxel_mm)
+    margin = np.ceil(np.broadcast_to(np.asarray(margin_mm, float), (3,))
+                     / voxel_mm - 1e-6).astype(int)   # 15.6 / .2 -> 78
+    print(f'{os.path.basename(seg_path)}: margin '
+          f'{np.round(margin * voxel_mm, 2).tolist()} mm '
+          f'({margin.tolist()} voxels)')
     lo = idx.min(0) - margin
     hi = idx.max(0) + 1 + margin
     # make HR shape a multiple of `factor`
@@ -644,6 +893,13 @@ class TreeGeneratorConfig:
     template_sigma_mm: float = _f(
         0.5, 'Gaussian smoothing (mm) of the labels when building the HR '
              'template (0 = none)')
+    template_margin: object = _f(
+        16., "background margin kept around the brain when building the HR "
+             "templates: mm (a number or [x, y, z]), {'mm': ...}, {'vox': "
+             "...} (voxels of the input label map), 'auto' (worst case of "
+             "the spatial deformation, see `auto_margin_mm`) or {'auto': q} "
+             "(enough for a fraction q of the deformations, see "
+             "`sampled_margin_mm`)")
 
     # -- label space ---------------------------------------------------------
     output_labels: str = _f(
@@ -696,6 +952,13 @@ class TreeGeneratorConfig:
     motion_rotations: float = _f(10., 'max motion rotation (deg)')
     motion_translations_mm: float = _f(10., 'max motion translation (mm)')
     noise_sigma: tuple = _f((0.01, 0.1), 'range of the Gaussian noise std')
+    field_voxel_mm: object = _f(
+        None, 'voxel size (mm) of the grid the smooth random fields '
+              '(deformation, bias) are drawn on before being upsampled '
+              '(None = target_voxel); rounded to a multiple of the HR '
+              'voxel. Set it when target_voxel is small (e.g. 0.6 with '
+              'target_voxel 0.2): a field costs ~200 bytes per voxel of '
+              'its grid')
 
     # -- resolution augmentation (SynthSeg Sec. 3.1.4) ---------------------
     lowres_prob: float = _f(
@@ -822,7 +1085,8 @@ class TreeGenerator:
     # fields that change the label space or the template grid: they cannot
     # be changed by `with_config` (a new TreeGenerator is needed)
     _TEMPLATE_FIELDS = ('target_voxel', 'factor', 'background',
-                        'template_sigma_mm', 'output_labels', 'unassigned')
+                        'template_sigma_mm', 'template_margin',
+                        'output_labels', 'unassigned')
 
     def _build_steps(self):
         """
@@ -852,18 +1116,25 @@ class TreeGenerator:
             if ia and ib:
                 self.morpho_pairs.append((a, b, ia, ib))
 
-        # Affine + elastic sampling field. It is drawn by cornucopia on the
-        # training (0.75 mm) grid, then linearly upsampled slab-by-slab and
-        # used to resample the 0.25 mm labels with nearest neighbour (see
-        # `_deform`). The field is smooth, so this is equivalent to drawing
-        # it at 0.25 mm, at a fraction of the memory.
+        # Affine + elastic sampling field. It is drawn by cornucopia on a
+        # coarse grid (`field_voxel_mm`, the training grid by default),
+        # then linearly upsampled slab-by-slab and used to resample the HR
+        # labels with nearest neighbour (see `_deform`). The field is
+        # smooth, so this is equivalent to drawing it on the HR grid, at a
+        # fraction of the memory.
+        hr_voxel = cfg.target_voxel / cfg.factor
+        field_voxel = cfg.field_voxel_mm or cfg.target_voxel
+        self.deform_factor = max(1, round(field_voxel / hr_voxel))
+        deform_voxel = self.deform_factor * hr_voxel
+        # the bias field is drawn on the same coarse grid (see `_bias`)
+        self.bias_factor = max(1, round(field_voxel / cfg.target_voxel))
         self.deform = cc.RandomAffineElasticTransform(
-            dmax=cfg.elastic_dmax_mm / cfg.target_voxel,
+            dmax=cfg.elastic_dmax_mm / deform_voxel,
             shape=cfg.elastic_ctrl,
             rotations=cfg.rotations,
             zooms=cfg.zooms,
             shears=cfg.shears,
-            translations=cfg.translations_mm / cfg.target_voxel,
+            translations=cfg.translations_mm / deform_voxel,
             unit='vox',
             returns='flow',
         )
@@ -1014,30 +1285,34 @@ class TreeGenerator:
 
         Parameters
         ----------
-        lab : (X, Y, Z) int tensor, shape multiple of `factor`
+        lab : (X, Y, Z) int tensor
         slab : int
-            Training-grid slices upsampled at once (memory).
+            Coarse-grid slices upsampled at once (memory).
 
         Returns
         -------
         (X, Y, Z) tensor, same dtype
         """
-        f = self.cfg.factor
-        lr_shape = [s // f for s in lab.shape]
-        # (1, x, y, z, 3) absolute sampling coordinates on the LR grid
+        f = self.deform_factor
+        X, Y, Z = lab.shape
+        # coarse grid covering the HR grid (cropped back after upsampling)
+        lr_shape = [-(-s // f) for s in lab.shape]
+        # (1, x, y, z, 3) absolute sampling coordinates on the coarse grid
         flow = self.deform(lab.new_zeros([1, *lr_shape], dtype=torch.float))
-        # LR voxel i is centred on HR voxel f*i + (f-1)/2
+        # coarse voxel i is centred on HR voxel f*i + (f-1)/2
         flow = (flow * f + (f - 1) / 2).movedim(-1, 1)   # (1, 3, x, y, z)
         src = lab[None, None].float()   # exact for indices < 2**24
         out = torch.empty_like(lab)
         for i0 in range(0, lr_shape[0], slab):
             i1 = min(i0 + slab, lr_shape[0])
             a, b = max(i0 - 1, 0), min(i1 + 1, lr_shape[0])  # 1-voxel halo
-            # align_corners=False maps HR voxel j to LR coord (j - (f-1)/2)/f
+            # align_corners=False maps HR voxel j to coarse coord
+            # (j - (f-1)/2)/f
             up = F.interpolate(flow[:, :, a:b], scale_factor=f,
                                mode='trilinear', align_corners=False)
-            up = up[:, :, (i0 - a) * f:(i1 - a) * f].movedim(1, -1)
-            out[i0 * f:i1 * f] = warps.apply_flow(
+            h0, h1 = i0 * f, min(i1 * f, X)
+            up = up[:, :, h0 - a * f:h1 - a * f, :Y, :Z].movedim(1, -1)
+            out[h0:h1] = warps.apply_flow(
                 src, up, has_identity=True, mode='nearest',
                 padding_mode='zeros')[0, 0].to(lab.dtype)
             del up
@@ -1141,6 +1416,30 @@ class TreeGenerator:
                 pv[:, i0:i1] = pg.T.reshape(G, s, Y, Z)
             del pg, eps
         return img[None], seg, pv
+
+    def _bias(self, img):
+        """
+        Multiplicative bias field (`self.bias`). With `bias_factor` > 1 the
+        field is drawn on a grid `bias_factor` times coarser and linearly
+        upsampled: it is smooth, and drawing it at full size costs ~200
+        bytes per voxel.
+
+        Parameters
+        ----------
+        img : (1, X, Y, Z) tensor
+
+        Returns
+        -------
+        (1, X, Y, Z) tensor
+        """
+        k = self.bias_factor
+        if k == 1 or isinstance(self.bias, cc.IdentityTransform):
+            return self.bias(img)
+        shape = [-(-s // k) for s in img.shape[1:]]
+        field = self.bias(img.new_ones([1, *shape]))
+        field = F.interpolate(field[None], size=img.shape[1:],
+                              mode='trilinear', align_corners=False)[0]
+        return img * field
 
     def _motion(self, img, force=None):
         """
@@ -1292,7 +1591,7 @@ class TreeGenerator:
         img = img / self.cfg.intensity_scale
         if return_steps:
             steps['tree'] = img.cpu()
-        img = self.bias(img)
+        img = self._bias(img)
         if return_steps:
             steps['bias'] = img.cpu()
         img = self._motion(img, motion)
@@ -1369,7 +1668,9 @@ def build_templates(seg_paths, tree, cfg, cache_dir, device='cpu'):
     tree : LabelTree, dict or path
     cfg : TreeGeneratorConfig
     cache_dir : str
-        Cached HR templates `<name>_hr<voxel>mm.nii.gz` are reused.
+        Cached HR templates `<name>_hr<voxel>mm.nii.gz` are reused if
+        they were built with the same settings (recorded next to them in
+        `<name>_hr<voxel>mm.json`); otherwise they are rebuilt.
     device : str
 
     Returns
@@ -1380,23 +1681,56 @@ def build_templates(seg_paths, tree, cfg, cache_dir, device='cpu'):
     labels = None
     if cfg.unassigned == 'background':
         labels = list(LabelTree.load(tree).label_to_node)
+    build = template_build_settings(cfg)
     templates = []
     for path in seg_paths:
         name = os.path.basename(path).split('.')[0]
         hr = os.path.join(cache_dir, f'{name}_hr'
                           f'{cfg.target_voxel / cfg.factor:g}mm.nii.gz')
+        record = hr[:-len('.nii.gz')] + '.json'
         if os.path.exists(hr):
-            templates.append(load_template(hr))
-        else:
-            print(f'Super-resolving {path} -> {hr}')
-            lab, aff = prepare_template(path, hr, cfg.target_voxel,
-                                        cfg.factor,
-                                        sigma_mm=cfg.template_sigma_mm,
-                                        labels=labels,
-                                        background=cfg.background,
-                                        device=device)
-            templates.append((lab.cpu(), aff))
+            if not os.path.exists(record):
+                print(f'{hr}: reused, built before the settings were '
+                      f'recorded (delete it to rebuild)')
+                templates.append(load_template(hr))
+                continue
+            with open(record) as f:
+                old = json.load(f)['settings']
+            if old == build:
+                templates.append(load_template(hr))
+                continue
+            changed = sorted(k for k in set(old) | set(build)
+                             if old.get(k) != build.get(k))
+            print(f'{hr}: template settings changed {changed}, rebuilding '
+                  f'(images already in this dataset used the old one)')
+        print(f'Super-resolving {path} -> {hr}')
+        lab, aff = prepare_template(
+            path, hr, cfg.target_voxel, cfg.factor,
+            margin_mm=lambda fg, vox: resolve_margin_mm(
+                cfg.template_margin, fg, vox, cfg),
+            sigma_mm=cfg.template_sigma_mm, labels=labels,
+            background=cfg.background, device=device)
+        with open(record, 'w') as f:
+            json.dump(dict(source=os.path.abspath(path), settings=build,
+                           shape=list(lab.shape)), f, indent=2)
+        templates.append((lab.cpu(), aff))
     return templates
+
+
+def template_build_settings(cfg):
+    """
+    Config fields that determine an HR template (JSON-normalised), used to
+    decide whether a cached template can be reused. With an automatic
+    `template_margin` the spatial deformation fields are included.
+    """
+    keys = ['target_voxel', 'factor', 'background', 'template_sigma_mm',
+            'template_margin', 'unassigned']
+    spec = cfg.template_margin
+    if spec == 'auto' or (isinstance(spec, dict) and 'auto' in spec):
+        keys += ['rotations', 'zooms', 'shears', 'translations_mm',
+                 'elastic_dmax_mm', 'morpho_iter', 'morpho_pairs',
+                 'field_voxel_mm']
+    return json.loads(json.dumps({k: getattr(cfg, k) for k in keys}))
 
 
 def main():

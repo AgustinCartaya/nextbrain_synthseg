@@ -81,15 +81,15 @@ def build_parser():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     run = p.add_argument_group('run options')
     run.add_argument('--seg', nargs='+',
-                     default=[os.path.join(INPUTS, 'seg.nii.gz')],
+                     default=[os.path.join(INPUTS, 'case-1.nii.gz')],
                      help='template label map(s)')
-    run.add_argument('--t1', default=os.path.join(INPUTS, 'T1w.nii.gz'),
+    run.add_argument('--t1', default=os.path.join(INPUTS, 'case-1_l1.nii.gz'),
                      help='real image shown next to the samples ("" = none)')
     run.add_argument('--tree',
-                     default=os.path.join(INPUTS, 'synthseg_ctx_tree.json'),
+                     default=os.path.join(INPUTS, 'nextbrain_complete_tree.json'),
                      help='label tree JSON')
     run.add_argument('--config',
-                     default=os.path.join(HERE, 'configs', 'freesurfer.json'),
+                     default=os.path.join(INPUTS, 'nextbrain_configs.json'),
                      help='base config JSON ("" = dataclass defaults)')
     run.add_argument('--out', default=os.path.join(HERE, 'data', 'outputs'),
                      help='output directory')
@@ -179,7 +179,7 @@ def random_label_cmap(n, seed=0):
 def acq_title(acq):
     """Short description of a simulated acquisition."""
     if acq['mode'] == 'none':
-        return 'native 0.75 mm'
+        return 'native 0.4 mm'
     if acq['mode'] == 'iso':
         return f'iso {acq["spacing_mm"][0]:.1f} mm'
     a = acq['axis']
@@ -194,10 +194,15 @@ def steps_figure(gen, point, lkw, path):
     """
     r = gen.cfg.target_voxel
     sp, th, sg = [r] * 3, [r] * 3, [0.] * 3
-    sp[2], th[2] = 5., 4.
-    sg[2] = tg.sigma_thick_vox(4., 1., r)
+    # sp[2], th[2] = 5., 4.
+    # sg[2] = tg.sigma_thick_vox(4., 1., r)
+    # acq = dict(mode='aniso', axis=2, spacing_mm=sp, thickness_mm=th,
+    #            alpha=[1.] * 3, sigma_vox=sg)
+    
+    # sp[2], th[2] = 1.5, 1.5
+    sg[2] = tg.sigma_thick_vox(sp[2], 1., r)
     acq = dict(mode='aniso', axis=2, spacing_mm=sp, thickness_mm=th,
-               alpha=[1.] * 3, sigma_vox=sg)
+            alpha=[1.] * 3, sigma_vox=sg)
     img, seg, aff, info = gen(template_index=0, acquisition=acq, motion=True,
                               return_steps=True)
     st = info['steps']
@@ -219,7 +224,7 @@ def steps_figure(gen, point, lkw, path):
         (coronal(st['resolution'][0], aff, point),
          f'+ {acq_title(acq)}\n+ noise (coronal)', {}),
         (coronal(img[0].cpu(), aff, point), 'final, [0, 1] (coronal)', {}),
-        (coronal(seg.cpu(), aff, point), 'target (0.75 mm)', lkw),
+        (coronal(seg.cpu(), aff, point), 'target (0.4 mm)', lkw),
     ]
     fig, axes = plt.subplots(1, len(panels), figsize=(2.3 * len(panels), 3.4))
     for ax, (im, title, kw) in zip(axes, panels):
@@ -263,6 +268,7 @@ def main():
     if not args.no_figures:
         steps_figure(gen, point, lkw, os.path.join(args.out, 'steps.png'))
 
+    # return  # only the steps figure for now
     # --- samples -----------------------------------------------------------
     has_t1 = bool(args.t1) and not args.no_figures
     ncol = args.n + int(has_t1)

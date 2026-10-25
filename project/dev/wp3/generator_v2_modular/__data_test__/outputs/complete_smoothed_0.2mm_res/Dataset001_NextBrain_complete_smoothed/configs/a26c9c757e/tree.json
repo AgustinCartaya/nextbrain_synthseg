@@ -1,0 +1,4360 @@
+{
+  "version": "nextbrain-complete-0.1",
+  "description": "Complete NextBrain tree from nextbrain_ontology_v1.csv: L1-L4 columns are levels 1-4, leaf_name is level 5 with label = allen_id. Each level-1 tissue is an independent color. Left and right share a node. Jitters and L2/L3 r_max are illustrative; L4 and leaf r_max come from the table (best contrast = default, T1 = T1w).",
+  "colors": ["Brainstem", "CSF / ventricles", "Cerebellar GM", "Cerebellar WM", "Cerebral GM", "Cerebral WM", "Deep GM", "Other"],
+  "contrasts": ["T1", "T2", "FLAIR", "PD"],
+  "root": "root",
+  "nodes": {
+    "root": {
+      "parent": null,
+      "children": ["background_l1", "brainstem_l1", "csf_ventricles_l1", "cerebellar_gm_l1", "cerebellar_wm_l1", "cerebral_gm_l1", "cerebral_wm_l1", "deep_gm_l1", "other_l1"],
+      "level": 0,
+      "labels": [],
+      "wr_mu": 0.0,
+      "wr_sigma": 0.0,
+      "r_max": null
+    },
+    "background_l1": {
+      "parent": "root",
+      "children": ["background_l2"],
+      "level": 1,
+      "labels": [],
+      "wr_mu": 0.0,
+      "wr_sigma": 0.0,
+      "r_max": null,
+      "null": true
+    },
+    "brainstem_l1": {
+      "parent": "root",
+      "children": ["brainstem_l2"],
+      "level": 1,
+      "labels": [],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+    "csf_ventricles_l1": {
+      "parent": "root",
+      "children": ["ventricular_system_l2"],
+      "level": 1,
+      "labels": [],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+    "cerebellar_gm_l1": {
+      "parent": "root",
+      "children": ["cerebellar_cortex_l2", "cerebellar_nuclei_l2"],
+      "level": 1,
+      "labels": [],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+    "cerebellar_wm_l1": {
+      "parent": "root",
+      "children": ["cerebellar_white_matter_l2"],
+      "level": 1,
+      "labels": [],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+    },
+    "cerebral_gm_l1": {
+      "parent": "root",
+      "children": ["amygdala_l2", "cerebral_cortex_l2", "hippocampal_formation_l2"],
+      "level": 1,
+      "labels": [],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+    },
+    "cerebral_wm_l1": {
+      "parent": "root",
+      "children": ["cerebral_white_matter_l2", "optic_pathway_l2"],
+      "level": 1,
+      "labels": [],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    "deep_gm_l1": {
+      "parent": "root",
+      "children": ["basal_forebrain_l2", "basal_ganglia_l2", "claustrum_l2", "epithalamus_l2", "hypothalamus_l2", "subthalamus_l2", "thalamus_l2"],
+      "level": 1,
+      "labels": [],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+    },
+    "other_l1": {
+      "parent": "root",
+      "children": ["pineal_gland_l2"],
+      "level": 1,
+      "labels": [],
+      "wr_mu": 4.0,
+      "wr_sigma": 0.5,
+      "r_max": null,
+      "w_mu": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+    },
+    "background_l2": {
+      "parent": "background_l1",
+      "children": ["background_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": null
+    },
+    "brainstem_l2": {
+      "parent": "brainstem_l1",
+      "children": ["brain_stem_l3", "substantia_nigra_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 4.0
+    },
+    "ventricular_system_l2": {
+      "parent": "csf_ventricles_l1",
+      "children": ["lateral_ventricle_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "cerebellar_cortex_l2": {
+      "parent": "cerebellar_gm_l1",
+      "children": ["cerebellum_cortex_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 4.0
+    },
+    "cerebellar_nuclei_l2": {
+      "parent": "cerebellar_gm_l1",
+      "children": ["cerebellar_nuclei_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 1.0, "T1": 0.0}
+    },
+    "cerebellar_white_matter_l2": {
+      "parent": "cerebellar_wm_l1",
+      "children": ["cerebellum_white_matter_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "amygdala_l2": {
+      "parent": "cerebral_gm_l1",
+      "children": ["amygdala_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 2.0
+    },
+    "cerebral_cortex_l2": {
+      "parent": "cerebral_gm_l1",
+      "children": ["cerebral_cortex_l3", "paleocortex_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 4.0
+    },
+    "hippocampal_formation_l2": {
+      "parent": "cerebral_gm_l1",
+      "children": ["hippocampus_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 2.0
+    },
+    "cerebral_white_matter_l2": {
+      "parent": "cerebral_wm_l1",
+      "children": ["cerebral_white_matter_l3", "fornix_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 4.0
+    },
+    "optic_pathway_l2": {
+      "parent": "cerebral_wm_l1",
+      "children": ["optic_chiasm_l3", "optic_nerve_l3", "optic_tract_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 1.5
+    },
+    "basal_forebrain_l2": {
+      "parent": "deep_gm_l1",
+      "children": ["basal_forebrain_l3", "septal_nuclei_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 1.0
+    },
+    "basal_ganglia_l2": {
+      "parent": "deep_gm_l1",
+      "children": ["accumbens_area_l3", "caudate_l3", "pallidum_l3", "putamen_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 3.5
+    },
+    "claustrum_l2": {
+      "parent": "deep_gm_l1",
+      "children": ["claustrum_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "epithalamus_l2": {
+      "parent": "deep_gm_l1",
+      "children": ["epithalamus_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "hypothalamus_l2": {
+      "parent": "deep_gm_l1",
+      "children": ["hypothalamus_l3", "mammillary_body_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 1.5
+    },
+    "subthalamus_l2": {
+      "parent": "deep_gm_l1",
+      "children": ["subthalamic_nucleus_l3", "zona_incerta_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 1.5
+    },
+    "thalamus_l2": {
+      "parent": "deep_gm_l1",
+      "children": ["thalamus_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 3.5
+    },
+    "pineal_gland_l2": {
+      "parent": "other_l1",
+      "children": ["pineal_body_l3"],
+      "level": 2,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "background_l3": {
+      "parent": "background_l2",
+      "children": ["background_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": null
+    },
+    "brain_stem_l3": {
+      "parent": "brainstem_l2",
+      "children": ["medulla_l4", "midbrain_l4", "pons_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 4.0
+    },
+    "substantia_nigra_l3": {
+      "parent": "brainstem_l2",
+      "children": ["substantia_nigra_pars_compacta_l4", "substantia_nigra_pars_reticulata_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 1.0, "T1": 0.0}
+    },
+    "lateral_ventricle_l3": {
+      "parent": "ventricular_system_l2",
+      "children": ["lateral_ventricle_l4", "septum_pellucidum_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "cerebellum_cortex_l3": {
+      "parent": "cerebellar_cortex_l2",
+      "children": ["granular_layer_l4", "molecular_layer_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "cerebellar_nuclei_l3": {
+      "parent": "cerebellar_nuclei_l2",
+      "children": ["deep_cerebellar_nuclei_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 1.0}
+    },
+    "cerebellum_white_matter_l3": {
+      "parent": "cerebellar_white_matter_l2",
+      "children": ["cerebellar_white_matter_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "amygdala_l3": {
+      "parent": "amygdala_l2",
+      "children": ["anterior_amygdaloid_area_l4", "basolateral_group_l4", "central_group_l4", "corticomedial_group_l4", "transition_areas_l4", "whole_amygdala_unassigned_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.5}
+    },
+    "cerebral_cortex_l3": {
+      "parent": "cerebral_cortex_l2",
+      "children": ["cingulate_cortex_l4", "frontal_lobe_l4", "insula_l4", "occipital_lobe_l4", "parietal_lobe_l4", "temporal_lobe_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "paleocortex_l3": {
+      "parent": "cerebral_cortex_l2",
+      "children": ["olfactory_piriform_cortex_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "hippocampus_l3": {
+      "parent": "hippocampal_formation_l2",
+      "children": ["alveus_l4", "ca1_l4", "ca2_l4", "ca3_l4", "ca4_l4", "dentate_gyrus_l4", "fimbria_l4", "subiculum_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "cerebral_white_matter_l3": {
+      "parent": "cerebral_white_matter_l2",
+      "children": ["cerebral_white_matter_unassigned_l4", "commissural_fibres_l4", "limbic_tracts_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "fornix_l3": {
+      "parent": "cerebral_white_matter_l2",
+      "children": ["fornix_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "optic_chiasm_l3": {
+      "parent": "optic_pathway_l2",
+      "children": ["optic_chiasm_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "optic_nerve_l3": {
+      "parent": "optic_pathway_l2",
+      "children": ["optic_nerve_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "optic_tract_l3": {
+      "parent": "optic_pathway_l2",
+      "children": ["optic_tract_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "basal_forebrain_l3": {
+      "parent": "basal_forebrain_l2",
+      "children": ["bed_nucleus_of_stria_terminalis_l4", "diagonal_band_of_broca_l4", "nucleus_basalis_of_meynert_l4", "substantia_innominata_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.7}
+    },
+    "septal_nuclei_l3": {
+      "parent": "basal_forebrain_l2",
+      "children": ["septal_nuclei_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.7
+    },
+    "accumbens_area_l3": {
+      "parent": "basal_ganglia_l2",
+      "children": ["nucleus_accumbens_l4", "olfactory_tubercle_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 1.2
+    },
+    "caudate_l3": {
+      "parent": "basal_ganglia_l2",
+      "children": ["caudate_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 2.0
+    },
+    "pallidum_l3": {
+      "parent": "basal_ganglia_l2",
+      "children": ["globus_pallidus_externa_l4", "globus_pallidus_interna_l4", "ventral_pallidum_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 2.0
+    },
+    "putamen_l3": {
+      "parent": "basal_ganglia_l2",
+      "children": ["putamen_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 2.0
+    },
+    "claustrum_l3": {
+      "parent": "claustrum_l2",
+      "children": ["claustrum_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "epithalamus_l3": {
+      "parent": "epithalamus_l2",
+      "children": ["habenula_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "hypothalamus_l3": {
+      "parent": "hypothalamus_l2",
+      "children": ["hypothalamic_white_matter_l4", "posterior_hypothalamus_l4", "preoptic_l4", "supraoptic_anterior_l4", "tuberal_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.5}
+    },
+    "mammillary_body_l3": {
+      "parent": "hypothalamus_l2",
+      "children": ["mammillary_nuclei_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.7
+    },
+    "subthalamic_nucleus_l3": {
+      "parent": "subthalamus_l2",
+      "children": ["parasubthalamic_nucleus_l4", "subthalamic_nucleus_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 1.0}
+    },
+    "zona_incerta_l3": {
+      "parent": "subthalamus_l2",
+      "children": ["subthalamic_region_zi_forel_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "thalamus_l3": {
+      "parent": "thalamus_l2",
+      "children": ["anterior_l4", "intralaminar_l4", "lateral_l4", "medial_l4", "posterior_l4", "reticular_l4", "thalamic_white_matter_l4", "ventral_l4", "whole_thalamus_unassigned_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "pineal_body_l3": {
+      "parent": "pineal_gland_l2",
+      "children": ["pineal_body_l4"],
+      "level": 3,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "background_l4": {
+      "parent": "background_l3",
+      "children": ["background"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": null
+    },
+    "medulla_l4": {
+      "parent": "brain_stem_l3",
+      "children": ["inferior_cerebellar_peduncle", "spinal_trigeminal_nucleus", "ambiguus_nucleus", "solitary_nucleus", "hypoglossal_nucleus", "dorsal_motor_nucleus_of_the_vagus_vagal_nucleus", "spinal_accessory_supraspinal_nucleus", "external_accessory_lateral_cuneate_nucleus", "cuneate_nucleus", "gracile_nucleus", "spinal_trigeminal_tract", "solitary_tract", "corticospinal_tract", "inferior_olive_principal_nucleus", "amiculum_of_the_olive", "inferior_olive_medial_nucleus", "inferior_olive_dorsal_nucleus", "central_gray_of_medulla_oblongata", "medullary_reticular_formation", "spinal_inferior_vestibular_nucleus", "myelencephalon_medulla_oblongata"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 1.0
+    },
+    "midbrain_l4": {
+      "parent": "brain_stem_l3",
+      "children": ["superior_colliculus", "brachium_of_inferior_colliculus", "brachium_of_superior_colliculus", "central_nucleus_of_inferior_colliculus", "commissure_of_inferior_colliculus", "root_of_oculomotor_nerve", "root_of_trochlear_nerve", "edinger_westphal_nucleus_accessory_oculomotor_nucleus", "oculomotor_nucleus", "trochlear_nucleus", "mesencephalic_trigeminal_nucleus", "cerebellothalamic_tract", "fasciculus_retroflexus_habenuno_interpeduncular_tract", "decussation_of_superior_cerebellar_peduncle", "medial_lemniscus", "mesencephalic_trigeminal_tract", "decussation_of_trochlear_nerve_fibres", "white_matter_of_midbrain", "posterior_commissure", "parabrachial_pigmented_nucleus", "ventral_tegmental_area", "dorsal_raphe_nucleus", "interpeduncular_nucleus", "interstitial_nucleus_of_cajal", "precommissural_nucleus", "interstitial_nucleus_of_posterior_commissure", "peripeduncular_nucleus", "parabigeminal_nucleus", "subcommissural_organ", "periaqueductal_gray_substance", "pretectal_region", "red_nucleus", "reticular_formation_cuneiform_area", "midbrain_mesencephalon"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 1.0
+    },
+    "pons_l4": {
+      "parent": "brain_stem_l3",
+      "children": ["dorsal_nucleus_of_lateral_lemniscus", "ventral_nucleus_of_lateral_lemniscus", "nucleus_of_trapezoid_body", "medial_superior_olive", "lateral_superior_olivary_nucleus", "ventral_cochlear_nucleus", "dorsal_cochlear_nucleus", "superior_cerebellar_peduncle_brachium_conjunctivum", "middle_cerebellar_peduncle", "root_of_facial_nerve", "motor_nucleus_of_trigeminal_nerve", "principal_sensory_nucleus_of_trigeminal_nerve", "facial_nucleus", "abducens_nucleus", "pontocerebellar_tract", "lateral_lemniscus", "medial_longitudinal_fasciculus", "central_tegmental_tract", "spinal_lemniscus_in_hindbrain", "parietotemporopontine_tract", "corticonuclear_tract", "frontopontine_tract", "nucleus_coeruleus", "pontine_nucleus", "lateral_parabrachial_nucleus", "medial_parabrachial_nucleus", "rostral_anterior_medullary_velum", "central_gray_of_pons", "pontine_reticular_formation", "superior_vestibular_nucleus", "lateral_vestibular_nucleus", "medial_vestibular_nucleus", "pons"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 1.0
+    },
+    "substantia_nigra_pars_compacta_l4": {
+      "parent": "substantia_nigra_l3",
+      "children": ["substantia_nigra_compact_part"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 1.0, "T1": 0.0}
+    },
+    "substantia_nigra_pars_reticulata_l4": {
+      "parent": "substantia_nigra_l3",
+      "children": ["substantia_nigra_reticular_part"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 1.0, "T1": 0.0}
+    },
+    "lateral_ventricle_l4": {
+      "parent": "lateral_ventricle_l3",
+      "children": ["anterior_horn_of_lateral_ventricle"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "septum_pellucidum_l4": {
+      "parent": "lateral_ventricle_l3",
+      "children": ["septum_pellucidum"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "granular_layer_l4": {
+      "parent": "cerebellum_cortex_l3",
+      "children": ["granular_cell_layer_of_pva"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.3, "T1": 0.0}
+    },
+    "molecular_layer_l4": {
+      "parent": "cerebellum_cortex_l3",
+      "children": ["molecular_layer_of_pva"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.3, "T1": 0.0}
+    },
+    "deep_cerebellar_nuclei_l4": {
+      "parent": "cerebellar_nuclei_l3",
+      "children": ["fastigial_medial_nucleus", "dentate_lateral_nucleus", "medial_interpositus_globose_nucleus", "lateral_interpositus_emboliform_nucleus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 1.0, "T1": 0.0}
+    },
+    "cerebellar_white_matter_l4": {
+      "parent": "cerebellum_white_matter_l3",
+      "children": ["white_matter_of_hindbrain", "white_matter_of_the_cerebellum"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "anterior_amygdaloid_area_l4": {
+      "parent": "amygdala_l3",
+      "children": ["anterior_amygdaloid_area"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "basolateral_group_l4": {
+      "parent": "amygdala_l3",
+      "children": ["basolateral_nucleus_basal_nucleus", "ventral_division_of_basomedial_nucleus", "paralaminar_nucleus", "lateral_nucleus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "central_group_l4": {
+      "parent": "amygdala_l3",
+      "children": ["medial_subdivision_of_central_nucleus", "lateral_subdivision_of_central_nucleus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "corticomedial_group_l4": {
+      "parent": "amygdala_l3",
+      "children": ["ventral_subdivision_of_coa", "rostral_subdivision_of_medial_nucleus", "amygdalohippocampal_area"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "transition_areas_l4": {
+      "parent": "amygdala_l3",
+      "children": ["amygdalocortical_corticoamygdaloid_transition_area", "amygdalostriatal_transition_area", "amygdalohippocampal_transition_area"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "whole_amygdala_unassigned_l4": {
+      "parent": "amygdala_l3",
+      "children": ["amygdaloid_complex"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "cingulate_cortex_l4": {
+      "parent": "cerebral_cortex_l3",
+      "children": ["ctx_rh_caudalanteriorcingulate", "ctx_rh_isthmuscingulate", "ctx_rh_posteriorcingulate", "ctx_rh_rostralanteriorcingulate"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "frontal_lobe_l4": {
+      "parent": "cerebral_cortex_l3",
+      "children": ["ctx_rh_caudalmiddlefrontal", "ctx_rh_lateralorbitofrontal", "ctx_rh_medialorbitofrontal", "ctx_rh_paracentral", "ctx_rh_parsopercularis", "ctx_rh_parsorbitalis", "ctx_rh_parstriangularis", "ctx_rh_precentral", "ctx_rh_rostralmiddlefrontal", "ctx_rh_superiorfrontal", "ctx_rh_frontalpole"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "insula_l4": {
+      "parent": "cerebral_cortex_l3",
+      "children": ["ctx_rh_insula"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "occipital_lobe_l4": {
+      "parent": "cerebral_cortex_l3",
+      "children": ["ctx_rh_cuneus", "ctx_rh_lateraloccipital", "ctx_rh_lingual", "ctx_rh_pericalcarine"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "parietal_lobe_l4": {
+      "parent": "cerebral_cortex_l3",
+      "children": ["ctx_rh_inferiorparietal", "ctx_rh_postcentral", "ctx_rh_precuneus", "ctx_rh_superiorparietal", "ctx_rh_supramarginal"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "temporal_lobe_l4": {
+      "parent": "cerebral_cortex_l3",
+      "children": ["ctx_rh_bankssts", "ctx_rh_entorhinal", "ctx_rh_fusiform", "ctx_rh_inferiortemporal", "ctx_rh_middletemporal", "ctx_rh_parahippocampal", "ctx_rh_superiortemporal", "ctx_rh_temporalpole", "ctx_rh_transversetemporal"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "olfactory_piriform_cortex_l4": {
+      "parent": "paleocortex_l3",
+      "children": ["anterior_olfactory_nucleus", "lateral_olfactory_stria", "lateral_olfactory_area", "layer_iii_of_piriform_cortex"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "alveus_l4": {
+      "parent": "hippocampus_l3",
+      "children": ["alveus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "ca1_l4": {
+      "parent": "hippocampus_l3",
+      "children": ["stratum_lacunosum_moleculare_of_uncal_ca1", "stratum_radiatum_of_uncal_ca1", "stratum_pyramidale_of_uncal_ca1", "stratum_oriens_of_uncal_ca1", "stratum_lacunosum_moleculare_of_rostral_ca1", "stratum_radiatum_of_rostral_ca1", "stratum_pyramidale_of_rostral_ca1", "stratum_oriens_of_rostral_ca1", "stratum_lacunosum_moleculare_of_caudal_ca1", "stratum_radiatum_of_caudal_ca1", "stratum_pyramidale_of_caudal_ca1", "stratum_oriens_of_caudal_ca1"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "ca2_l4": {
+      "parent": "hippocampus_l3",
+      "children": ["stratum_lacunosum_moleculare_of_uncal_ca2", "stratum_radiatum_of_uncal_ca2", "stratum_pyramidale_of_uncal_ca2", "stratum_oriens_of_uncal_ca2", "stratum_lacunosum_moleculare_of_rostral_ca2", "stratum_radiatum_of_rostral_ca2", "stratum_pyramidale_of_rostral_ca2", "stratum_oriens_of_rostral_ca2", "stratum_lacunosum_moleculare_of_caudal_ca2", "stratum_radiatum_of_caudal_ca2", "stratum_pyramidale_of_caudal_ca2", "stratum_oriens_of_caudal_ca2"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "ca3_l4": {
+      "parent": "hippocampus_l3",
+      "children": ["stratum_lacunosum_moleculare_of_uncal_ca3", "stratum_lucidum_of_uncal_ca3", "stratum_pyramidale_of_uncal_ca3", "stratum_oriens_of_uncal_ca3", "stratum_lacunosum_moleculare_of_rostral_ca3", "stratum_lucidum_of_rostral_ca3", "stratum_pyramidale_of_rostral_ca3", "stratum_oriens_of_rostral_ca3", "stratum_lacunosum_moleculare_of_caudal_ca3", "stratum_lucidum_of_caudal_ca3", "stratum_pyramidale_of_caudal_ca3", "stratum_oriens_of_caudal_ca3"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "ca4_l4": {
+      "parent": "hippocampus_l3",
+      "children": ["pyramidal_cells_of_uncal_ca4", "pyramidal_cells_of_rostral_ca4", "pyramidal_cells_of_caudal_ca4"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "dentate_gyrus_l4": {
+      "parent": "hippocampus_l3",
+      "children": ["molecular_layer_of_uncal_dentate_gyrus", "granular_layer_of_uncal_dentate_gyrus", "polyform_layer_of_uncal_dentate_gyrus", "molecular_layer_of_rostral_dentate_gyrus", "granular_layer_of_rostral_dentate_gyrus", "polyform_layer_of_rostral_dentate_gyrus", "molecular_layer_of_caudal_dentate_gyrus", "granular_layer_of_caudal_dentate_gyrus", "polyform_layer_of_caudal_dentate_gyrus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "fimbria_l4": {
+      "parent": "hippocampus_l3",
+      "children": ["fimbria"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "subiculum_l4": {
+      "parent": "hippocampus_l3",
+      "children": ["uncal_subiculum", "rostral_subiculum", "caudal_subiculum"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "cerebral_white_matter_unassigned_l4": {
+      "parent": "cerebral_white_matter_l3",
+      "children": ["white_matter_of_forebrain"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "commissural_fibres_l4": {
+      "parent": "cerebral_white_matter_l3",
+      "children": ["anterior_commissure"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "limbic_tracts_l4": {
+      "parent": "cerebral_white_matter_l3",
+      "children": ["stria_terminalis"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "fornix_l4": {
+      "parent": "fornix_l3",
+      "children": ["fornix"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "optic_chiasm_l4": {
+      "parent": "optic_chiasm_l3",
+      "children": ["optic_chiasm"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "optic_nerve_l4": {
+      "parent": "optic_nerve_l3",
+      "children": ["optic_nerve"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "optic_tract_l4": {
+      "parent": "optic_tract_l3",
+      "children": ["optic_tract", "supraoptic_dicussation"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "bed_nucleus_of_stria_terminalis_l4": {
+      "parent": "basal_forebrain_l3",
+      "children": ["bed_nucleus_of_stria_terminalis"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.7, "T1": 0.0}
+    },
+    "diagonal_band_of_broca_l4": {
+      "parent": "basal_forebrain_l3",
+      "children": ["diagonal_band"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.7, "T1": 0.0}
+    },
+    "nucleus_basalis_of_meynert_l4": {
+      "parent": "basal_forebrain_l3",
+      "children": ["basal_nucleus_of_meynert"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.7, "T1": 0.0}
+    },
+    "substantia_innominata_l4": {
+      "parent": "basal_forebrain_l3",
+      "children": ["substantia_innominata"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.7, "T1": 0.0}
+    },
+    "septal_nuclei_l4": {
+      "parent": "septal_nuclei_l3",
+      "children": ["medial_septal_nucleus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.7
+    },
+    "nucleus_accumbens_l4": {
+      "parent": "accumbens_area_l3",
+      "children": ["core_of_nucleus_accumbens"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "olfactory_tubercle_l4": {
+      "parent": "accumbens_area_l3",
+      "children": ["olfactory_tubercle"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "caudate_l4": {
+      "parent": "caudate_l3",
+      "children": ["head_of_caudate", "body_of_caudate", "tail_of_caudate"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "globus_pallidus_externa_l4": {
+      "parent": "pallidum_l3",
+      "children": ["external_segment_of_globus_pallidus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 1.0, "T1": 0.8}
+    },
+    "globus_pallidus_interna_l4": {
+      "parent": "pallidum_l3",
+      "children": ["internal_segment_of_globus_pallidus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 1.0, "T1": 0.8}
+    },
+    "ventral_pallidum_l4": {
+      "parent": "pallidum_l3",
+      "children": ["ventral_pallidus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 1.0, "T1": 0.8}
+    },
+    "putamen_l4": {
+      "parent": "putamen_l3",
+      "children": ["putamen", "posteroventral_putamen"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "claustrum_l4": {
+      "parent": "claustrum_l3",
+      "children": ["claustrum", "temporal_claustrum"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "habenula_l4": {
+      "parent": "epithalamus_l3",
+      "children": ["lateral_habenular_nucleus", "medial_habenular_nucleus", "habenular_commissure"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "hypothalamic_white_matter_l4": {
+      "parent": "hypothalamus_l3",
+      "children": ["medial_corticohypothalamic_tract", "mammillary_peduncle", "lenticular_fasciculus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "posterior_hypothalamus_l4": {
+      "parent": "hypothalamus_l3",
+      "children": ["tuberomammillary_nucleus", "posterior_hypothalamic_nucleus", "lateral_hypothalamic_area_posterior_part", "supramammillary_nucleus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "preoptic_l4": {
+      "parent": "hypothalamus_l3",
+      "children": ["preoptic_region_of_hth", "lateral_preoptic_area", "median_preoptic_nucleus", "medial_preoptic_nucleus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "supraoptic_anterior_l4": {
+      "parent": "hypothalamus_l3",
+      "children": ["suprachiasmatic_nucleus", "supraoptic_region_of_hth", "anterior_hypothalamic_nucleus", "paraventricular_nucleus_of_hypothalamus", "supraoptic_nucleus", "periventricular_nucleus_supraoptic_portion"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "tuberal_l4": {
+      "parent": "hypothalamus_l3",
+      "children": ["periventricular_nucleus_tuberal_portion", "juxtaparaventricular_lateral_hypothalamic_area", "dorsomedial_hypothalamic_nucleus", "lateral_hypothalamic_area_tuberal_part", "pallidohypothalamic_area", "dorsal_part_of_ventromedial_hypothalamic_nucleus", "ventral_part_of_ventromedial_hypothalamic_nucleus", "arcuate_nucleus_of_hypothalamus", "central_part_of_ventromedial_hypothalamic_nucleus", "lateral_tuberal_nuclei", "infundibular_stalk"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 0.5, "T1": 0.0}
+    },
+    "mammillary_nuclei_l4": {
+      "parent": "mammillary_body_l3",
+      "children": ["lateral_part_of_medial_mammillary_nucleus", "medial_part_of_medial_mammillary_nucleus", "basal_division_of_medial_mammillary_nucleus", "lateral_mammillary_nucleus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.7
+    },
+    "parasubthalamic_nucleus_l4": {
+      "parent": "subthalamic_nucleus_l3",
+      "children": ["parasubthalamic_nucleus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 1.0, "T1": 0.0}
+    },
+    "subthalamic_nucleus_l4": {
+      "parent": "subthalamic_nucleus_l3",
+      "children": ["medial_portion_of_sth", "laterodorsal_portion_of_sth", "lateroventral_portion_of_sth"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": {"default": 1.0, "T1": 0.0}
+    },
+    "subthalamic_region_zi_forel_l4": {
+      "parent": "zona_incerta_l3",
+      "children": ["zona_incerta", "nucleus_of_the_field_of_forel"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "anterior_l4": {
+      "parent": "thalamus_l3",
+      "children": ["anterodorsal_nucleus_of_thalamus", "anteroventral_nucleus_of_thalamus", "anteromedial_nucleus_of_thalamus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "intralaminar_l4": {
+      "parent": "thalamus_l3",
+      "children": ["fasciculosus_nucleus_of_thalamus", "rhomboid_central_nucleus_of_thalamus", "central_medial_nucleus_of_thalamus", "paracentral_nucleus_of_thalamus", "central_dorsal_nucleus_of_thalamus", "lateral_division_of_centromedian_nucleus_of_thalamus", "medial_division_of_centromedian_nucleus_of_thalamus", "parafascicular_nucleus_of_thalamus", "periventricular_area_of_thalamus", "lateral_division_of_central_lateral_nucleus", "subparafascicular_nucleus_of_thalamus", "dorsal_division_of_central_lateral_nucleus", "centromedian_nucleus_of_thalamus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "lateral_l4": {
+      "parent": "thalamus_l3",
+      "children": ["lateral_dorsal_nucleus_of_thalamus", "lateral_posterior_nucleus_of_thalamus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "medial_l4": {
+      "parent": "thalamus_l3",
+      "children": ["parataenial_nucleus_of_thalamus", "paraventricular_nucleus", "reuniens_nucleus_medioventral_nucleus_of_thalamus", "magnocellular_medial_division_of_md", "intermediodorsal_nucleus_of_thalamus", "central_part_of_medial_division_of_md", "parvocellular_central_division_of_md", "densocelllular_paralamellar_division_of_md", "multiform_lateral_division_of_md"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "posterior_l4": {
+      "parent": "thalamus_l3",
+      "children": ["anterior_nucleus_of_pulvinar", "posterior_nucleus_of_thalamus", "dorsal_lateral_geniculate_nucleus", "limitans_nucleus", "dorsal_medial_geniculate_nucleus", "ventral_medial_geniculate_nucleus", "medial_nucleus_of_pulvinar", "magnocellular_medial_nucleus", "suprageniculate_nucleus_of_thalamus", "lateral_nucleus_of_pulvinar", "inferior_nucleus_of_pulvinar", "pulvinar_of_thalamus", "superficial_pulvinar_nucleus", "diffuse_pulvinar_nucleus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "reticular_l4": {
+      "parent": "thalamus_l3",
+      "children": ["magnocellular_division_of_reticular_nucleus", "parvocellular_division_of_reticular_nucleus_perireticular_nucleus", "reticular_nucleus_of_thalamus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "thalamic_white_matter_l4": {
+      "parent": "thalamus_l3",
+      "children": ["stria_medullaris_of_thalamus", "inferior_thalamic_peduncle", "mammillothalamic_tract", "thalamic_fasciculus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "ventral_l4": {
+      "parent": "thalamus_l3",
+      "children": ["parvocellular_division_of_va", "ventral_medial_nucleus_of_thalamus", "magnocellular_division_of_va", "rostral_division_of_vl", "dorsal_subdivision_of_vlc", "ventral_subdivision_of_vlc", "medial_subdivision_of_vlc_area_x", "rostral_division_of_ventral_posterior_lateral_nucleus", "parvocellular_division_of_vpm", "ventral_posterior_medial_nucleus", "ventral_posterior_inferior_nucleus", "basal_ventral_medial_nucleus", "caudal_division_of_ventral_posterior_lateral_nucleus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "whole_thalamus_unassigned_l4": {
+      "parent": "thalamus_l3",
+      "children": ["thalamus"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "pineal_body_l4": {
+      "parent": "pineal_body_l3",
+      "children": ["pineal_body"],
+      "level": 4,
+      "labels": [],
+      "wr_mu": 5.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.5
+    },
+    "background": {
+      "parent": "background_l4",
+      "children": [],
+      "level": 5,
+      "labels": [0],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": null
+    },
+    "inferior_cerebellar_peduncle": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [697],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cerebellar peduncle"
+    },
+    "spinal_trigeminal_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [669],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "ambiguus_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [693],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "solitary_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [717],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "hypoglossal_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [724],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "dorsal_motor_nucleus_of_the_vagus_vagal_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [725],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "spinal_accessory_supraspinal_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [771],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "external_accessory_lateral_cuneate_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [726],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Dorsal column nucleus"
+    },
+    "cuneate_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [755],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Dorsal column nucleus"
+    },
+    "gracile_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [756],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Dorsal column nucleus"
+    },
+    "spinal_trigeminal_tract": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [677],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "solitary_tract": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [687],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "corticospinal_tract": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [779],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "inferior_olive_principal_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [654],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Olivary"
+    },
+    "amiculum_of_the_olive": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [655],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Olivary"
+    },
+    "inferior_olive_medial_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [671],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Olivary"
+    },
+    "inferior_olive_dorsal_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [685],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Olivary"
+    },
+    "central_gray_of_medulla_oblongata": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [765],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Periaqueductal / central gray"
+    },
+    "medullary_reticular_formation": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [695],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Reticular formation"
+    },
+    "spinal_inferior_vestibular_nucleus": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [703],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Vestibular"
+    },
+    "myelencephalon_medulla_oblongata": {
+      "parent": "medulla_l4",
+      "children": [],
+      "level": 5,
+      "labels": [662],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Whole level (unassigned)"
+    },
+    "superior_colliculus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [507],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Colliculus"
+    },
+    "brachium_of_inferior_colliculus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [525],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Colliculus"
+    },
+    "brachium_of_superior_colliculus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [526],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Colliculus"
+    },
+    "central_nucleus_of_inferior_colliculus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [541],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Colliculus"
+    },
+    "commissure_of_inferior_colliculus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [586],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Colliculus"
+    },
+    "root_of_oculomotor_nerve": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [386],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve / root"
+    },
+    "root_of_trochlear_nerve": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [535],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve / root"
+    },
+    "edinger_westphal_nucleus_accessory_oculomotor_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [447],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "oculomotor_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [464],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "trochlear_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [520],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "mesencephalic_trigeminal_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [645],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "cerebellothalamic_tract": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [403],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "fasciculus_retroflexus_habenuno_interpeduncular_tract": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [412],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "decussation_of_superior_cerebellar_peduncle": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [471],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "medial_lemniscus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [499],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "mesencephalic_trigeminal_tract": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [600],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "decussation_of_trochlear_nerve_fibres": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [842],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "white_matter_of_midbrain": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [431],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Midbrain white matter"
+    },
+    "posterior_commissure": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [472],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Midbrain white matter"
+    },
+    "parabrachial_pigmented_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [401],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Monoaminergic / modulatory"
+    },
+    "ventral_tegmental_area": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [435],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Monoaminergic / modulatory"
+    },
+    "dorsal_raphe_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [521],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Monoaminergic / modulatory"
+    },
+    "interpeduncular_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [436],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Nucleus"
+    },
+    "interstitial_nucleus_of_cajal": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [451],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Nucleus"
+    },
+    "precommissural_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [468],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Nucleus"
+    },
+    "interstitial_nucleus_of_posterior_commissure": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [469],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Nucleus"
+    },
+    "peripeduncular_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [498],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Nucleus"
+    },
+    "parabigeminal_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [542],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Nucleus"
+    },
+    "subcommissural_organ": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [470],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Other"
+    },
+    "periaqueductal_gray_substance": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [465],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Periaqueductal / central gray"
+    },
+    "pretectal_region": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [496],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Pretectum"
+    },
+    "red_nucleus": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [385],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Red nucleus"
+    },
+    "reticular_formation_cuneiform_area": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [844],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Reticular formation"
+    },
+    "midbrain_mesencephalon": {
+      "parent": "midbrain_l4",
+      "children": [],
+      "level": 5,
+      "labels": [384],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Whole level (unassigned)"
+    },
+    "dorsal_nucleus_of_lateral_lemniscus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [598],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Auditory"
+    },
+    "ventral_nucleus_of_lateral_lemniscus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [599],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Auditory"
+    },
+    "nucleus_of_trapezoid_body": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [647],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Auditory"
+    },
+    "medial_superior_olive": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [649],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Auditory"
+    },
+    "lateral_superior_olivary_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [660],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Auditory"
+    },
+    "ventral_cochlear_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [689],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Auditory"
+    },
+    "dorsal_cochlear_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [731],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Auditory"
+    },
+    "superior_cerebellar_peduncle_brachium_conjunctivum": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [531],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cerebellar peduncle"
+    },
+    "middle_cerebellar_peduncle": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [543],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cerebellar peduncle"
+    },
+    "root_of_facial_nerve": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [624],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve / root"
+    },
+    "motor_nucleus_of_trigeminal_nerve": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [630],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "principal_sensory_nucleus_of_trigeminal_nerve": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [659],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "facial_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [666],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "abducens_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [682],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Cranial nerve nucleus"
+    },
+    "pontocerebellar_tract": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [415],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "lateral_lemniscus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [515],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "medial_longitudinal_fasciculus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [528],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "central_tegmental_tract": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [591],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "spinal_lemniscus_in_hindbrain": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [592],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "parietotemporopontine_tract": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [827],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "corticonuclear_tract": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [828],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "frontopontine_tract": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [829],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Long tract"
+    },
+    "nucleus_coeruleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [589],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Monoaminergic / modulatory"
+    },
+    "pontine_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [414],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Nucleus"
+    },
+    "lateral_parabrachial_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [546],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Nucleus"
+    },
+    "medial_parabrachial_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [581],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Nucleus"
+    },
+    "rostral_anterior_medullary_velum": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [617],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Other"
+    },
+    "central_gray_of_pons": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [610],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Periaqueductal / central gray"
+    },
+    "pontine_reticular_formation": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [527],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Reticular formation"
+    },
+    "superior_vestibular_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [683],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Vestibular"
+    },
+    "lateral_vestibular_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [690],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Vestibular"
+    },
+    "medial_vestibular_nucleus": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [694],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Vestibular"
+    },
+    "pons": {
+      "parent": "pons_l4",
+      "children": [],
+      "level": 5,
+      "labels": [580],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "Whole level (unassigned)"
+    },
+    "substantia_nigra_compact_part": {
+      "parent": "substantia_nigra_pars_compacta_l4",
+      "children": [],
+      "level": 5,
+      "labels": [352],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "substantia_nigra_reticular_part": {
+      "parent": "substantia_nigra_pars_reticulata_l4",
+      "children": [],
+      "level": 5,
+      "labels": [310],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "anterior_horn_of_lateral_ventricle": {
+      "parent": "lateral_ventricle_l4",
+      "children": [],
+      "level": 5,
+      "labels": [50],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "septum_pellucidum": {
+      "parent": "septum_pellucidum_l4",
+      "children": [],
+      "level": 5,
+      "labels": [68],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "granular_cell_layer_of_pva": {
+      "parent": "granular_layer_l4",
+      "children": [],
+      "level": 5,
+      "labels": [597],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "molecular_layer_of_pva": {
+      "parent": "molecular_layer_l4",
+      "children": [],
+      "level": 5,
+      "labels": [595],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "fastigial_medial_nucleus": {
+      "parent": "deep_cerebellar_nuclei_l4",
+      "children": [],
+      "level": 5,
+      "labels": [715],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "dentate_lateral_nucleus": {
+      "parent": "deep_cerebellar_nuclei_l4",
+      "children": [],
+      "level": 5,
+      "labels": [721],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "medial_interpositus_globose_nucleus": {
+      "parent": "deep_cerebellar_nuclei_l4",
+      "children": [],
+      "level": 5,
+      "labels": [751],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "lateral_interpositus_emboliform_nucleus": {
+      "parent": "deep_cerebellar_nuclei_l4",
+      "children": [],
+      "level": 5,
+      "labels": [752],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "white_matter_of_hindbrain": {
+      "parent": "cerebellar_white_matter_l4",
+      "children": [],
+      "level": 5,
+      "labels": [611],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "white_matter_of_the_cerebellum": {
+      "parent": "cerebellar_white_matter_l4",
+      "children": [],
+      "level": 5,
+      "labels": [846],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "anterior_amygdaloid_area": {
+      "parent": "anterior_amygdaloid_area_l4",
+      "children": [],
+      "level": 5,
+      "labels": [215],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "basolateral_nucleus_basal_nucleus": {
+      "parent": "basolateral_group_l4",
+      "children": [],
+      "level": 5,
+      "labels": [216],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "ventral_division_of_basomedial_nucleus": {
+      "parent": "basolateral_group_l4",
+      "children": [],
+      "level": 5,
+      "labels": [217],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "paralaminar_nucleus": {
+      "parent": "basolateral_group_l4",
+      "children": [],
+      "level": 5,
+      "labels": [240],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "lateral_nucleus": {
+      "parent": "basolateral_group_l4",
+      "children": [],
+      "level": 5,
+      "labels": [377],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "medial_subdivision_of_central_nucleus": {
+      "parent": "central_group_l4",
+      "children": [],
+      "level": 5,
+      "labels": [277],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "lateral_subdivision_of_central_nucleus": {
+      "parent": "central_group_l4",
+      "children": [],
+      "level": 5,
+      "labels": [278],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "ventral_subdivision_of_coa": {
+      "parent": "corticomedial_group_l4",
+      "children": [],
+      "level": 5,
+      "labels": [238],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "rostral_subdivision_of_medial_nucleus": {
+      "parent": "corticomedial_group_l4",
+      "children": [],
+      "level": 5,
+      "labels": [279],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "amygdalohippocampal_area": {
+      "parent": "corticomedial_group_l4",
+      "children": [],
+      "level": 5,
+      "labels": [301],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "amygdalocortical_corticoamygdaloid_transition_area": {
+      "parent": "transition_areas_l4",
+      "children": [],
+      "level": 5,
+      "labels": [242],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "amygdalostriatal_transition_area": {
+      "parent": "transition_areas_l4",
+      "children": [],
+      "level": 5,
+      "labels": [295],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "amygdalohippocampal_transition_area": {
+      "parent": "transition_areas_l4",
+      "children": [],
+      "level": 5,
+      "labels": [320],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "amygdaloid_complex": {
+      "parent": "whole_amygdala_unassigned_l4",
+      "children": [],
+      "level": 5,
+      "labels": [214],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "ctx_rh_caudalanteriorcingulate": {
+      "parent": "cingulate_cortex_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2002],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_isthmuscingulate": {
+      "parent": "cingulate_cortex_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2010],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_posteriorcingulate": {
+      "parent": "cingulate_cortex_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2023],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_rostralanteriorcingulate": {
+      "parent": "cingulate_cortex_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2026],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_caudalmiddlefrontal": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2003],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_lateralorbitofrontal": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2012],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_medialorbitofrontal": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2014],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_paracentral": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2017],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_parsopercularis": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2018],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_parsorbitalis": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2019],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_parstriangularis": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2020],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_precentral": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2024],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_rostralmiddlefrontal": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2027],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_superiorfrontal": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2028],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_frontalpole": {
+      "parent": "frontal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2032],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_insula": {
+      "parent": "insula_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2035],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_cuneus": {
+      "parent": "occipital_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2005],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_lateraloccipital": {
+      "parent": "occipital_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2011],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_lingual": {
+      "parent": "occipital_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2013],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_pericalcarine": {
+      "parent": "occipital_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2021],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_inferiorparietal": {
+      "parent": "parietal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2008],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_postcentral": {
+      "parent": "parietal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2022],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_precuneus": {
+      "parent": "parietal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2025],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_superiorparietal": {
+      "parent": "parietal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2029],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_supramarginal": {
+      "parent": "parietal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2031],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_bankssts": {
+      "parent": "temporal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2001],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_entorhinal": {
+      "parent": "temporal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2006],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_fusiform": {
+      "parent": "temporal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2007],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_inferiortemporal": {
+      "parent": "temporal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2009],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_middletemporal": {
+      "parent": "temporal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2015],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_parahippocampal": {
+      "parent": "temporal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2016],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_superiortemporal": {
+      "parent": "temporal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2030],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_temporalpole": {
+      "parent": "temporal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2033],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ctx_rh_transversetemporal": {
+      "parent": "temporal_lobe_l4",
+      "children": [],
+      "level": 5,
+      "labels": [2034],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "anterior_olfactory_nucleus": {
+      "parent": "olfactory_piriform_cortex_l4",
+      "children": [],
+      "level": 5,
+      "labels": [99],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "lateral_olfactory_stria": {
+      "parent": "olfactory_piriform_cortex_l4",
+      "children": [],
+      "level": 5,
+      "labels": [113],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "lateral_olfactory_area": {
+      "parent": "olfactory_piriform_cortex_l4",
+      "children": [],
+      "level": 5,
+      "labels": [125],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "layer_iii_of_piriform_cortex": {
+      "parent": "olfactory_piriform_cortex_l4",
+      "children": [],
+      "level": 5,
+      "labels": [157],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "alveus": {
+      "parent": "alveus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [354],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "stratum_lacunosum_moleculare_of_uncal_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [339],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lacunosum-moleculare, uncal"
+    },
+    "stratum_radiatum_of_uncal_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [340],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum radiatum, uncal"
+    },
+    "stratum_pyramidale_of_uncal_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [341],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum pyramidale, uncal"
+    },
+    "stratum_oriens_of_uncal_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [342],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum oriens, uncal"
+    },
+    "stratum_lacunosum_moleculare_of_rostral_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [343],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lacunosum-moleculare, rostral"
+    },
+    "stratum_radiatum_of_rostral_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [344],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum radiatum, rostral"
+    },
+    "stratum_pyramidale_of_rostral_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [345],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum pyramidale, rostral"
+    },
+    "stratum_oriens_of_rostral_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [346],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum oriens, rostral"
+    },
+    "stratum_lacunosum_moleculare_of_caudal_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [562],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lacunosum-moleculare, caudal"
+    },
+    "stratum_radiatum_of_caudal_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [563],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum radiatum, caudal"
+    },
+    "stratum_pyramidale_of_caudal_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [564],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum pyramidale, caudal"
+    },
+    "stratum_oriens_of_caudal_ca1": {
+      "parent": "ca1_l4",
+      "children": [],
+      "level": 5,
+      "labels": [565],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum oriens, caudal"
+    },
+    "stratum_lacunosum_moleculare_of_uncal_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [368],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lacunosum-moleculare, uncal"
+    },
+    "stratum_radiatum_of_uncal_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [369],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum radiatum, uncal"
+    },
+    "stratum_pyramidale_of_uncal_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [370],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum pyramidale, uncal"
+    },
+    "stratum_oriens_of_uncal_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [371],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum oriens, uncal"
+    },
+    "stratum_lacunosum_moleculare_of_rostral_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [408],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lacunosum-moleculare, rostral"
+    },
+    "stratum_radiatum_of_rostral_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [409],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum radiatum, rostral"
+    },
+    "stratum_pyramidale_of_rostral_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [410],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum pyramidale, rostral"
+    },
+    "stratum_oriens_of_rostral_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [411],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum oriens, rostral"
+    },
+    "stratum_lacunosum_moleculare_of_caudal_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [566],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lacunosum-moleculare, caudal"
+    },
+    "stratum_radiatum_of_caudal_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [567],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum radiatum, caudal"
+    },
+    "stratum_pyramidale_of_caudal_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [568],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum pyramidale, caudal"
+    },
+    "stratum_oriens_of_caudal_ca2": {
+      "parent": "ca2_l4",
+      "children": [],
+      "level": 5,
+      "labels": [569],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum oriens, caudal"
+    },
+    "stratum_lacunosum_moleculare_of_uncal_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [372],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lacunosum-moleculare, uncal"
+    },
+    "stratum_lucidum_of_uncal_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [373],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lucidum, uncal"
+    },
+    "stratum_pyramidale_of_uncal_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [374],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum pyramidale, uncal"
+    },
+    "stratum_oriens_of_uncal_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [375],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum oriens, uncal"
+    },
+    "stratum_lacunosum_moleculare_of_rostral_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [418],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lacunosum-moleculare, rostral"
+    },
+    "stratum_lucidum_of_rostral_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [419],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lucidum, rostral"
+    },
+    "stratum_pyramidale_of_rostral_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [420],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum pyramidale, rostral"
+    },
+    "stratum_oriens_of_rostral_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [421],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum oriens, rostral"
+    },
+    "stratum_lacunosum_moleculare_of_caudal_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [571],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lacunosum-moleculare, caudal"
+    },
+    "stratum_lucidum_of_caudal_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [572],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum lucidum, caudal"
+    },
+    "stratum_pyramidale_of_caudal_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [573],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum pyramidale, caudal"
+    },
+    "stratum_oriens_of_caudal_ca3": {
+      "parent": "ca3_l4",
+      "children": [],
+      "level": 5,
+      "labels": [574],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "stratum oriens, caudal"
+    },
+    "pyramidal_cells_of_uncal_ca4": {
+      "parent": "ca4_l4",
+      "children": [],
+      "level": 5,
+      "labels": [422],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "pyramidal layer, uncal"
+    },
+    "pyramidal_cells_of_rostral_ca4": {
+      "parent": "ca4_l4",
+      "children": [],
+      "level": 5,
+      "labels": [432],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "pyramidal layer, rostral"
+    },
+    "pyramidal_cells_of_caudal_ca4": {
+      "parent": "ca4_l4",
+      "children": [],
+      "level": 5,
+      "labels": [575],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "pyramidal layer, caudal"
+    },
+    "molecular_layer_of_uncal_dentate_gyrus": {
+      "parent": "dentate_gyrus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [364],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "molecular layer, uncal"
+    },
+    "granular_layer_of_uncal_dentate_gyrus": {
+      "parent": "dentate_gyrus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [365],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "granular layer, uncal"
+    },
+    "polyform_layer_of_uncal_dentate_gyrus": {
+      "parent": "dentate_gyrus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [367],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "polymorph layer, uncal"
+    },
+    "molecular_layer_of_rostral_dentate_gyrus": {
+      "parent": "dentate_gyrus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [404],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "molecular layer, rostral"
+    },
+    "granular_layer_of_rostral_dentate_gyrus": {
+      "parent": "dentate_gyrus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [405],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "granular layer, rostral"
+    },
+    "polyform_layer_of_rostral_dentate_gyrus": {
+      "parent": "dentate_gyrus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [407],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "polymorph layer, rostral"
+    },
+    "molecular_layer_of_caudal_dentate_gyrus": {
+      "parent": "dentate_gyrus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [558],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "molecular layer, caudal"
+    },
+    "granular_layer_of_caudal_dentate_gyrus": {
+      "parent": "dentate_gyrus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [559],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "granular layer, caudal"
+    },
+    "polyform_layer_of_caudal_dentate_gyrus": {
+      "parent": "dentate_gyrus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [561],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "polymorph layer, caudal"
+    },
+    "fimbria": {
+      "parent": "fimbria_l4",
+      "children": [],
+      "level": 5,
+      "labels": [461],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "uncal_subiculum": {
+      "parent": "subiculum_l4",
+      "children": [],
+      "level": 5,
+      "labels": [326],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "uncal"
+    },
+    "rostral_subiculum": {
+      "parent": "subiculum_l4",
+      "children": [],
+      "level": 5,
+      "labels": [347],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "rostral"
+    },
+    "caudal_subiculum": {
+      "parent": "subiculum_l4",
+      "children": [],
+      "level": 5,
+      "labels": [576],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4,
+      "description": "caudal"
+    },
+    "white_matter_of_forebrain": {
+      "parent": "cerebral_white_matter_unassigned_l4",
+      "children": [],
+      "level": 5,
+      "labels": [7],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "anterior_commissure": {
+      "parent": "commissural_fibres_l4",
+      "children": [],
+      "level": 5,
+      "labels": [130],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "stria_terminalis": {
+      "parent": "limbic_tracts_l4",
+      "children": [],
+      "level": 5,
+      "labels": [184],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "fornix": {
+      "parent": "fornix_l4",
+      "children": [],
+      "level": 5,
+      "labels": [199],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "optic_chiasm": {
+      "parent": "optic_chiasm_l4",
+      "children": [],
+      "level": 5,
+      "labels": [161],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "optic_nerve": {
+      "parent": "optic_nerve_l4",
+      "children": [],
+      "level": 5,
+      "labels": [114],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "optic_tract": {
+      "parent": "optic_tract_l4",
+      "children": [],
+      "level": 5,
+      "labels": [208],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "supraoptic_dicussation": {
+      "parent": "optic_tract_l4",
+      "children": [],
+      "level": 5,
+      "labels": [209],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "bed_nucleus_of_stria_terminalis": {
+      "parent": "bed_nucleus_of_stria_terminalis_l4",
+      "children": [],
+      "level": 5,
+      "labels": [117],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "diagonal_band": {
+      "parent": "diagonal_band_of_broca_l4",
+      "children": [],
+      "level": 5,
+      "labels": [111],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "basal_nucleus_of_meynert": {
+      "parent": "nucleus_basalis_of_meynert_l4",
+      "children": [],
+      "level": 5,
+      "labels": [108],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "substantia_innominata": {
+      "parent": "substantia_innominata_l4",
+      "children": [],
+      "level": 5,
+      "labels": [128],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "medial_septal_nucleus": {
+      "parent": "septal_nuclei_l4",
+      "children": [],
+      "level": 5,
+      "labels": [103],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "core_of_nucleus_accumbens": {
+      "parent": "nucleus_accumbens_l4",
+      "children": [],
+      "level": 5,
+      "labels": [101],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "olfactory_tubercle": {
+      "parent": "olfactory_tubercle_l4",
+      "children": [],
+      "level": 5,
+      "labels": [100],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "head_of_caudate": {
+      "parent": "caudate_l4",
+      "children": [],
+      "level": 5,
+      "labels": [48],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "body_of_caudate": {
+      "parent": "caudate_l4",
+      "children": [],
+      "level": 5,
+      "labels": [118],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "tail_of_caudate": {
+      "parent": "caudate_l4",
+      "children": [],
+      "level": 5,
+      "labels": [393],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "external_segment_of_globus_pallidus": {
+      "parent": "globus_pallidus_externa_l4",
+      "children": [],
+      "level": 5,
+      "labels": [119],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "internal_segment_of_globus_pallidus": {
+      "parent": "globus_pallidus_interna_l4",
+      "children": [],
+      "level": 5,
+      "labels": [206],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ventral_pallidus": {
+      "parent": "ventral_pallidum_l4",
+      "children": [],
+      "level": 5,
+      "labels": [120],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "putamen": {
+      "parent": "putamen_l4",
+      "children": [],
+      "level": 5,
+      "labels": [79],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "posteroventral_putamen": {
+      "parent": "putamen_l4",
+      "children": [],
+      "level": 5,
+      "labels": [349],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "claustrum": {
+      "parent": "claustrum_l4",
+      "children": [],
+      "level": 5,
+      "labels": [102],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "temporal_claustrum": {
+      "parent": "claustrum_l4",
+      "children": [],
+      "level": 5,
+      "labels": [174],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "lateral_habenular_nucleus": {
+      "parent": "habenula_l4",
+      "children": [],
+      "level": 5,
+      "labels": [430],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "medial_habenular_nucleus": {
+      "parent": "habenula_l4",
+      "children": [],
+      "level": 5,
+      "labels": [444],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "habenular_commissure": {
+      "parent": "habenula_l4",
+      "children": [],
+      "level": 5,
+      "labels": [493],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "medial_corticohypothalamic_tract": {
+      "parent": "hypothalamic_white_matter_l4",
+      "children": [],
+      "level": 5,
+      "labels": [234],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "mammillary_peduncle": {
+      "parent": "hypothalamic_white_matter_l4",
+      "children": [],
+      "level": 5,
+      "labels": [298],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "lenticular_fasciculus": {
+      "parent": "hypothalamic_white_matter_l4",
+      "children": [],
+      "level": 5,
+      "labels": [309],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "tuberomammillary_nucleus": {
+      "parent": "posterior_hypothalamus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [256],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "posterior_hypothalamic_nucleus": {
+      "parent": "posterior_hypothalamus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [275],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "lateral_hypothalamic_area_posterior_part": {
+      "parent": "posterior_hypothalamus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [297],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "supramammillary_nucleus": {
+      "parent": "posterior_hypothalamus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [304],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "preoptic_region_of_hth": {
+      "parent": "preoptic_l4",
+      "children": [],
+      "level": 5,
+      "labels": [147],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "lateral_preoptic_area": {
+      "parent": "preoptic_l4",
+      "children": [],
+      "level": 5,
+      "labels": [149],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "median_preoptic_nucleus": {
+      "parent": "preoptic_l4",
+      "children": [],
+      "level": 5,
+      "labels": [150],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "medial_preoptic_nucleus": {
+      "parent": "preoptic_l4",
+      "children": [],
+      "level": 5,
+      "labels": [192],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "suprachiasmatic_nucleus": {
+      "parent": "supraoptic_anterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [160],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "supraoptic_region_of_hth": {
+      "parent": "supraoptic_anterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [181],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "anterior_hypothalamic_nucleus": {
+      "parent": "supraoptic_anterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [193],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "paraventricular_nucleus_of_hypothalamus": {
+      "parent": "supraoptic_anterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [194],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "supraoptic_nucleus": {
+      "parent": "supraoptic_anterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [196],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "periventricular_nucleus_supraoptic_portion": {
+      "parent": "supraoptic_anterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [207],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "periventricular_nucleus_tuberal_portion": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [227],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "juxtaparaventricular_lateral_hypothalamic_area": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [228],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "dorsomedial_hypothalamic_nucleus": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [229],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "lateral_hypothalamic_area_tuberal_part": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [230],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "pallidohypothalamic_area": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [232],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "dorsal_part_of_ventromedial_hypothalamic_nucleus": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [243],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "ventral_part_of_ventromedial_hypothalamic_nucleus": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [244],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "arcuate_nucleus_of_hypothalamus": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [245],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "central_part_of_ventromedial_hypothalamic_nucleus": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [255],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "lateral_tuberal_nuclei": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [268],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "infundibular_stalk": {
+      "parent": "tuberal_l4",
+      "children": [],
+      "level": 5,
+      "labels": [843],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "lateral_part_of_medial_mammillary_nucleus": {
+      "parent": "mammillary_nuclei_l4",
+      "children": [],
+      "level": 5,
+      "labels": [305],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "medial_part_of_medial_mammillary_nucleus": {
+      "parent": "mammillary_nuclei_l4",
+      "children": [],
+      "level": 5,
+      "labels": [306],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "basal_division_of_medial_mammillary_nucleus": {
+      "parent": "mammillary_nuclei_l4",
+      "children": [],
+      "level": 5,
+      "labels": [307],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "lateral_mammillary_nucleus": {
+      "parent": "mammillary_nuclei_l4",
+      "children": [],
+      "level": 5,
+      "labels": [308],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "parasubthalamic_nucleus": {
+      "parent": "parasubthalamic_nucleus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [433],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "medial_portion_of_sth": {
+      "parent": "subthalamic_nucleus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [315],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "laterodorsal_portion_of_sth": {
+      "parent": "subthalamic_nucleus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [316],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "lateroventral_portion_of_sth": {
+      "parent": "subthalamic_nucleus_l4",
+      "children": [],
+      "level": 5,
+      "labels": [321],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": {"T1": 0.0, "default": 0.3}
+    },
+    "zona_incerta": {
+      "parent": "subthalamic_region_zi_forel_l4",
+      "children": [],
+      "level": 5,
+      "labels": [226],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "nucleus_of_the_field_of_forel": {
+      "parent": "subthalamic_region_zi_forel_l4",
+      "children": [],
+      "level": 5,
+      "labels": [400],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "anterodorsal_nucleus_of_thalamus": {
+      "parent": "anterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [219],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "anteroventral_nucleus_of_thalamus": {
+      "parent": "anterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [220],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "anteromedial_nucleus_of_thalamus": {
+      "parent": "anterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [252],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "fasciculosus_nucleus_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [223],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "rhomboid_central_nucleus_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [224],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "central_medial_nucleus_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [284],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "paracentral_nucleus_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [285],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "central_dorsal_nucleus_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [303],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "lateral_division_of_centromedian_nucleus_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [396],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "medial_division_of_centromedian_nucleus_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [397],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "parafascicular_nucleus_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [398],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "periventricular_area_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [399],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "lateral_division_of_central_lateral_nucleus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [425],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "subparafascicular_nucleus_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [426],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "dorsal_division_of_central_lateral_nucleus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [443],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "centromedian_nucleus_of_thalamus": {
+      "parent": "intralaminar_l4",
+      "children": [],
+      "level": 5,
+      "labels": [479],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "lateral_dorsal_nucleus_of_thalamus": {
+      "parent": "lateral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [378],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "lateral_posterior_nucleus_of_thalamus": {
+      "parent": "lateral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [441],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "parataenial_nucleus_of_thalamus": {
+      "parent": "medial_l4",
+      "children": [],
+      "level": 5,
+      "labels": [221],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "paraventricular_nucleus": {
+      "parent": "medial_l4",
+      "children": [],
+      "level": 5,
+      "labels": [225],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "reuniens_nucleus_medioventral_nucleus_of_thalamus": {
+      "parent": "medial_l4",
+      "children": [],
+      "level": 5,
+      "labels": [253],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "magnocellular_medial_division_of_md": {
+      "parent": "medial_l4",
+      "children": [],
+      "level": 5,
+      "labels": [282],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "intermediodorsal_nucleus_of_thalamus": {
+      "parent": "medial_l4",
+      "children": [],
+      "level": 5,
+      "labels": [286],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "central_part_of_medial_division_of_md": {
+      "parent": "medial_l4",
+      "children": [],
+      "level": 5,
+      "labels": [312],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "parvocellular_central_division_of_md": {
+      "parent": "medial_l4",
+      "children": [],
+      "level": 5,
+      "labels": [313],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "densocelllular_paralamellar_division_of_md": {
+      "parent": "medial_l4",
+      "children": [],
+      "level": 5,
+      "labels": [379],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "multiform_lateral_division_of_md": {
+      "parent": "medial_l4",
+      "children": [],
+      "level": 5,
+      "labels": [380],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "anterior_nucleus_of_pulvinar": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [454],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "posterior_nucleus_of_thalamus": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [478],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "dorsal_lateral_geniculate_nucleus": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [484],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "limitans_nucleus": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [492],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "dorsal_medial_geniculate_nucleus": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [504],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ventral_medial_geniculate_nucleus": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [505],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "medial_nucleus_of_pulvinar": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [508],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "magnocellular_medial_nucleus": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [510],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "suprageniculate_nucleus_of_thalamus": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [512],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "lateral_nucleus_of_pulvinar": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [517],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "inferior_nucleus_of_pulvinar": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [519],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "pulvinar_of_thalamus": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [578],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "superficial_pulvinar_nucleus": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [811],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "diffuse_pulvinar_nucleus": {
+      "parent": "posterior_l4",
+      "children": [],
+      "level": 5,
+      "labels": [813],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "magnocellular_division_of_reticular_nucleus": {
+      "parent": "reticular_l4",
+      "children": [],
+      "level": 5,
+      "labels": [190],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "parvocellular_division_of_reticular_nucleus_perireticular_nucleus": {
+      "parent": "reticular_l4",
+      "children": [],
+      "level": 5,
+      "labels": [191],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "reticular_nucleus_of_thalamus": {
+      "parent": "reticular_l4",
+      "children": [],
+      "level": 5,
+      "labels": [254],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "stria_medullaris_of_thalamus": {
+      "parent": "thalamic_white_matter_l4",
+      "children": [],
+      "level": 5,
+      "labels": [201],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "inferior_thalamic_peduncle": {
+      "parent": "thalamic_white_matter_l4",
+      "children": [],
+      "level": 5,
+      "labels": [246],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "mammillothalamic_tract": {
+      "parent": "thalamic_white_matter_l4",
+      "children": [],
+      "level": 5,
+      "labels": [276],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "thalamic_fasciculus": {
+      "parent": "thalamic_white_matter_l4",
+      "children": [],
+      "level": 5,
+      "labels": [322],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "parvocellular_division_of_va": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [222],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ventral_medial_nucleus_of_thalamus": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [274],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "magnocellular_division_of_va": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [283],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "rostral_division_of_vl": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [314],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "dorsal_subdivision_of_vlc": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [350],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ventral_subdivision_of_vlc": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [381],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "medial_subdivision_of_vlc_area_x": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [382],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "rostral_division_of_ventral_posterior_lateral_nucleus": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [394],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "parvocellular_division_of_vpm": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [395],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ventral_posterior_medial_nucleus": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [423],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "ventral_posterior_inferior_nucleus": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [424],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "basal_ventral_medial_nucleus": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [442],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "caudal_division_of_ventral_posterior_lateral_nucleus": {
+      "parent": "ventral_l4",
+      "children": [],
+      "level": 5,
+      "labels": [458],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "thalamus": {
+      "parent": "whole_thalamus_unassigned_l4",
+      "children": [],
+      "level": 5,
+      "labels": [218],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    },
+    "pineal_body": {
+      "parent": "pineal_body_l4",
+      "children": [],
+      "level": 5,
+      "labels": [506],
+      "wr_mu": 3.0,
+      "wr_sigma": 0.5,
+      "r_max": 0.4
+    }
+  }
+}

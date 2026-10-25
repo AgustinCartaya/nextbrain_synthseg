@@ -1,0 +1,29 @@
+{
+  "channel_names": {
+    "0": "synthetic"
+  },
+  "labels": {
+    "background": 0,
+    "brainstem": 1,
+    "csf_ventricles": 2,
+    "cerebellar_gm": 3,
+    "cerebellar_wm": 4,
+    "cerebral_gm": 5,
+    "cerebral_wm": 6,
+    "deep_gm": 7,
+    "other": 8
+  },
+  "numTraining": 3,
+  "file_ending": ".nii.gz",
+  "original_label_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ]
+}

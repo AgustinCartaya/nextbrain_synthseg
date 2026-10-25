@@ -1,0 +1,112 @@
+The objective is to develop a synthetic brain MRI generator inspired by SynthSeg and the approach described in https\://arxiv.org/pdf/2605.02737.  
+The generator will be used to create synthetic training data for a brain segmentation model based on NextBrain.  
+An initial implementation is available in @/generator_v2. 
+The goal is to refactor this implementation into a modular architecture, allowing each component to be tested independently and providing finer control over the generation process.
+
+
+
+This generator will reproduce Generator V2, 
+but with a modular architecture that allows each function to be tested separately and provides more granular control over its behaviour. 
+
+Initially, the main modules are:  
+
+
+(OFFLINE)  
+
+
+1. Template super-resolution      
+
+    Objectives:         
+        - Upscale the template as described in https\://arxiv.org/pdf/2605.02737, using sinc upsampling with Gaussian smoothing.
+        - Reduce memory usage by cropping the templates to the foreground bounding box, avoiding unnecessary background voxels.      
+    Outputs:         
+        - High-resolution (HR) template.         
+        - If requested, the parameters used for the operation.      
+    Unit tests (Future work):         
+        - Check that all original labels are preserved and that no new labels are introduced.         
+        - Measure execution time and memory usage. This should also be possible on the GPU, if necessary.      
+    Future work (not implemented in this version):         
+        - Add an initial morphological validation step to resolve inconsistencies. For example, prevent white matter (WM) and cerebrospinal fluid (CSF) from touching directly.   
+        
+        
+        
+(ONLINE)  
+These functions should fit in memory, using less than 10 GB for any supported resolution. 
+They should also be fast enough for training while maintaining accuracy.  
+
+
+2. Morphological transformations      
+    Objectives:         
+    - Apply morphological transformations to the HR templates.         
+    - Implement two independent functions:             
+        - Erosion and dilation: Morphologically erode or dilate structures, as already implemented in Generator V2.
+        - Affine and non-affine transformations.      
+    Outputs:         
+    - Transformed HR labels.         
+    - If requested, the transformations and their parameters, including:             
+        - Erosion and dilation operations (e.g., GM and CSF, 3 iterations).             
+        - Affine deformation matrix.             
+        - Parameters used to generate the non-affine deformation matrix.      
+    Unit tests (potentially future work, not implemented in this version):         
+        - Check for implausible transformations based on predefined rules. For example, CSF should not touch WM directly because GM should lie between them.   
+        
+        
+3. Partial volumes      
+    Objectives:         
+        - Generate partial volumes to model boundaries more accurately. This can be achieved in two ways:             
+            - If the HR labels have a higher resolution than the target resolution, follow the approach described in the original paper (https\://arxiv.org/pdf/2605.02737), where partial volumes are obtained by downsampling the HR labels to the target resolution.             
+            - If the HR labels have a resolution similar to the target resolution, approximate partial volumes using grey-level morphology or Gaussian smoothing near region boundaries.      
+    Outputs:         
+        - Partial volume maps at the target resolution.         
+        - Segmentation at the target resolution.  
+        
+4. Image generation from the tree      
+    Objectives:         
+        - Use the tree structure to generate a synthetic image at a given resolution, using the Gaussian distributions defined by the tree.         
+        - Support image generation from either hard labels or partial volume maps.      
+    Outputs:         
+        - Synthetic image.      
+    Unit tests:         
+        - Check whether the intensity distributions match the expected Gaussian distributions:             
+            - Each structure has an expected Gaussian distribution defined by the tree. When partial volumes are used, the resulting intensity distribution may be affected by neighbouring structures.             
+            - Compute the intensity histogram within the segmentation of each structure and check whether it matches the expected Gaussian distribution.        
+        - Check that collapsed structures share the same Gaussian distribution as their parent structure.  
+        
+5. Intensity transformations      
+    Objectives:         
+        - Apply intensity augmentations. The following operations should be implemented as independent functions:             
+            - Bias field.             
+            - Motion.             
+            - Resolution changes.             
+            - Additive noise.      
+    Outputs:         
+        - Augmented synthetic image.   
+        
+6. Normalization      
+    Objectives:         
+        - Normalize the image intensity.      
+    Outputs:         
+        - Normalized image.   
+    
+    
+Things to take into account:      
+    - Module and function names are not fixed. They can be changed if necessary to improve clarity and understanding.     
+    - All configurable parameters should be passed either directly to the functions or through a config.json file.     
+    - All functions should be able to return the parameters used to generate their outputs, if requested.     
+    - Augmentations should be random by default, but the option to set a seed must be available for reproducibility.     
+    - Augmentation parameters should also be configurable through config.json, allowing specific transformations and parameter values to be set to obtain predictable results.   
+    
+    
+Launchers:  
+    1. Offline launcher      
+        - The template super-resolution module should have its own launcher with the necessary parameters.     
+        - It should be callable from the command line (CLI) or through a function with the necessary parameters.     
+        - It should also accept the same config.json file used by the online launcher.  
+        
+2. Online launcher      
+    - Provide a generator that orchestrates the entire image generation process by calling the individual modules.     
+    - It should be callable from the CLI or through a function with the necessary parameters.     
+    - It should accept config.json.     
+    - It should return the generated results or save them to disk if requested.     
+    - It should return the parameters used or save them to disk if requested.     
+    - It should return the intermediate results from each processing step or save them to disk if requested.

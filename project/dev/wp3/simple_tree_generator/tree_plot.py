@@ -288,3 +288,4 @@ if __name__ == '__main__':
 # CLI:
 # python tree_plot.py --i /home/agustin/phd/fast_nextbrain2/project/wp3/simple_generator/data/inputs/nextbrain_tree_example.json --resolution 0.7 --orientation horizontal
 # python tree_plot.py --i /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_nextbraintree/data/outputs/nextbrain_tree.json --o /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_nextbraintree/data/outputs/nextbrain_tree_0.1mm.png --resolution 0.1
+# python tree_plot.py --i /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_nextbraintree/data/outputs/nextbrain_complete_tree.json --o /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_nextbraintree/data/outputs/nextbrain_complete_tree.1mm.png --resolution 0.1
