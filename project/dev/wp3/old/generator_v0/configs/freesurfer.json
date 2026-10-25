@@ -1,0 +1,19 @@
+{
+  "morpho_pairs": [
+    ["cerebral_wm", "cortex"],
+    ["cerebral_wm", "lateral_ventricles"],
+    ["cerebral_wm", "inf_lat_ventricles"],
+    ["cerebral_wm", "thalamus"],
+    ["cerebral_wm", "putamen"],
+    ["cerebral_wm", "pallidum"],
+    ["cerebral_wm", "caudate"],
+    ["cerebral_wm", "accumbens"],
+    ["cerebral_wm", "amygdala"],
+    ["cerebral_wm", "hippocampus"],
+    [24, "cortex"],
+    [24, "vessels"]
+  ],
+  "unassigned": "background",
+  "contrasts": ["T1", "T2", "FLAIR", "PD"],
+   "resolution": [0.75, 3.0]
+}

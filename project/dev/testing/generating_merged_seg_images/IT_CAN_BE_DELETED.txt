@@ -1,0 +1,4 @@
+this folder is just keeped because I cested the traning images with this code
+but if the modular code is enough, then you can delete it becuase it is an old version
+
+
