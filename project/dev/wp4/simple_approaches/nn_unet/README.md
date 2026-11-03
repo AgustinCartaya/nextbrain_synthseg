@@ -1,7 +1,7 @@
 # nnU-Net v2 on Dataset001_NextBrain_L1
 
 Data: 1000 synthetic 0.6 mm isotropic volumes (~190x340x260) with 9 L1 labels, from
-`testing/generating_merged_seg_images/data/outputs/Dataset001_NextBrain_L1` (symlinked, not copied).
+`/home/Data/Synthetic/NextBrain/Dataset001_NextBrain_L1` (symlinked, not copied).
 
 ## Setup (once)
 ```bash

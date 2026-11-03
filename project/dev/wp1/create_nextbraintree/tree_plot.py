@@ -294,3 +294,14 @@ if __name__ == '__main__':
 # --i /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_nextbraintree/data/outputs/nextbrain_tree_v1.json \
 # --o /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_nextbraintree/data/outputs/nextbrain_tree_v1_1mm.png \
 # --resolution 0.1
+
+
+# python tree_plot.py \
+# --i /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/allen_ontology/data/outputs/nextbrain_allen_label_tree_developmental.json \
+# --o /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/allen_ontology/data/outputs/nextbrain_allen_label_tree_developmental_1mm.png \
+# --resolution 0.1
+
+# python tree_plot.py \
+# --i /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/allen_ontology/data/outputs/nextbrain_tree_allen_gyral.json \
+# --o /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/allen_ontology/data/outputs/nextbrain_tree_allen_gyral_1mm.png \
+# --resolution 0.1

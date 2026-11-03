@@ -8,4 +8,4 @@ export nnUNet_n_proc_DA=${nnUNet_n_proc_DA:-16}
 
 export DATASET_ID=1
 export DATASET_NAME=Dataset001_NextBrain_L1
-export SOURCE_DATASET=/home/agustin/phd/synthseg_nextbrain/project/dev/testing/generating_merged_seg_images/data/outputs/Dataset001_NextBrain_L1
+export SOURCE_DATASET=/home/Data/Synthetic/NextBrain/Dataset001_NextBrain_L1

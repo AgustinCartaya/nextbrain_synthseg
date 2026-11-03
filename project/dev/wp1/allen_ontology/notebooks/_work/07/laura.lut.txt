@@ -1,0 +1,30 @@
+#No. Label Name:                                R   G   B   A
+0       Unknown                                 0   0   0   0
+1       Left-Cerebral-White-Matter              245 245 245 0
+2       Left-Cerebral-Grey-Matter               205 62  78  0
+3       Left-Cerebral-Cortex                    205 62  78  0
+4       Left-Cerebellum-White-Matter            220 248 164 0
+5       Left-Cerebellum-Cortex                  230 148 34  0
+6       Left-Thalamus                           0   118 14  0
+7       Left-Caudate-Accumbens-area             122 186 220 0
+8       Left-Putamen                            236 13  176 0
+9       Left-Pallidum                           12  48  255 0
+10      Brain-Stem                              119 159 176 0
+11      Left-Hippocampus-Grey-Matter            220 216 20  0
+12      Left-Hippocampus-White-Matter           110 108 10  0
+13      Left-Amygdala                           103 255 255 0
+14      Left-VentralDC                          145 42  42  0
+
+101     Right-Cerebral-White-Matter             245 245 245 0
+102     Right-Cerebral-Grey-Matter              205 62  78  0
+103     Right-Cerebral-Cortex                   205 62  78  0
+104     Right-Cerebellum-White-Matter           220 248 164 0
+105     Right-Cerebellum-Cortex                 230 148 34  0
+106     Right-Thalamus                          0   118 14  0
+107     Right-Caudate-Accumbens-area            122 186 220 0
+108     Right-Putamen                           236 13  176 0
+109     Right-Pallidum                          12  48  255 0
+111     Right-Hippocampus-Grey-Matter           220 216 20  0
+112     Right-Hippocampus-White-Matter          110 108 10  0
+113     Right-Amygdala                          103 255 255 0
+114     Right-VentralDC                         145 42  42  0

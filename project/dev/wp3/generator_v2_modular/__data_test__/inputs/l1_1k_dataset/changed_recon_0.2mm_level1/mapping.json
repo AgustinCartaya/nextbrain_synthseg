@@ -1,0 +1,18 @@
+{
+  "level": "L1",
+  "column": "L1_tissue",
+  "mapping": {
+    "Background": 0,
+    "Brainstem": 1,
+    "CSF / ventricles": 2,
+    "Cerebellar GM": 3,
+    "Cerebellar WM": 4,
+    "Cerebral GM": 5,
+    "Cerebral WM": 6,
+    "Deep GM": 7,
+    "Other": 8
+  },
+  "unmapped_value": 0,
+  "unknown_value": 9,
+  "extra_labels": []
+}

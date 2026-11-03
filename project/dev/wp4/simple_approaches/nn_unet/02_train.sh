@@ -14,3 +14,4 @@ TRAINER=${TRAINER:-nnUNetTrainer}
 mkdir -p logs
 CUDA_VISIBLE_DEVICES=$GPU nnUNetv2_train $DATASET_ID 3d_fullres $FOLD -p $PLANS -tr $TRAINER --npz ${EXTRA:-} \
     2>&1 | tee logs/train_${PLANS}_${TRAINER}_fold${FOLD}.log
+

@@ -1,0 +1,39 @@
+% PONER LOS PATHS
+export nnUNet_raw="/home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_raw"
+export nnUNet_preprocessed="/home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_preprocessed"
+export nnUNet_results="/home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_results"
+
+% PLAN AND PREPROCESS
+nnUNetv2_plan_and_preprocess -d 001 --verify_dataset_integrity
+
+% ENTRENAR
+CUDA_VISIBLE_DEVICES=3 nnUNetv2_train Dataset001_DFU 2d 0 --npz
+CUDA_VISIBLE_DEVICES=2 nnUNetv2_train Dataset001_DFU 2d 1 --npz
+CUDA_VISIBLE_DEVICES=2 nnUNetv2_train Dataset001_DFU 2d 2 --npz
+CUDA_VISIBLE_DEVICES=0 nnUNetv2_train Dataset001_DFU 2d 3 --npz
+CUDA_VISIBLE_DEVICES=1 nnUNetv2_train Dataset001_DFU 2d 4 --npz
+
+% FIND THE BEST CONFIGURATION
+nnUNetv2_find_best_configuration Dataset001_DFU
+
+% despues de correr lo anterior me dijo esto:
+All results:
+nnUNetTrainer__nnUNetPlans__2d: 0.7685898107315662
+Best: nnUNetTrainer__nnUNetPlans__2d: 0.7685898107315662
+Determining postprocessing for best model/ensemble
+Removing all but the largest foreground region did not improve results!
+Run inference like this:
+nnUNetv2_predict -d Dataset001_DFU -i /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_raw/Dataset001_DFU/imagesTs -o /home/mica/project/DFUC/nnUNet/nnUNet_baseline/test_results/raw -f 0 1 2 3 4 -tr nnUNetTrainer -c 2d -p nnUNetPlans
+CUDA_VISIBLE_DEVICES=0 nnUNetv2_predict -d Dataset001_DFU -i /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_raw/Dataset001_DFU/imagesTr -o /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_results/training_results -f 0 1 2 3 4 -tr nnUNetTrainer -c 2d -p nnUNetPlans
+Once inference is completed, run postprocessing like this:
+nnUNetv2_apply_postprocessing -i /home/mica/project/DFUC/nnUNet/nnUNet_baseline/test_results/raw -o /home/mica/project/DFUC/nnUNet/nnUNet_baseline/test_results/postprocessed -pp_pkl_file /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_results/Dataset001_DFU/nnUNetTrainer__nnUNetPlans__2d/crossval_results_folds_0_1_2_3_4/postprocessing.pkl -np 8 -plans_json /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_results/Dataset001_DFU/nnUNetTrainer__nnUNetPlans__2d/crossval_results_folds_0_1_2_3_4/plans.json
+% PARA GUARDAR LOS PESOS
+CUDA_VISIBLE_DEVICES=0 nnUNetv2_predict -d Dataset001_DFU -i /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_raw/Dataset001_DFU/imagesTs -o /home/mica/project/DFUC/nnUNet/nnUNet_baseline/test_results/probabilities -f 0 1 2 3 4 -tr nnUNetTrainer -c 2d -p nnUNetPlans --save_probabilities
+CUDA_VISIBLE_DEVICES=2 nnUNetv2_predict -d Dataset001_DFU -i /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_raw/Dataset001_DFU/imagesTr -o /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUnet_training_results_prob -f 0 1 2 3 4 -tr nnUNetTrainer -c 2d -p nnUNetPlans --save_probabilities
+CUDA_VISIBLE_DEVICES=1 nnUNetv2_predict -d Dataset001_DFU -i /home/mica/project/DFUC/code_to_deliver/src/models/nnUNet/nnUNet_baseline/nnUNet_raw/Dataset001_DFU/imagesTs -o validation_results -f 0 1 2 3 4 -tr nnUNetTrainer -c 2d -p nnUNetPlans --save_probabilities
+
+% PARA FUSEG
+CUDA_VISIBLE_DEVICES=2 nnUNetv2_predict -d Dataset001_DFU -i /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_raw/Dataset002_FUSeg/imagesTs -o /home/mica/project/DFUC/_FUSeg_images/test/predictions/nnUNet_raw -f 0 1 2 3 4 -tr nnUNetTrainer -c 2d -p nnUNetPlans
+nnUNetv2_apply_postprocessing -i /home/mica/project/DFUC/_FUSeg_images/test/predictions/nnUNet_raw -o /home/mica/project/DFUC/_FUSeg_images/test/predictions/nnUNet_pp -pp_pkl_file /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_results/Dataset001_DFU/nnUNetTrainer__nnUNetPlans__2d/crossval_results_folds_0_1_2_3_4/postprocessing.pkl -np 8 -plans_json /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_results/Dataset001_DFU/nnUNetTrainer__nnUNetPlans__2d/crossval_results_folds_0_1_2_3_4/plans.json
+CUDA_VISIBLE_DEVICES=2 nnUNetv2_predict -d Dataset001_DFU -i /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_raw/Dataset002_FUSeg/imagesTr -o /home/mica/project/DFUC/_FUSeg_images/train/predictions/nnUNet_raw -f 0 1 2 3 4 -tr nnUNetTrainer -c 2d -p nnUNetPlans
+nnUNetv2_apply_postprocessing -i /home/mica/project/DFUC/_FUSeg_images/train/predictions/nnUNet_raw -o /home/mica/project/DFUC/_FUSeg_images/train/predictions/nnUNet_pp -pp_pkl_file /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_results/Dataset001_DFU/nnUNetTrainer__nnUNetPlans__2d/crossval_results_folds_0_1_2_3_4/postprocessing.pkl -np 8 -plans_json /home/mica/project/DFUC/nnUNet/nnUNet_baseline/nnUNet_results/Dataset001_DFU/nnUNetTrainer__nnUNetPlans__2d/crossval_results_folds_0_1_2_3_4/plans.json

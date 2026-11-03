@@ -9,4 +9,6 @@ NP=${NP:-16}
 
 python prepare_dataset.py
 # Only 3d_fullres: data is isotropic 0.6 mm, ~190x340x260 voxels
-nnUNetv2_plan_and_preprocess -d $DATASET_ID -c 3d_fullres -pl $PLANNER -np $NP -npfp $NP --verify_dataset_integrity
+# nnUNetv2_plan_and_preprocess -d $DATASET_ID -c 3d_fullres -pl $PLANNER -np $NP -npfp $NP --verify_dataset_integrity
+# nnUNetv2_plan_and_preprocess -d $DATASET_ID -pl $PLANNER -np $NP -npfp $NP
+nnUNetv2_plan_and_preprocess -d $DATASET_ID -c 2d 3d_fullres -pl $PLANNER -np $NP -npfp $NP
