@@ -1,0 +1,79 @@
+[20:33:33] 1. detecting gap planes
+[20:33:35] 1. detecting gap planes
+[20:33:35] 1. detecting gap planes
+[20:33:35] 1. detecting gap planes
+[20:33:36] 1. detecting gap planes
+[20:33:39]   1,093,358 short background runs (<= 2.4 mm) along axis 1
+[20:33:43]   global normal: pitch=-18.0 yaw=-2.5 deg (spikiness 0.74)
+[20:33:44]     rejected candidate plane: coverage 0.071, non-cortical runs 0.06
+[20:33:44]   11 gap planes (coverage / non-cortical runs): 0.10/0.24, 0.09/0.17, 0.19/0.26, 0.09/0.39, 0.09/0.21, 0.06/0.38, 0.13/0.45, 0.24/0.42, 0.05/0.26, 0.06/0.13, 0.04/0.11
+[20:33:44] 2. block misalignment
+[20:33:46]   1,409,725 short background runs (<= 2.4 mm) along axis 1
+[20:33:47]   1,404,041 short background runs (<= 2.4 mm) along axis 1
+[20:33:51]   misalignment per plane (vox): (-2,+0) (-2,+1) (-2,+0) (-0,+1) (-0,+1) (-2,-0) (-0,-0) (+0,+0) (+0,+0) (+0,+2) (+0,+0)
+[20:33:51]   block translations (vox): [[-2, 0], [0, 0], [-1, 0], [1, 0], [1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+[20:33:51]   938,718 short background runs (<= 2.4 mm) along axis 1
+[20:33:55]   774,902 short background runs (<= 2.4 mm) along axis 1
+[20:34:06]   global normal: pitch=-6.5 yaw=-3.5 deg (spikiness 0.99)
+[20:34:07] 3. filling gaps
+[20:34:14]   21 gap planes (coverage / non-cortical runs): 0.02/0.13, 0.11/0.18, 0.05/0.09, 0.16/0.23, 0.30/0.26, 0.12/0.39, 0.15/0.37, 0.19/0.39, 0.19/0.48, 0.05/0.37, 0.07/0.56, 0.22/0.41, 0.06/0.31, 0.06/0.22, 0.07/0.23, 0.09/0.21, 0.24/0.39, 0.18/0.44, 0.06/0.11, 0.10/0.23, 0.08/0.14
+[20:34:14] 2. block misalignment
+[20:34:15]   global normal: pitch=-19.5 yaw=0.5 deg (spikiness 0.75)
+[20:34:15]   global normal: pitch=-2.5 yaw=0.0 deg (spikiness 1.41)
+[20:34:16]     rejected candidate plane: coverage 0.020, non-cortical runs 0.06
+[20:34:16]   11 gap planes (coverage / non-cortical runs): 0.04/0.10, 0.06/0.24, 0.04/0.18, 0.08/0.38, 0.16/0.47, 0.19/0.32, 0.16/0.33, 0.05/0.62, 0.05/0.42, 0.02/0.11, 0.04/0.31
+[20:34:16] 2. block misalignment
+[20:34:17]   global normal: pitch=-11.0 yaw=-1.5 deg (spikiness 0.88)
+[20:34:18]   16 gap planes (coverage / non-cortical runs): 0.05/0.21, 0.14/0.23, 0.21/0.16, 0.29/0.19, 0.19/0.28, 0.31/0.41, 0.11/0.14, 0.33/0.53, 0.18/0.26, 0.07/0.29, 0.10/0.31, 0.13/0.30, 0.05/0.30, 0.09/0.15, 0.04/0.11, 0.10/0.22
+[20:34:18] 2. block misalignment
+[20:34:18]   misalignment per plane (vox): (-1,+0) (+0,-2) (+0,+0) (+0,+0) (+0,+1) (+0,+0) (+0,+3) (+0,+1) (-1,+0) (+0,-2) (-0,-0) (-0,-2) (-1,-2) (-0,+2) (+1,-1) (+3,-2) (-0,-0)
+[20:34:18]   block translations (vox): [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 1], [0, 1], [0, -1], [0, -1], [0, -1], [0, 0], [0, 0], [0, 0], [0, 1], [1, -1], [1, -1], [-1, 1], [-1, 1]]
+[20:34:18]     rejected candidate plane: coverage 0.026, non-cortical runs 0.01
+[20:34:19]     rejected candidate plane: coverage 0.016, non-cortical runs 0.02
+[20:34:19]   12 gap planes (coverage / non-cortical runs): 0.05/0.19, 0.15/0.58, 0.11/0.34, 0.09/0.53, 0.17/0.29, 0.14/0.53, 0.03/0.64, 0.05/0.40, 0.13/0.65, 0.18/0.59, 0.07/0.64, 0.08/0.22
+[20:34:19] 2. block misalignment
+[20:34:21] 3. filling gaps
+[20:34:21]   misalignment per plane (vox): (+0,+2) (-2,-0) (+0,+0) (+1,+0) (-0,+0) (-1,+0) (+0,-0) (+2,+0) (+0,-1) (+0,+0) (+0,+0) (-2,-2) (+0,+0) (+0,+1)
+[20:34:21]   block translations (vox): [[-1, 0], [-1, 0], [1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+[20:34:22]   misalignment per plane (vox): (+2,+0) (+0,-1) (+0,-1) (+0,-1) (-1,+0) (+0,+0) (-0,-1) (-0,+0) (+0,+2) (-0,-1) (+0,+0)
+[20:34:22]   block translations (vox): [[1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+[20:34:22]   misalignment per plane (vox): (-0,-0) (+0,+0) (+0,+0) (+0,+0) (+0,-2) (+1,-0) (-0,+2) (+0,-0) (-0,+1) (+0,+1) (-1,-2)
+[20:34:22]   block translations (vox): [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 1]]
+[20:34:25] 3. filling gaps
+[20:34:27] 3. filling gaps
+[20:34:31] 3. filling gaps
+[20:35:21]   axis 1: 11 planes, 821,682 gap voxels, 645,527 filled with tissue
+[20:35:21] 4. filling cracks
+[20:35:43]   axis 1: 21 planes, 2,593,200 gap voxels, 2,154,353 filled with tissue
+[20:35:43] 4. filling cracks
+[20:35:52]   axis 1: 16 planes, 2,409,433 gap voxels, 2,019,465 filled with tissue
+[20:35:52] 4. filling cracks
+[20:35:52]   axis 1: 11 planes, 735,776 gap voxels, 586,819 filled with tissue
+[20:35:52] 4. filling cracks
+[20:36:02]   axis 1: 12 planes, 514,334 gap voxels, 428,407 filled with tissue
+[20:36:02] 4. filling cracks
+[20:36:15]   190,485 crack voxels filled
+[20:36:15] 5. filling enclosed holes
+[20:36:18]   338,926 crack voxels filled
+[20:36:18] 5. filling enclosed holes
+[20:36:27]   2,695 hole voxels filled
+[20:36:28] done in 174.7 s, 3,712,456 voxels changed
+[20:36:28]   9,075 hole voxels filled
+[20:36:29] done in 173.9 s, 6,112,348 voxels changed
+[20:36:51]   389,621 crack voxels filled
+[20:36:51] 5. filling enclosed holes
+[20:37:03]   2,686 hole voxels filled
+[20:37:05] done in 210.1 s, 3,641,574 voxels changed
+[20:37:16]   285,221 crack voxels filled
+[20:37:16] 5. filling enclosed holes
+[20:37:31]   129,137 crack voxels filled
+[20:37:31] 5. filling enclosed holes
+[20:37:37]   2,187 hole voxels filled
+[20:37:39]   965 hole voxels filled
+[20:37:39] done in 244.7 s, 657,832 voxels changed
+[20:37:41] done in 244.9 s, 1,359,899 voxels changed
+case-1: {"gap_filled": 586819, "crack_filled": 285221, "hole_filled": 2187, "changed_voxels": 1359899, "block_translations_vox": [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 1]], "seconds": 244.9, "n_planes": 11}
+case-2: {"gap_filled": 428407, "crack_filled": 129137, "hole_filled": 965, "changed_voxels": 657832, "block_translations_vox": [[1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]], "seconds": 244.7, "n_planes": 12}
+case-3: {"gap_filled": 645527, "crack_filled": 190485, "hole_filled": 2695, "changed_voxels": 3712456, "block_translations_vox": [[-2, 0], [0, 0], [-1, 0], [1, 0], [1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]], "seconds": 174.7, "n_planes": 11}
+case-4: {"gap_filled": 2019465, "crack_filled": 389621, "hole_filled": 2686, "changed_voxels": 3641574, "block_translations_vox": [[-1, 0], [-1, 0], [1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]], "seconds": 210.1, "n_planes": 16}
+case-5: {"gap_filled": 2154353, "crack_filled": 338926, "hole_filled": 9075, "changed_voxels": 6112348, "block_translations_vox": [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 1], [0, 1], [0, -1], [0, -1], [0, -1], [0, 0], [0, 0], [0, 0], [0, 1], [1, -1], [1, -1], [-1, 1], [-1, 1]], "seconds": 173.9, "n_planes": 21}

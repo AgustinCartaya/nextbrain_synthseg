@@ -21,6 +21,14 @@ Usage (python):
 Usage (CLI):
     python merge_labels.py --level L1 --mapping '{"Deep GM": 1, "Cerebral GM": 2}' \
         --input data/inputs/recon_0.2mm --output data/outputs/recon_0.2mm_L1
+        
+python merge_labels.py \
+    --level L1 \
+    --mapping /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_merged_segmentations/data/inputs/mapping_l1.json \
+    --ontology /home/agustin/phd/synthseg_nextbrain/data/basics/nextbrain_ontology_v1.csv \
+    --input /home/agustin/phd/to_delete/nextbrain/recon_0.2mm \
+    --output /home/agustin/phd/to_delete/nextbrain/recon_0.2mm_L1
+        
 """
 import argparse
 import json
@@ -194,7 +202,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--input", default=os.path.join(here, "data/inputs/recon_0.2mm"))
     parser.add_argument("--output", default=None, help="Default: data/outputs/<input name>_<level>")
-    parser.add_argument("--ontology", default=os.path.join(here, "data/inputs/nextbrain_ontology_v1.csv"))
+    parser.add_argument("--ontology", default=os.path.join(here, "/home/agustin/phd/synthseg_nextbrain/data/basics/nextbrain_ontology_v1.csv"))
     parser.add_argument("--level", required=True, choices=list(LEVEL_COLUMNS))
     parser.add_argument("--mapping", help="JSON dict string or path to a JSON file: {\"parent name\": index}")
     parser.add_argument("--unmapped-value", type=int, default=0,

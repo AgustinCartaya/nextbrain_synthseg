@@ -1,0 +1,119 @@
+[20:34:25] case1 @ 0.4 mm: 20 synthetic gaps, 850,631 gap vox, 1,605,653 shifted vox, 11,095 hole vox
+[20:34:25] 1. detecting gap planes
+[20:34:27]   403,121 short background runs (<= 2.4 mm) along axis 1
+[20:34:30]   global normal: pitch=-2.5 yaw=2.0 deg (spikiness 2.65)
+[20:34:30]     rejected candidate plane: coverage 0.144, non-cortical runs 0.04
+[20:34:30]   14 gap planes (coverage / non-cortical runs): 0.07/0.12, 0.21/0.20, 0.32/0.21, 0.43/0.22, 0.53/0.34, 0.60/0.46, 0.67/0.49, 0.69/0.51, 0.55/0.49, 0.54/0.43, 0.32/0.37, 0.29/0.46, 0.35/0.36, 0.22/0.24
+[20:34:30] 2. block misalignment
+[20:34:33]   misalignment per plane (vox): (-2,+0) (-2,-6) (+6,+4) (-2,-2) (-2,-1) (+1,-2) (-1,+1) (-1,-0) (+2,+0) (+0,+2) (+1,-1) (-2,+1) (+0,+0) (-0,+0)
+[20:34:33]   block translations (vox): [[-1, -1], [1, -2], [2, 3], [-3, -1], [-1, 0], [1, 0], [0, 2], [0, 0], [1, 0], [0, 1], [0, -1], [-1, 0], [0, 0], [0, 0], [0, 0]]
+[20:34:33] 3. filling gaps
+[20:35:00]   axis 1: 14 planes, 857,199 gap voxels, 772,579 filled with tissue
+[20:35:00] 4. filling cracks
+[20:35:16]   39,736 crack voxels filled
+[20:35:16] 5. filling enclosed holes
+[20:35:20]   1,397 hole voxels filled
+[20:35:20] done in 55.9 s, 2,041,092 voxels changed
+case1 @ 0.4 mm  seed 1  (planes: 20 synthetic, 14 detected)
+  all_corrupted   2,431,603 vox | L1 errors  2,200,601 ->    765,159 ( 65.2% fixed) | full-label errors  2,431,603 ->    874,551 ( 64.0% fixed)
+  gaps              816,251 vox | L1 errors    816,251 ->    182,510 ( 77.6% fixed) | full-label errors    816,251 ->    205,342 ( 74.8% fixed)
+  shifted         1,605,466 vox | L1 errors  1,374,464 ->    575,088 ( 58.2% fixed) | full-label errors  1,605,466 ->    661,644 ( 58.8% fixed)
+  holes_cracks       10,908 vox | L1 errors     10,908 ->      8,457 ( 22.5% fixed) | full-label errors     10,908 ->      8,467 ( 22.4% fixed)
+  on uncorrupted case: 269,489 vox changed, sulcal background filled 77,820/386,438 (20.14%)
+  changed outside the synthetic corruption: 75,609 vox
+  block steps (rms, vox): 2.79 -> 1.73
+[20:36:34] case2 @ 0.4 mm: 17 synthetic gaps, 717,954 gap vox, 1,207,553 shifted vox, 10,686 hole vox
+[20:36:34] 1. detecting gap planes
+[20:36:34]   351,022 short background runs (<= 2.4 mm) along axis 1
+[20:36:35]   global normal: pitch=-2.5 yaw=2.5 deg (spikiness 2.92)
+[20:36:36]     rejected candidate plane: coverage 0.126, non-cortical runs 0.07
+[20:36:36]   16 gap planes (coverage / non-cortical runs): 0.27/0.23, 0.45/0.21, 0.63/0.24, 0.70/0.36, 0.64/0.34, 0.54/0.42, 0.02/0.31, 0.65/0.46, 0.55/0.46, 0.06/0.33, 0.45/0.58, 0.33/0.45, 0.38/0.52, 0.35/0.38, 0.26/0.26, 0.08/0.10
+[20:36:36] 2. block misalignment
+[20:36:37]   misalignment per plane (vox): (+5,+2) (+1,-0) (+3,-2) (-4,+4) (+1,-2) (-3,-2) (+2,+2) (-2,-0) (-1,-0) (+2,-0) (+2,+4) (+0,+0) (+0,+2) (-2,-4) (+0,+6)
+[20:36:37]   block translations (vox): [[3, 1], [-1, -1], [-1, 0], [-3, 2], [0, -2], [-1, 0], [1, 2], [-1, 0], [1, 0], [2, 1], [0, 2], [-1, -1], [-1, -1], [-1, -1], [1, 2], [0, -3]]
+[20:36:37] 3. filling gaps
+[20:36:49]   axis 1: 16 planes, 743,878 gap voxels, 693,155 filled with tissue
+[20:36:49] 4. filling cracks
+[20:36:52]   21,758 crack voxels filled
+[20:36:52] 5. filling enclosed holes
+[20:36:53]   2,381 hole voxels filled
+[20:36:53] done in 19.3 s, 2,070,594 voxels changed
+case2 @ 0.4 mm  seed 1  (planes: 17 synthetic, 16 detected)
+  all_corrupted   1,911,422 vox | L1 errors  1,708,035 ->    444,462 ( 74.0% fixed) | full-label errors  1,911,422 ->    525,993 ( 72.5% fixed)
+  gaps              694,355 vox | L1 errors    694,355 ->    128,167 ( 81.5% fixed) | full-label errors    694,355 ->    145,465 ( 79.1% fixed)
+  shifted         1,207,256 vox | L1 errors  1,003,869 ->    309,800 ( 69.1% fixed) | full-label errors  1,207,256 ->    373,994 ( 69.0% fixed)
+  holes_cracks       10,389 vox | L1 errors     10,389 ->      6,996 ( 32.7% fixed) | full-label errors     10,389 ->      7,051 ( 32.1% fixed)
+  on uncorrupted case: 633,425 vox changed, sulcal background filled 93,417/262,675 (35.56%)
+  changed outside the synthetic corruption: 227,689 vox
+  block steps (rms, vox): 3.50 -> 2.77
+[20:37:17] case3 @ 0.4 mm: 16 synthetic gaps, 794,303 gap vox, 1,800,236 shifted vox, 7,604 hole vox
+[20:37:17] 1. detecting gap planes
+[20:37:18]   421,963 short background runs (<= 2.4 mm) along axis 1
+[20:37:19]   global normal: pitch=-2.5 yaw=2.5 deg (spikiness 2.79)
+[20:37:19]     rejected candidate plane: coverage 0.064, non-cortical runs 0.04
+[20:37:19]     rejected candidate plane: coverage 0.044, non-cortical runs 0.03
+[20:37:19]   13 gap planes (coverage / non-cortical runs): 0.20/0.12, 0.37/0.14, 0.57/0.20, 0.64/0.31, 0.62/0.33, 0.67/0.42, 0.68/0.43, 0.51/0.52, 0.56/0.38, 0.40/0.35, 0.32/0.46, 0.23/0.32, 0.19/0.16
+[20:37:19] 2. block misalignment
+[20:37:20]   misalignment per plane (vox): (-8,+3) (+2,+0) (+0,+2) (-2,-4) (+4,+2) (-2,-2) (-3,+2) (+2,-2) (-2,+3) (+0,+0) (+2,+0) (-2,+0) (+3,+2)
+[20:37:20]   block translations (vox): [[-4, 2], [3, -1], [0, 0], [0, -2], [1, 1], [-2, -1], [-1, 1], [1, 0], [-1, 2], [1, -1], [1, 0], [0, 0], [1, 0], [-1, -1]]
+[20:37:20] 3. filling gaps
+[20:37:31]   axis 1: 13 planes, 833,696 gap voxels, 740,390 filled with tissue
+[20:37:31] 4. filling cracks
+[20:37:34]   29,487 crack voxels filled
+[20:37:34] 5. filling enclosed holes
+[20:37:35]   4,134 hole voxels filled
+[20:37:35] done in 18.3 s, 2,184,800 voxels changed
+case3 @ 0.4 mm  seed 1  (planes: 16 synthetic, 13 detected)
+  all_corrupted   2,559,442 vox | L1 errors  2,271,652 ->    754,424 ( 66.8% fixed) | full-label errors  2,559,442 ->    928,476 ( 63.7% fixed)
+  gaps              753,207 vox | L1 errors    753,207 ->    173,181 ( 77.0% fixed) | full-label errors    753,207 ->    197,754 ( 73.7% fixed)
+  shifted         1,799,822 vox | L1 errors  1,512,032 ->    577,762 ( 61.8% fixed) | full-label errors  1,799,822 ->    727,198 ( 59.6% fixed)
+  holes_cracks        7,190 vox | L1 errors      7,190 ->      3,937 ( 45.2% fixed) | full-label errors      7,190 ->      4,049 ( 43.7% fixed)
+  on uncorrupted case: 859,815 vox changed, sulcal background filled 177,058/495,098 (35.76%)
+  changed outside the synthetic corruption: 9,276 vox
+  block steps (rms, vox): 3.54 -> 2.16
+[20:38:06] case4 @ 0.4 mm: 19 synthetic gaps, 937,158 gap vox, 1,722,134 shifted vox, 8,219 hole vox
+[20:38:06] 1. detecting gap planes
+[20:38:06]   528,573 short background runs (<= 2.4 mm) along axis 1
+[20:38:08]   global normal: pitch=-2.5 yaw=2.5 deg (spikiness 2.22)
+[20:38:08]   19 gap planes (coverage / non-cortical runs): 0.21/0.13, 0.32/0.21, 0.45/0.14, 0.44/0.26, 0.52/0.32, 0.21/0.28, 0.40/0.36, 0.36/0.38, 0.50/0.49, 0.53/0.37, 0.42/0.49, 0.60/0.48, 0.24/0.21, 0.51/0.43, 0.38/0.48, 0.38/0.35, 0.24/0.24, 0.19/0.22, 0.09/0.13
+[20:38:08] 2. block misalignment
+[20:38:10]   misalignment per plane (vox): (-0,-2) (+2,-2) (-4,+6) (+0,-2) (-2,-4) (+2,+2) (-1,-1) (-2,-0) (+3,-1) (+2,+0) (-0,+2) (+0,-2) (+0,-0) (+0,+2) (-2,-2) (-0,+0) (+0,+0) (+2,-2)
+[20:38:10]   block translations (vox): [[0, -1], [0, 0], [-2, 3], [1, -3], [0, -1], [2, 2], [0, 0], [1, 0], [2, 0], [0, 1], [-1, 1], [-1, -1], [-1, 1], [-1, 1], [-1, -1], [1, 0], [1, 0], [1, 0], [-1, 1]]
+[20:38:10] 3. filling gaps
+[20:38:30]   axis 1: 19 planes, 1,165,542 gap voxels, 1,035,488 filled with tissue
+[20:38:30] 4. filling cracks
+[20:38:35]   42,158 crack voxels filled
+[20:38:35] 5. filling enclosed holes
+[20:38:36]   1,797 hole voxels filled
+[20:38:37] done in 30.9 s, 2,793,163 voxels changed
+case4 @ 0.4 mm  seed 1  (planes: 19 synthetic, 19 detected)
+  all_corrupted   2,630,041 vox | L1 errors  2,309,990 ->    690,370 ( 70.1% fixed) | full-label errors  2,630,041 ->    822,159 ( 68.7% fixed)
+  gaps              900,833 vox | L1 errors    900,833 ->    216,100 ( 76.0% fixed) | full-label errors    900,833 ->    236,289 ( 73.8% fixed)
+  shifted         1,722,025 vox | L1 errors  1,401,974 ->    469,091 ( 66.5% fixed) | full-label errors  1,722,025 ->    580,661 ( 66.3% fixed)
+  holes_cracks        8,110 vox | L1 errors      8,110 ->      5,912 ( 27.1% fixed) | full-label errors      8,110 ->      5,943 ( 26.7% fixed)
+  on uncorrupted case: 1,054,910 vox changed, sulcal background filled 240,061/615,258 (39.02%)
+  changed outside the synthetic corruption: 272,364 vox
+  block steps (rms, vox): 2.83 -> 1.82
+[20:39:14] case5 @ 0.4 mm: 17 synthetic gaps, 819,716 gap vox, 1,595,303 shifted vox, 10,136 hole vox
+[20:39:14] 1. detecting gap planes
+[20:39:14]   518,837 short background runs (<= 2.4 mm) along axis 1
+[20:39:15]   global normal: pitch=-2.5 yaw=2.5 deg (spikiness 2.36)
+[20:39:16]   16 gap planes (coverage / non-cortical runs): 0.18/0.13, 0.35/0.23, 0.47/0.25, 0.64/0.25, 0.69/0.41, 0.16/0.18, 0.69/0.44, 0.53/0.46, 0.60/0.51, 0.50/0.54, 0.39/0.37, 0.28/0.35, 0.29/0.48, 0.28/0.24, 0.22/0.29, 0.07/0.09
+[20:39:16] 2. block misalignment
+[20:39:18]   misalignment per plane (vox): (-2,-6) (+2,+1) (+2,+0) (+3,-2) (-4,+4) (+2,-3) (-2,-3) (+1,+2) (-2,-2) (+2,+0) (+1,+0) (+0,+0) (+1,+2) (+2,-2) (+2,-4)
+[20:39:18]   block translations (vox): [[0, -3], [2, 2], [1, 0], [0, 0], [-3, 2], [1, -3], [-1, 0], [1, 2], [0, -1], [2, 0], [0, 0], [0, 0], [0, 0], [0, -2], [-1, 0], [-2, 3]]
+[20:39:18] 3. filling gaps
+[20:39:33]   axis 1: 16 planes, 922,544 gap voxels, 828,346 filled with tissue
+[20:39:33] 4. filling cracks
+[20:39:37]   62,693 crack voxels filled
+[20:39:37] 5. filling enclosed holes
+[20:39:38]   6,659 hole voxels filled
+[20:39:38] done in 24.7 s, 2,270,658 voxels changed
+case5 @ 0.4 mm  seed 1  (planes: 17 synthetic, 16 detected)
+  all_corrupted   2,386,865 vox | L1 errors  2,174,656 ->    567,723 ( 73.9% fixed) | full-label errors  2,386,865 ->    633,292 ( 73.5% fixed)
+  gaps              783,856 vox | L1 errors    783,856 ->    157,836 ( 79.9% fixed) | full-label errors    783,856 ->    173,449 ( 77.9% fixed)
+  shifted         1,594,904 vox | L1 errors  1,382,695 ->    404,365 ( 70.8% fixed) | full-label errors  1,594,904 ->    454,293 ( 71.5% fixed)
+  holes_cracks        9,737 vox | L1 errors      9,737 ->      6,838 ( 29.8% fixed) | full-label errors      9,737 ->      6,912 ( 29.0% fixed)
+  on uncorrupted case: 948,941 vox changed, sulcal background filled 212,391/565,922 (37.53%)
+  changed outside the synthetic corruption: 106,764 vox
+  block steps (rms, vox): 3.46 -> 1.84

@@ -1,0 +1,56 @@
+mri_vol2vol \
+--mov /home/agustin/phd/synthseg_nextbrain/project/dev/testing/segment_mrixfields/data/outputs/T1W/3T/R_T1W_3T_0329/seg.combined.nii.gz \
+--targ /home/agustin/phd/synthseg_nextbrain/project/dev/wp4/simple_approaches/nn_unet/data/inputs/mrixfields/T1W/3T/R_T1W_3T_0329_0000.nii.gz \
+--regheader --interp nearest \
+--o /home/agustin/phd/synthseg_nextbrain/project/dev/testing/segment_mrixfields/data/outputs/T1W/3T/R_T1W_3T_0329/seg_registered.nii.gz
+
+
+
+### Merge with the latest approache
+python /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/allen_ontology/tree_segmentation.py \
+--i /home/agustin/phd/synthseg_nextbrain/project/dev/testing/segment_mrixfields/data/outputs/T1W/3T/R_T1W_3T_0329/seg_registered.nii.gz \
+--o /home/agustin/phd/synthseg_nextbrain/project/dev/testing/segment_mrixfields/data/outputs/T1W/3T/R_T1W_3T_0329/seg_registered_merged.nii.gz \
+--v brainstem_l1 csf_ventricles_l1 cerebellar_gm_l1 cerebellar_wm_l1 cerebral_gm_l1 cerebral_wm_l1 deep_gm_l1 other_l1 \
+--tree /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_nextbraintree/data/outputs/nextbrain_tree_v1.json
+
+python /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/allen_ontology/tree_segmentation.py \
+--i /home/agustin/phd/synthseg_nextbrain/project/dev/testing/segment_mrixfields/data/outputs/T1W/3T/R_T1W_3T_0330/seg_registered.nii.gz \
+--o /home/agustin/phd/synthseg_nextbrain/project/dev/testing/segment_mrixfields/data/outputs/T1W/3T/R_T1W_3T_0330/seg_registered_merged.nii.gz \
+--v brainstem_l1 csf_ventricles_l1 cerebellar_gm_l1 cerebellar_wm_l1 cerebral_gm_l1 cerebral_wm_l1 deep_gm_l1 other_l1 \
+--tree /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_nextbraintree/data/outputs/nextbrain_tree_v1.json
+
+
+
+### merge with the original approach
+
+import merge_labels as ml
+
+ontology_csv = "/home/agustin/phd/synthseg_nextbrain/data/basics/nextbrain_ontology_v1.csv"
+img = nib.load("/home/agustin/phd/synthseg_nextbrain/project/dev/testing/segment_mrixfields/data/outputs/T1W/3T/R_T1W_3T_0329/seg_registered.nii.gz")
+
+mapping = {
+    "Background": 0,
+    "Brainstem": 1,
+    "CSF / ventricles": 2,
+    "Cerebellar GM": 3,
+    "Cerebellar WM": 4,
+    "Cerebral GM": 5,
+    "Cerebral WM": 6,
+    "Deep GM": 7,
+    "Other": 8
+  }
+ontology = ml.load_ontology(ontology_csv)
+label_map = ml.build_label_map(ontology, 'L1', mapping)
+# def merge_segmentation(seg, ontology, label_map, unmapped_value=0, unknown_value=None):
+
+merged_data, unknown_labels = ml.merge_segmentation(img.get_fdata(), ontology, label_map)
+
+## To compare
+# merged_gt = nib.load("/home/agustin/phd/synthseg_nextbrain/project/dev/testing/segment_mrixfields/data/outputs/T1W/3T/R_T1W_3T_0329/seg_registered_merged.nii.gz").get_fdata()
+# print(" merged equeal to gt:", np.array_equal(merged_data, merged_gt))
+# print("unknown_labels:", unknown_labels)
+
+# # To save
+# save_path = "/home/agustin/phd/synthseg_nextbrain/project/dev/testing/segment_mrixfields/data/outputs/T1W/3T/R_T1W_3T_0329/seg_registered_merged_2.nii.gz"
+# new_img = nib.Nifti1Image(merged_data, img.affine, img.header)
+# nib.save(new_img, save_path)

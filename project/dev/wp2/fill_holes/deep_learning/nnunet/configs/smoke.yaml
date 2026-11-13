@@ -1,0 +1,42 @@
+# Tiny end-to-end configuration used by smoke_test.sh (minutes, one GPU).
+# Everything is written under smoke_test_output/ so it never mixes with the real run.
+_base_: default.yaml
+
+paths:
+  headers_csv: smoke_test_output/scan_headers.csv
+  index_csv: smoke_test_output/index.csv
+  cache_dir: smoke_test_output/label_cache
+  runs_dir: smoke_test_output/results
+  test_l1_dir: smoke_test_output/test_l1          # small crop of one real case (made by smoke_test.sh)
+
+data:
+  val_fraction: 0.25
+  test_fraction: 0.25
+
+patch:
+  size: 64
+  context: 96
+
+model:
+  features: [8, 16, 32, 32, 32, 32]
+  blocks: [1, 1, 1, 1, 1, 1]
+
+train:
+  run_name: smoke
+  batch_size: 2
+  num_workers: 4
+  iters_per_epoch: 4
+  epochs: 2
+  log_every: 1
+  val_every: 1
+  val_samples: 4
+  save_every: 1
+
+inference:
+  num_workers: 8
+  overlap: 0.25
+  batch_size: 4
+
+evaluation:
+  patch_samples: 4
+  volumes: 1

@@ -1,0 +1,4 @@
+{"name": "fomo_PT017_HBN-SSI_sub-11_ses-03_left", "closing_iter": 3, "gaps": 81.4, "holes_cracks": 80.3, "sulcal_filled_pct_clean": 87.3}
+{"name": "fomo_PT017_HBN-SSI_sub-11_ses-03_left", "closing_iter": 6, "gaps": 85.4, "holes_cracks": 91.8, "sulcal_filled_pct_clean": 97.0}
+{"name": "fomo_PT020_HCP_Wu_Minn_sub-0235_ses-01_right", "closing_iter": 3, "gaps": 83.8, "holes_cracks": 83.0, "sulcal_filled_pct_clean": 82.9}
+{"name": "fomo_PT020_HCP_Wu_Minn_sub-0235_ses-01_right", "closing_iter": 6, "gaps": 87.5, "holes_cracks": 88.4, "sulcal_filled_pct_clean": 90.8}

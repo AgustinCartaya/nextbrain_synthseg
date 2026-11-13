@@ -1,0 +1,151 @@
+# =============================================================================
+# Default configuration: restoration of corrupted NextBrain label maps (L1, 0.2 mm)
+#
+# Every script takes `--config <yaml>` and optional `--set a.b=value` overrides.
+# A config may start with `_base_: other.yaml` to inherit from another file
+# (see smoke.yaml). Relative paths are resolved from the project folder
+# (the one that contains this configs/ folder).
+# =============================================================================
+
+paths:
+  # ---- inputs (READ ONLY, never written) -----------------------------------
+  scans_csv: /home/Data/FOMO-300K/derivatives/scans_to_process.csv
+  corrupt_script: ../../image_corruption/corrupt_nifti.py
+  merge_script: /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_merged_segmentations/merge_labels.py
+  ontology_csv: /home/agustin/phd/synthseg_nextbrain/data/basics/nextbrain_ontology_v1.csv
+  mapping_json: /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_merged_segmentations/data/inputs/mapping_l1.json
+  test_raw_dir: ../../data/inputs/recon_holes_0.2mm     # 5 real cases, full label set
+  # ---- outputs (all inside this project) -----------------------------------
+  test_l1_dir: ../../data/inputs/recon_holes_0.2mm_L1     # written by 02_prepare_test_cases.py
+  headers_csv: intermediate/scan_headers.csv        # T1w voxel size of EVERY scan (slow part, cached)
+  index_csv: intermediate/index.csv                # filtered scans + train/val/test split
+  cache_dir: intermediate/label_cache              # merged + cropped FOMO labels (uint8 .nii.gz)
+  runs_dir: results                                # one sub-folder per training run
+
+labels:
+  level: L1                # ontology level given to merge_labels.build_label_map
+  num_classes: 9           # the code only uses this number: change level/mapping/num_classes for finer levels
+  names: [Background, Brainstem, CSF/ventricles, Cerebellar GM, Cerebellar WM,
+          Cerebral GM, Cerebral WM, Deep GM, Other]
+  # Raw labels of the TEST cases that are not in the ontology -> merged index.
+  # {1: 1, 2: 2, 3: 5} reproduces the existing ../../data/inputs/recon_holes_0.2mm_L1
+  # (raw 3 -> Cerebral GM; 1 and 2 keep their value). Any other unknown label -> 0.
+  test_extra_label_map: {1: 1, 2: 2, 3: 5}
+
+data:
+  hemispheres: [left, right]     # seg.<hemi>.nii.gz, each one is a training sample
+  target_spacing: 0.2            # mm; FOMO labels (~0.4 mm) are upsampled by round(spacing / target)
+  max_voxel_mm: 1.0              # keep scans whose T1w voxel size is <= this in ALL axes
+  voxel_tolerance: 0.001         # headers often store 1.0000001
+  # Sampling weight of a scan = (1 / largest voxel size) ** weight_gamma.
+  # 0 = uniform; 2 = a 0.7 mm scan is drawn 2x and a 0.5 mm scan 4x as often as a 1 mm scan.
+  weight_gamma: 2.0
+  val_fraction: 0.02             # fractions of SUBJECTS (all sessions of a subject go together)
+  test_fraction: 0.02
+  split_seed: 0
+  write_cache: true              # save merged labels to cache_dir the first time they are read
+  foreground_center_prob: 0.9    # probability that the patch centre is a labelled voxel
+  flip_lr_prob: 0.5              # left-right mirror (left and right hemispheres look alike)
+
+patch:
+  size: 192                # network input, voxels at target_spacing (38.4 mm)
+  context: 256             # crop that is corrupted; the patch is its centre
+
+# -----------------------------------------------------------------------------
+# On-the-fly corruption: random arguments for corrupt_nifti.corrupt_array
+# -----------------------------------------------------------------------------
+corruption:
+  p_clean: 0.15            # patches left uncorrupted (input == target)
+  # Section geometry: one mode is drawn with probability p (normalised).
+  # corrupt_array draws the angle uniformly in `angle`.
+  geometry:
+    random_sign: true      # also the opposite tilt
+    modes:
+      - {p: 0.55, axis: coronal,  tilt_about: LR, angle: [9, 14]}   # what the test data shows
+      - {p: 0.20, axis: coronal,  tilt_about: LR, angle: [0, 25]}
+      - {p: 0.10, axis: coronal,  tilt_about: SI, angle: [0, 20]}
+      - {p: 0.08, axis: axial,    tilt_about: LR, angle: [0, 20]}
+      - {p: 0.07, axis: sagittal, tilt_about: AP, angle: [0, 20]}
+  thickness:
+    p_voxel: 0.3           # probability of thickness=None (one voxel thick sections)
+    range_mm: [0.2, 2.0]   # otherwise log-uniform in this range
+  # Severity: s ~ U(0,1) per sample; every parameter is interpolated between
+  # `mild` (s=0) and `severe` (s=1) with its own jitter N(0, jitter) on s.
+  jitter: 0.25
+  p_drop_type: 0.2         # each family (section shifts, block shift, holes, missing sections)
+                           # is switched off with this probability -> types also appear alone
+  thin_prob: [0.2, 0.8]    # uniform, independent of severity
+  mild:
+    p_section: 0.02
+    p_block: 0.1
+    shift_sd_mm: 0.4
+    rot_sd_deg: 0.5
+    block_sections: [3, 10]
+    n_blobs: [0, 2]
+    radius_mm: [1.0, 4.0]
+    thin_sections: [1, 2]
+    p_slab: 0.05
+    slab_sections: [1, 2]
+    irregularity: 0.3
+  severe:
+    p_section: 0.15
+    p_block: 0.8
+    shift_sd_mm: 2.5
+    rot_sd_deg: 3.0
+    block_sections: [5, 25]
+    n_blobs: [4, 10]
+    radius_mm: [2.0, 12.0]
+    thin_sections: [1, 4]
+    p_slab: 0.7
+    slab_sections: [2, 5]
+    irregularity: 0.9
+
+# -----------------------------------------------------------------------------
+# Residual-encoder 3D U-Net (nnU-Net building blocks) with residual output
+# -----------------------------------------------------------------------------
+model:
+  features: [32, 64, 128, 256, 320, 320]   # one entry per resolution level (6 levels)
+  blocks: [1, 3, 4, 6, 6, 6]               # residual blocks per encoder level (ResEnc-L)
+  decoder_convs: 1
+  alpha: 5.0               # logits = net(x) + alpha * onehot(x)
+  learn_alpha: false       # make alpha a trainable scalar
+  alpha_skip_holes: false  # true: no prior on "suspicious hole" voxels (they are surely wrong)
+
+loss:
+  ce_weight: 1.0
+  dice_weight: 1.0
+  corrupted_weight: 8.0    # CE weight on voxels where corrupted != clean (dilated); 1 elsewhere
+  dilate_iters: 2          # dilation of that mask, voxels
+
+train:
+  run_name: l1_resenc
+  seed: 0
+  batch_size: 2            # per GPU
+  num_workers: 28          # per GPU; one sample costs ~3.5 s of one core
+  iters_per_epoch: 500
+  epochs: 400
+  optimizer: sgd           # sgd (nnU-Net: nesterov, momentum 0.99) | adamw
+  lr: 0.01
+  weight_decay: 0.00003
+  poly_power: 0.9          # lr = lr0 * (1 - iter/total) ** poly_power
+  grad_clip: 12.0
+  amp: true                # mixed precision
+  log_every: 20            # iterations
+  val_every: 5             # epochs
+  val_samples: 64          # fixed (seeded) corrupted validation patches
+  save_every: 50           # epochs: extra numbered checkpoint
+
+inference:
+  overlap: 0.5             # sliding-window overlap
+  batch_size: 2
+  num_workers: 16          # compute the hole channel of every window
+  accum_device: cuda       # where class probabilities are accumulated (cuda | cpu)
+  tta_flip_lr: false       # average with the left-right mirrored prediction
+  passes: 1                # > 1: feed the output back (can help with very large holes)
+  qc_slices: 3             # slices per view in the QC figure
+
+evaluation:
+  patch_samples: 256       # --mode patch: seeded corrupted patches of test subjects
+  volumes: 8               # --mode volume: whole hemispheres (corrupt + sliding window)
+  volume_blob_scale: 6     # n_blobs is per image: scale it for whole volumes (~6x a crop)
+  seed: 1234
