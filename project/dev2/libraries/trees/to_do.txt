@@ -1,0 +1,4 @@
+hacer que los trees sean mas editables
+tienes que crear una clase basica (puede ser abstracta o no) con arboles normales pero que acepten edicion
+esta es la clase utilizada para la generacion basica
+luego que las otras clases extiendan de esta clase y agregen lo que tengan que agregar

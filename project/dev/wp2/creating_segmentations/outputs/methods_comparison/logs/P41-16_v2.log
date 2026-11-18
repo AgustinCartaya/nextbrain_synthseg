@@ -1,0 +1,75 @@
+P41-16: 40 blocks -> grid (504, 941, 787) at 0.2 mm
+  block  1: 18 sections (1 missing), spacing 0.62 mm, 9 labels, 1778859 voxels written
+  block  2: 35 sections (0 missing), spacing 0.33 mm, 33 labels, 3115916 voxels written
+  block  3: 37 sections (1 missing), spacing 0.34 mm, 4 labels, 2208050 voxels written
+  block  4: 18 sections (1 missing), spacing 0.70 mm, 6 labels, 1880376 voxels written
+  block  5: 30 sections (0 missing), spacing 0.35 mm, 7 labels, 1637497 voxels written
+  block  6: 36 sections (0 missing), spacing 0.34 mm, 32 labels, 428698 voxels written
+  block  7: 36 sections (0 missing), spacing 0.31 mm, 46 labels, 215671 voxels written
+  block  8: 18 sections (0 missing), spacing 0.65 mm, 7 labels, 1942409 voxels written
+  block  9: 18 sections (3 missing), spacing 0.66 mm, 6 labels, 962205 voxels written
+  block 10: 17 sections (0 missing), spacing 0.68 mm, 8 labels, 2761062 voxels written
+  block 11: 18 sections (1 missing), spacing 0.68 mm, 7 labels, 1824065 voxels written
+  block 12: 18 sections (0 missing), spacing 0.71 mm, 8 labels, 666861 voxels written
+  block 13: 36 sections (3 missing), spacing 0.32 mm, 21 labels, 2506088 voxels written
+  block 14: 18 sections (0 missing), spacing 0.65 mm, 8 labels, 1589631 voxels written
+  block 15: 22 sections (3 missing), spacing 0.64 mm, 3 labels, 715432 voxels written
+  block 16: 36 sections (3 missing), spacing 0.30 mm, 41 labels, 215197 voxels written
+  block 17: 17 sections (0 missing), spacing 0.67 mm, 5 labels, 1453187 voxels written
+  block 18: 20 sections (0 missing), spacing 0.66 mm, 3 labels, 1512657 voxels written
+  block 19: 36 sections (2 missing), spacing 0.33 mm, 103 labels, 1984953 voxels written
+  block 20: 17 sections (1 missing), spacing 0.71 mm, 5 labels, 421196 voxels written
+  block 21: 17 sections (0 missing), spacing 0.67 mm, 8 labels, 2627220 voxels written
+  block 22: 19 sections (1 missing), spacing 0.67 mm, 9 labels, 1954525 voxels written
+  block 23: 13 sections (0 missing), spacing 0.70 mm, 4 labels, 307338 voxels written
+  block 24: 18 sections (0 missing), spacing 0.66 mm, 4 labels, 575935 voxels written
+  block 25: 18 sections (1 missing), spacing 0.71 mm, 6 labels, 1810190 voxels written
+  block 26: 18 sections (0 missing), spacing 0.68 mm, 11 labels, 2165066 voxels written
+  block 27: 38 sections (2 missing), spacing 0.35 mm, 58 labels, 1234241 voxels written
+  block 28: 17 sections (0 missing), spacing 0.70 mm, 9 labels, 1715836 voxels written
+  block 29: 18 sections (1 missing), spacing 0.68 mm, 9 labels, 2241060 voxels written
+  block 30: 18 sections (1 missing), spacing 0.70 mm, 7 labels, 1394897 voxels written
+  block 31: 17 sections (0 missing), spacing 0.71 mm, 9 labels, 2892637 voxels written
+  block 33: 18 sections (1 missing), spacing 0.69 mm, 7 labels, 1721355 voxels written
+  block 34: 11 sections (1 missing), spacing 0.72 mm, 9 labels, 1129179 voxels written
+  block 35: 34 sections (0 missing), spacing 0.34 mm, 17 labels, 2610778 voxels written
+  block 36: 18 sections (0 missing), spacing 0.69 mm, 5 labels, 1519536 voxels written
+  block 37: 36 sections (0 missing), spacing 0.32 mm, 127 labels, 2380124 voxels written
+  block 38: 35 sections (6 missing), spacing 0.34 mm, 19 labels, 80456 voxels written
+  block 39: 24 sections (3 missing), spacing 0.68 mm, 7 labels, 1667819 voxels written
+  block 40: 18 sections (0 missing), spacing 0.68 mm, 5 labels, 1391068 voxels written
+  block 41: 36 sections (1 missing), spacing 0.33 mm, 112 labels, 3468722 voxels written
+  37 of 942 sections treated as missing
+  labels not visible in the MRI (kept as they are): [50, 68, 103, 113, 114, 147, 150, 161, 194, 199, 201, 219, 221, 224, 225, 245, 253, 282, 284, 285, 286, 298, 304, 307, 308, 312, 379, 398, 399, 444, 447, 465, 470, 472, 493, 506, 521, 586, 617, 765, 813, 842, 843]
+
+Saved /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v2/P41-16_seg_0.2mm_v2.nii.gz and /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v2/P41-16_seg_0.2mm_v2_steps.nii.gz
+  333 labels, 61413686 labelled voxels = 491.3 cm^3
+  MRI tissue: 499.7 cm^3; labelled fraction 0.962 after the mosaic, 0.962 at the end
+  interpolated/bridged: 62690334 voxels (1587441 bridged in the final volume)
+  removed outside MRI tissue: 1276648 voxels (10.2 cm^3)
+    most affected labels (id: fraction of that label removed): 7: 0.01, 2009: 0.08, 595: 0.05, 2011: 0.06, 597: 0.03, 2028: 0.02, 2014: 0.06, 2029: 0.03
+  MRI-guided fill: 0 voxels (0.0 cm^3)
+  done in 471 s
+	Command being timed: "python3 /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/build_3d_segmentation_v2.py --case-dir /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/../NextBrain-Case-2/P41-16/ --res 0.2 --out-dir /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v2"
+	User time (seconds): 454.69
+	System time (seconds): 23.00
+	Percent of CPU this job got: 101%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:51.80
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5439376
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2959473
+	Voluntary context switches: 256
+	Involuntary context switches: 2641
+	Swaps: 0
+	File system inputs: 8
+	File system outputs: 37656
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

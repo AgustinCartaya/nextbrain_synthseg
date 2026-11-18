@@ -1,0 +1,78 @@
+EX9-19: 49 blocks -> grid (453, 905, 812) at 0.2 mm
+  block  1: shape (600, 889, 32),section spacing 0.35 mm, 7 labels, 1712412 voxels written
+  block  2: shape (909, 638, 21),section spacing 0.72 mm, 6 labels, 1652737 voxels written
+  block  3: shape (855, 616, 32),section spacing 0.36 mm, 57 labels, 1444265 voxels written
+  block  4: shape (581, 944, 11),section spacing 0.72 mm, 3 labels, 396711 voxels written
+  block  5: shape (831, 627, 16),section spacing 0.74 mm, 7 labels, 1530908 voxels written
+  block  6: shape (560, 904, 12),section spacing 0.69 mm, 5 labels, 274086 voxels written
+  block  7: shape (593, 865, 18),section spacing 0.68 mm, 6 labels, 1993232 voxels written
+  block  8: shape (599, 878, 16),section spacing 0.70 mm, 6 labels, 1630186 voxels written
+  block  9: shape (574, 882, 34),section spacing 0.35 mm, 46 labels, 2036060 voxels written
+  block 10: shape (589, 919, 16),section spacing 0.74 mm, 6 labels, 1737091 voxels written
+  block 11: shape (578, 901, 17),section spacing 0.69 mm, 3 labels, 1816260 voxels written
+  block 12: shape (849, 625, 23),section spacing 0.71 mm, 6 labels, 1300953 voxels written
+  block 13: shape (800, 638, 17),section spacing 0.52 mm, 15 labels, 1273299 voxels written
+  block 14: shape (859, 633, 16),section spacing 0.73 mm, 6 labels, 1366983 voxels written
+  block 15: shape (242, 200, 31),section spacing 0.34 mm, 26 labels, 176960 voxels written
+  block 16: shape (829, 653, 17),section spacing 0.75 mm, 7 labels, 1700337 voxels written
+  block 17: shape (556, 839, 35),section spacing 0.34 mm, 72 labels, 974939 voxels written
+  block 18: shape (352, 276, 39),section spacing 0.34 mm, 24 labels, 511222 voxels written
+  block 19: shape (560, 852, 37),section spacing 0.34 mm, 27 labels, 1942633 voxels written
+  block 20: shape (549, 868, 32),section spacing 0.35 mm, 13 labels, 2427776 voxels written
+  block 21: shape (589, 868, 15),section spacing 0.72 mm, 7 labels, 950418 voxels written
+  block 22: shape (596, 904, 22),section spacing 0.72 mm, 6 labels, 2630808 voxels written
+  block 23: shape (587, 886, 17),section spacing 0.70 mm, 8 labels, 2289559 voxels written
+  block 24: shape (549, 873, 42),section spacing 0.35 mm, 79 labels, 1841332 voxels written
+  block 25: shape (562, 897, 33),section spacing 0.35 mm, 4 labels, 2115010 voxels written
+  block 26: shape (589, 918, 16),section spacing 0.74 mm, 7 labels, 936882 voxels written
+  block 27: shape (884, 650, 10),section spacing 0.74 mm, 3 labels, 468737 voxels written
+  block 28: shape (601, 879, 17),section spacing 0.70 mm, 9 labels, 2324766 voxels written
+  block 29: shape (840, 651, 15),section spacing 0.75 mm, 4 labels, 1270394 voxels written
+  block 30: shape (884, 610, 17),section spacing 0.68 mm, 8 labels, 2146618 voxels written
+  block 31: shape (874, 546, 16),section spacing 0.67 mm, 7 labels, 1514456 voxels written
+  block 32: shape (857, 587, 17),section spacing 0.66 mm, 8 labels, 1594806 voxels written
+  block 33: shape (615, 923, 17),section spacing 0.71 mm, 8 labels, 2144826 voxels written
+  block 34: shape (559, 886, 18),section spacing 0.72 mm, 8 labels, 1980244 voxels written
+  block 35: shape (885, 629, 17),section spacing 0.72 mm, 5 labels, 1340328 voxels written
+  block 36: shape (613, 893, 17),section spacing 0.71 mm, 7 labels, 1942039 voxels written
+  block 37: shape (316, 217, 42),section spacing 0.29 mm, 39 labels, 312730 voxels written
+  block 38: shape (568, 875, 17),section spacing 0.70 mm, 7 labels, 1867453 voxels written
+  block 39: shape (607, 905, 16),section spacing 0.72 mm, 5 labels, 1872492 voxels written
+  block 40: shape (568, 909, 16),section spacing 0.72 mm, 7 labels, 1825064 voxels written
+  block 41: shape (568, 865, 31),section spacing 0.35 mm, 65 labels, 1712618 voxels written
+  block 42: shape (566, 932, 9),section spacing 0.71 mm, 3 labels, 507917 voxels written
+  block 43: shape (573, 885, 34),section spacing 0.35 mm, 14 labels, 2216797 voxels written
+  block 44: shape (537, 905, 16),section spacing 0.74 mm, 6 labels, 1513952 voxels written
+  block 45: shape (549, 851, 33),section spacing 0.35 mm, 74 labels, 1628115 voxels written
+  block 46: shape (592, 865, 18),section spacing 0.69 mm, 7 labels, 1416249 voxels written
+  block 47: shape (566, 925, 35),section spacing 0.37 mm, 18 labels, 2205196 voxels written
+  block 48: shape (412, 247, 34),section spacing 0.33 mm, 45 labels, 298753 voxels written
+  block 49: shape (187, 123, 31),section spacing 0.31 mm, 14 labels, 54647 voxels written
+
+Saved /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v1/EX9-19_seg_0.2mm.nii.gz
+  333 labels (max id 2035), 70780350 labelled voxels = 566.2 cm^3
+  3962469 voxels were claimed by more than one block (5.60% of labelled voxels)
+  done in 38 s
+	Command being timed: "python3 /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/build_3d_segmentation.py --case-dir /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/../NextBrain-Case-5/EX9-19/ --res 0.2 --out-dir /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v1"
+	User time (seconds): 38.02
+	System time (seconds): 4.05
+	Percent of CPU this job got: 108%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:38.90
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2490644
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 753925
+	Voluntary context switches: 76
+	Involuntary context switches: 1012
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 30120
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

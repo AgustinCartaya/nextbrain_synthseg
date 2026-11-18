@@ -1,0 +1,9 @@
+
+
+mri_histo_atlas_segment_fireants \
+ --i /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/correct_cortex/synthetic_images_creation/generated/synthetic_t1w/images/case-2.nii.gz \
+ --o /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/correct_cortex/synthetic_images_creation/generated/synthetic_t1w/nextbrain/case-2.nii.gz \
+ --device cuda:3 \
+ --side right \
+ --mode invivo \
+ --skip_bf

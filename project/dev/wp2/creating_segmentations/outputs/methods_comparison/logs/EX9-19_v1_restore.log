@@ -1,0 +1,37 @@
+[02:11:09] 1. detecting gap planes
+[02:11:22]   1,234,292 short background runs (<= 2.4 mm) along axis 1
+[02:11:23]   global normal: pitch=-7.5 yaw=-4.0 deg (spikiness 0.84)
+[02:11:25]   16 gap planes (coverage / non-cortical runs): 0.04/0.10, 0.25/0.26, 0.07/0.33, 0.15/0.39, 0.15/0.36, 0.05/0.37, 0.11/0.23, 0.06/0.30, 0.03/0.22, 0.06/0.24, 0.09/0.20, 0.23/0.30, 0.16/0.47, 0.05/0.08, 0.08/0.23, 0.08/0.13
+[02:11:25] 2. block misalignment
+[02:11:33]   misalignment per plane (vox): (-1,-1) (-1,-1) (+0,+0) (+0,+2) (+0,+0) (+0,+0) (+0,-2) (-0,-0) (+0,-1) (-1,-2) (-0,+0) (-2,+0) (+0,+0) (+0,-0)
+[02:11:33]   block translations (vox): [[0, 0], [0, 0], [0, 0], [0, 1], [0, -1], [0, -1], [0, 0], [0, 0], [0, -1], [0, -1], [0, 1], [0, 0], [0, 0], [0, 0], [0, 0]]
+[02:11:37] 3. filling gaps
+[02:13:37]   axis 1: 16 planes, 1,435,835 gap voxels, 1,177,324 filled with tissue
+[02:13:37] 4. filling cracks
+[02:14:26]   344,225 crack voxels filled
+[02:14:26] 5. filling enclosed holes
+[02:14:40]   7,829 hole voxels filled
+[02:14:41] done in 212.2 s, 3,884,198 voxels changed
+	Command being timed: "python3 /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/fill_holes/manual/restore.py /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v1/EX9-19_seg_0.2mm.nii.gz /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v1_restore/EX9-19_seg_0.2mm_restored.nii.gz"
+	User time (seconds): 225.93
+	System time (seconds): 88.59
+	Percent of CPU this job got: 143%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:39.63
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10421808
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2776136
+	Voluntary context switches: 383
+	Involuntary context switches: 945
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 41384
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

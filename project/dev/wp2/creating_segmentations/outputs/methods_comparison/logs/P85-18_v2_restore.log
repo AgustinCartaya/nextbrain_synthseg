@@ -1,0 +1,38 @@
+[02:50:36] 1. detecting gap planes
+[02:50:42]   1,069,558 short background runs (<= 2.4 mm) along axis 1
+[02:50:49]   global normal: pitch=-3.0 yaw=0.5 deg (spikiness 1.14)
+[02:50:51]     rejected candidate plane: coverage 0.051, non-cortical runs 0.02
+[02:50:51]   14 gap planes (coverage / non-cortical runs): 0.06/0.21, 0.20/0.27, 0.09/0.12, 0.19/0.40, 0.06/0.24, 0.31/0.49, 0.07/0.47, 0.06/0.31, 0.07/0.29, 0.06/0.26, 0.04/0.37, 0.05/0.13, 0.04/0.10, 0.09/0.24
+[02:50:51] 2. block misalignment
+[02:50:56]   misalignment per plane (vox): (-2,+0) (+0,+0) (+0,+0) (-0,+0) (+2,-2) (+1,+0) (+0,-0) (+0,-2) (-2,+1) (+1,-0) (+0,-1) (-0,-1) (-1,-0)
+[02:50:56]   block translations (vox): [[0, 0], [0, 0], [0, 0], [0, 0], [0, -1], [0, 1], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+[02:50:58] 3. filling gaps
+[02:51:43]   axis 1: 14 planes, 1,106,245 gap voxels, 863,888 filled with tissue
+[02:51:43] 4. filling cracks
+[02:52:25]   281,473 crack voxels filled
+[02:52:25] 5. filling enclosed holes
+[02:52:37]   4,030 hole voxels filled
+[02:52:38] done in 122.3 s, 2,082,730 voxels changed
+	Command being timed: "python3 /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/fill_holes/manual/restore.py outputs/methods_comparison/v2/P85-18_seg_0.2mm_v2.nii.gz outputs/methods_comparison/v2_restore/P85-18_seg_0.2mm_v2_restored.nii.gz"
+	User time (seconds): 453.60
+	System time (seconds): 23.86
+	Percent of CPU this job got: 369%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:09.31
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10485364
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1253194
+	Voluntary context switches: 204
+	Involuntary context switches: 32672
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 39688
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

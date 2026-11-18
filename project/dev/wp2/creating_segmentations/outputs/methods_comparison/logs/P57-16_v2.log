@@ -1,0 +1,80 @@
+P57-16: 45 blocks -> grid (473, 934, 753) at 0.2 mm
+  block  1: 17 sections (1 missing), spacing 0.77 mm, 8 labels, 995109 voxels written
+  block  2: 18 sections (1 missing), spacing 0.77 mm, 10 labels, 2665745 voxels written
+  block  3: 18 sections (1 missing), spacing 0.75 mm, 7 labels, 2354545 voxels written
+  block  4: 19 sections (2 missing), spacing 0.76 mm, 7 labels, 1700472 voxels written
+  block  5: 35 sections (8 missing), spacing 0.37 mm, 49 labels, 1807389 voxels written
+  block  6: 17 sections (0 missing), spacing 0.75 mm, 6 labels, 1928589 voxels written
+  block  7: 39 sections (7 missing), spacing 0.38 mm, 15 labels, 2821856 voxels written
+  block  8: 18 sections (3 missing), spacing 0.72 mm, 16 labels, 1607150 voxels written
+  block  9: 38 sections (2 missing), spacing 0.33 mm, 36 labels, 271589 voxels written
+  block 10: 19 sections (1 missing), spacing 0.67 mm, 11 labels, 2224736 voxels written
+  block 11: 23 sections (4 missing), spacing 0.69 mm, 6 labels, 1551743 voxels written
+  block 12: 20 sections (4 missing), spacing 0.67 mm, 6 labels, 686426 voxels written
+  block 13: 41 sections (9 missing), spacing 0.33 mm, 28 labels, 502538 voxels written
+  block 14: 18 sections (2 missing), spacing 0.76 mm, 9 labels, 1499402 voxels written
+  block 15: 22 sections (17 missing), spacing 0.34 mm, 10 labels, 40962 voxels written
+  block 16: 38 sections (7 missing), spacing 0.37 mm, 42 labels, 425447 voxels written
+  block 17: 17 sections (1 missing), spacing 0.73 mm, 5 labels, 1886052 voxels written
+  block 18: 18 sections (1 missing), spacing 0.72 mm, 5 labels, 1413870 voxels written
+  block 19: 17 sections (1 missing), spacing 0.71 mm, 5 labels, 980334 voxels written
+  block 20: 18 sections (0 missing), spacing 0.78 mm, 10 labels, 2521224 voxels written
+  block 21: 17 sections (0 missing), spacing 0.75 mm, 12 labels, 2476795 voxels written
+  block 22: 17 sections (0 missing), spacing 0.68 mm, 6 labels, 1024537 voxels written
+  block 23: 18 sections (2 missing), spacing 0.72 mm, 9 labels, 1918535 voxels written
+  block 24: 19 sections (1 missing), spacing 0.68 mm, 8 labels, 1859835 voxels written
+  block 25: 38 sections (6 missing), spacing 0.35 mm, 7 labels, 1644721 voxels written
+  block 26: 21 sections (2 missing), spacing 0.67 mm, 3 labels, 431186 voxels written
+  block 27: 21 sections (5 missing), spacing 0.80 mm, 7 labels, 791122 voxels written
+  block 28: 36 sections (2 missing), spacing 0.38 mm, 4 labels, 2374588 voxels written
+  block 29: 17 sections (1 missing), spacing 0.71 mm, 7 labels, 1286932 voxels written
+  block 30: 16 sections (1 missing), spacing 0.74 mm, 6 labels, 1487400 voxels written
+  block 31: 17 sections (1 missing), spacing 0.78 mm, 6 labels, 1069417 voxels written
+  block 32: 18 sections (1 missing), spacing 0.73 mm, 7 labels, 1557237 voxels written
+  block 33: 36 sections (3 missing), spacing 0.36 mm, 125 labels, 2204799 voxels written
+  block 34: 39 sections (8 missing), spacing 0.34 mm, 24 labels, 99609 voxels written
+  block 35: 19 sections (1 missing), spacing 0.73 mm, 3 labels, 1916493 voxels written
+  block 36: 19 sections (2 missing), spacing 0.70 mm, 6 labels, 1920335 voxels written
+  block 37: 36 sections (4 missing), spacing 0.37 mm, 10 labels, 1474594 voxels written
+  block 38: 17 sections (1 missing), spacing 0.74 mm, 5 labels, 1730429 voxels written
+  block 39: 20 sections (3 missing), spacing 0.73 mm, 3 labels, 1281655 voxels written
+  block 40: 9 sections (1 missing), spacing 0.71 mm, 3 labels, 466807 voxels written
+  block 41: 36 sections (4 missing), spacing 0.37 mm, 85 labels, 1797693 voxels written
+  block 42: 18 sections (1 missing), spacing 0.77 mm, 6 labels, 1968782 voxels written
+  block 43: 18 sections (2 missing), spacing 0.74 mm, 9 labels, 1958076 voxels written
+  block 44: 18 sections (0 missing), spacing 0.74 mm, 9 labels, 1735752 voxels written
+  block 45: 39 sections (6 missing), spacing 0.37 mm, 136 labels, 2302880 voxels written
+  130 of 1049 sections treated as missing
+  labels not visible in the MRI (kept as they are): [50, 68, 103, 113, 114, 161, 207, 284, 286, 430, 444, 464, 465, 469, 470, 472, 493, 506, 521, 526, 541, 586, 610, 617, 715, 726, 756, 765, 828, 842, 843]
+
+Saved /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v2/P57-16_seg_0.2mm_v2.nii.gz and /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v2/P57-16_seg_0.2mm_v2_steps.nii.gz
+  333 labels, 64372864 labelled voxels = 515.0 cm^3
+  MRI tissue: 549.4 cm^3; labelled fraction 0.927 after the mosaic, 0.927 at the end
+  interpolated/bridged: 65594877 voxels (2316681 bridged in the final volume)
+  removed outside MRI tissue: 1222013 voxels (9.8 cm^3)
+    most affected labels (id: fraction of that label removed): 595: 0.05, 597: 0.05, 2011: 0.08, 2028: 0.03, 7: 0.00, 2014: 0.07, 2027: 0.03, 611: 0.03
+  MRI-guided fill: 0 voxels (0.0 cm^3)
+  done in 492 s
+	Command being timed: "python3 /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/build_3d_segmentation_v2.py --case-dir /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/../NextBrain-Case-1/P57-16/ --res 0.2 --out-dir /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v2"
+	User time (seconds): 460.32
+	System time (seconds): 42.78
+	Percent of CPU this job got: 102%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 8:12.39
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4438108
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1893450
+	Voluntary context switches: 457
+	Involuntary context switches: 1693
+	Swaps: 0
+	File system inputs: 8
+	File system outputs: 41288
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

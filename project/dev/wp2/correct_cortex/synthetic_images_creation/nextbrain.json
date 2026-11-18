@@ -1,0 +1,34 @@
+{
+  "grid": {"target_voxel_mm": 0.4},
+  "labels": {
+    "tree": "./nextbrain_tree.json",
+    "background": 0,
+    "unassigned": "background",
+    "output_labels": "templates"
+  },
+  "patch": {"size": null},
+  "acquisition": {"lowres_prob": 0.0},
+  "morphology": {"pairs": [], "prob": 0.0},
+  "spatial": {
+    "rotation_deg": 0.0,
+    "zoom": 1.0,
+    "shear": 0.0,
+    "translation_mm": 0.0,
+    "elastic_dmax_mm": 0.0
+  },
+  "partial_volume": {
+    "method": "downsample",
+    "top_k": 8
+  },
+    "tree": {
+    "colors_mu": [0.0, 255.0],
+    "colors_sigma": [0.255, 2.55],
+    "min_sigma": 0.0,
+    "intensity_scale": 255.0,
+    "resolution": "acquisition"
+  },
+  "bias": {"prob": 0.0},
+  "motion": {"prob": 0.0},
+  "noise": {"sigma": 0.0},
+  "normalization": {"method": "minmax"}
+}

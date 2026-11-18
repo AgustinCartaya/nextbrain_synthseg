@@ -17,6 +17,13 @@ python /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_merged_segmen
     --output /home/agustin/phd/to_delete/nextbrain/changed_recon_holes2_0.2mm_L1
 
 
+python /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_merged_segmentations/merge_labels.py \
+    --level L1 \
+    --mapping /home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_merged_segmentations/data/inputs/mapping_l1.json \
+    --ontology /home/agustin/phd/synthseg_nextbrain/data/basics/nextbrain_ontology_v1.csv \
+    --input /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/l1/complete/v2_restore \
+    --output /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/l1/v2_restore
+
 ### -------------- merge with the original approach python --------------
 
 

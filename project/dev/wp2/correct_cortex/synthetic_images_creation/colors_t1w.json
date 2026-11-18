@@ -1,0 +1,11 @@
+{
+  "_comment": "Principal colors of a T1w-like image, one per color of the tree. mu = mean intensity, sigma = per-voxel noise std, both on a 0-255 scale (background is 0).",
+  "Cerebral WM":      {"mu": 200.0, "sigma": 2.0},
+  "Cerebellar WM":    {"mu": 190.0, "sigma": 2.0},
+  "Brainstem":        {"mu": 170.0, "sigma": 2.0},
+  "Deep GM":          {"mu": 140.0, "sigma": 2.0},
+  "Cerebral GM":      {"mu": 115.0, "sigma": 2.0},
+  "Cerebellar GM":    {"mu": 110.0, "sigma": 2.0},
+  "Other":            {"mu": 120.0, "sigma": 2.0},
+  "CSF / ventricles": {"mu": 30.0,  "sigma": 2.0}
+}

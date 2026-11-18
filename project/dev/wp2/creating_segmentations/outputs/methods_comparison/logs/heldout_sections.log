@@ -1,0 +1,9 @@
+blocks  rule   
+dense   interp     85.92
+        nearest    83.11
+sparse  interp     85.14
+        nearest    81.23
+
+real	0m22,405s
+user	10m37,380s
+sys	0m12,132s

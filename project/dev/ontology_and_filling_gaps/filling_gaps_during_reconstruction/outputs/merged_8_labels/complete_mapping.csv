@@ -1,0 +1,336 @@
+original_id,new_id,original_name,new_name
+0,0,background,Background
+310,1,substantia_nigra__reticular_part,Brainstem
+352,1,substantia_nigra__compact_part,Brainstem
+384,1,midbrain_(mesencephalon),Brainstem
+385,1,red_nucleus,Brainstem
+386,1,root_of_oculomotor_nerve,Brainstem
+401,1,parabrachial_pigmented_nucleus,Brainstem
+403,1,cerebellothalamic_tract,Brainstem
+412,1,fasciculus_retroflexus_(habenuno-interpeduncular_tract),Brainstem
+414,1,pontine_nucleus,Brainstem
+415,1,pontocerebellar_tract,Brainstem
+431,1,white_matter_of_midbrain,Brainstem
+435,1,ventral_tegmental_area,Brainstem
+436,1,interpeduncular_nucleus,Brainstem
+447,1,edinger-westphal_nucleus_(accessory_oculomotor_nucleus),Brainstem
+451,1,interstitial_nucleus_of_cajal,Brainstem
+464,1,oculomotor_nucleus,Brainstem
+465,1,periaqueductal_gray_substance,Brainstem
+468,1,precommissural_nucleus,Brainstem
+469,1,interstitial_nucleus_of_posterior_commissure,Brainstem
+470,1,subcommissural_organ,Brainstem
+471,1,decussation_of_superior_cerebellar_peduncle,Brainstem
+472,1,posterior_commissure,Brainstem
+496,1,pretectal_region,Brainstem
+498,1,peripeduncular_nucleus,Brainstem
+499,1,medial_lemniscus,Brainstem
+507,1,superior_colliculus,Brainstem
+515,1,lateral_lemniscus,Brainstem
+520,1,trochlear_nucleus,Brainstem
+521,1,dorsal_raphe_nucleus,Brainstem
+525,1,brachium_of_inferior_colliculus,Brainstem
+526,1,brachium_of_superior_colliculus,Brainstem
+527,1,pontine_reticular_formation,Brainstem
+528,1,medial_longitudinal_fasciculus,Brainstem
+531,1,superior_cerebellar_peduncle_(brachium_conjunctivum),Brainstem
+535,1,root_of_trochlear_nerve,Brainstem
+541,1,central_nucleus_of_inferior_colliculus,Brainstem
+542,1,parabigeminal_nucleus,Brainstem
+543,1,middle_cerebellar_peduncle,Brainstem
+546,1,lateral_parabrachial_nucleus,Brainstem
+580,1,pons,Brainstem
+581,1,medial_parabrachial_nucleus,Brainstem
+586,1,commissure_of_inferior_colliculus,Brainstem
+589,1,nucleus_coeruleus,Brainstem
+591,1,central_tegmental_tract,Brainstem
+592,1,spinal_lemniscus_in_hindbrain,Brainstem
+598,1,dorsal_nucleus_of_lateral_lemniscus,Brainstem
+599,1,ventral_nucleus_of_lateral_lemniscus,Brainstem
+600,1,mesencephalic_trigeminal_tract,Brainstem
+610,1,central_gray_of_pons,Brainstem
+617,1,rostral_(anterior)_medullary_velum,Brainstem
+624,1,root_of_facial_nerve,Brainstem
+630,1,motor_nucleus_of_trigeminal_nerve,Brainstem
+645,1,mesencephalic_trigeminal_nucleus,Brainstem
+647,1,nucleus_of_trapezoid_body,Brainstem
+649,1,medial_superior_olive,Brainstem
+654,1,inferior_olive__principal_nucleus,Brainstem
+655,1,amiculum_of_the_olive,Brainstem
+659,1,principal_sensory_nucleus_of_trigeminal_nerve,Brainstem
+660,1,lateral_superior_olivary_nucleus,Brainstem
+662,1,myelencephalon_(medulla_oblongata),Brainstem
+666,1,facial_nucleus,Brainstem
+669,1,spinal_trigeminal_nucleus,Brainstem
+671,1,inferior_olive__medial_nucleus,Brainstem
+677,1,spinal_trigeminal_tract,Brainstem
+682,1,abducens_nucleus,Brainstem
+683,1,superior_vestibular_nucleus,Brainstem
+685,1,inferior_olive__dorsal_nucleus,Brainstem
+687,1,solitary_tract,Brainstem
+689,1,ventral_cochlear_nucleus,Brainstem
+690,1,lateral_vestibular_nucleus,Brainstem
+693,1,ambiguus_nucleus,Brainstem
+694,1,medial_vestibular_nucleus,Brainstem
+695,1,medullary_reticular_formation,Brainstem
+697,1,inferior_cerebellar_peduncle,Brainstem
+703,1,spinal_(inferior)_vestibular_nucleus,Brainstem
+717,1,solitary_nucleus,Brainstem
+724,1,hypoglossal_nucleus,Brainstem
+725,1,dorsal_motor_nucleus_of_the_vagus_(vagal_nucleus),Brainstem
+726,1,external_(accessory/lateral)_cuneate_nucleus,Brainstem
+731,1,dorsal_cochlear_nucleus,Brainstem
+755,1,cuneate_nucleus,Brainstem
+756,1,gracile_nucleus,Brainstem
+765,1,central_gray_of_medulla_oblongata,Brainstem
+771,1,spinal_accessory_(supraspinal)_nucleus,Brainstem
+779,1,corticospinal_tract,Brainstem
+827,1,parietotemporopontine_tract,Brainstem
+828,1,corticonuclear_tract,Brainstem
+829,1,frontopontine_tract,Brainstem
+842,1,decussation_of_trochlear_nerve_fibres,Brainstem
+844,1,reticular_formation_/_cuneiform_area,Brainstem
+50,2,anterior_horn_of_lateral_ventricle,CSF / ventricles
+68,2,septum_pellucidum,CSF / ventricles
+595,3,molecular_layer_of_pva,Cerebellar GM
+597,3,granular_cell_layer_of_pva,Cerebellar GM
+715,3,fastigial_(medial)_nucleus,Cerebellar GM
+721,3,dentate_(lateral)_nucleus,Cerebellar GM
+751,3,medial_interpositus_(globose)_nucleus,Cerebellar GM
+752,3,lateral_interpositus_(emboliform)_nucleus,Cerebellar GM
+611,4,white_matter_of_hindbrain,Cerebellar WM
+846,4,white_matter_of_the_cerebellum,Cerebellar WM
+99,5,anterior_olfactory_nucleus,Cerebral GM
+113,5,lateral_olfactory_stria,Cerebral GM
+125,5,lateral_olfactory_area,Cerebral GM
+157,5,layer_iii_of_piriform_cortex,Cerebral GM
+214,5,amygdaloid_complex,Cerebral GM
+215,5,anterior_amygdaloid_area,Cerebral GM
+216,5,basolateral_nucleus_(basal_nucleus),Cerebral GM
+217,5,ventral_division_of_basomedial_nucleus,Cerebral GM
+238,5,ventral_subdivision_of_coa,Cerebral GM
+240,5,paralaminar_nucleus,Cerebral GM
+242,5,amygdalocortical_(corticoamygdaloid)_transition_area,Cerebral GM
+277,5,medial_subdivision_of_central_nucleus,Cerebral GM
+278,5,lateral_subdivision_of_central_nucleus,Cerebral GM
+279,5,rostral_subdivision_of_medial_nucleus,Cerebral GM
+295,5,amygdalostriatal_transition_area,Cerebral GM
+301,5,amygdalohippocampal_area,Cerebral GM
+320,5,amygdalohippocampal_transition_area,Cerebral GM
+326,5,uncal_subiculum,Cerebral GM
+339,5,stratum_lacunosum-moleculare_of_uncal_ca1,Cerebral GM
+340,5,stratum_radiatum_of_uncal_ca1,Cerebral GM
+341,5,stratum_pyramidale_of_uncal_ca1,Cerebral GM
+342,5,stratum_oriens_of_uncal_ca1,Cerebral GM
+343,5,stratum_lacunosum-moleculare_of_rostral_ca1,Cerebral GM
+344,5,stratum_radiatum_of_rostral_ca1,Cerebral GM
+345,5,stratum_pyramidale_of_rostral_ca1,Cerebral GM
+346,5,stratum_oriens_of_rostral_ca1,Cerebral GM
+347,5,rostral_subiculum,Cerebral GM
+354,5,alveus,Cerebral GM
+364,5,molecular_layer_of_uncal_dentate_gyrus,Cerebral GM
+365,5,granular_layer_of_uncal_dentate_gyrus,Cerebral GM
+367,5,polyform_layer_of_uncal_dentate_gyrus,Cerebral GM
+368,5,stratum_lacunosum-moleculare_of_uncal_ca2,Cerebral GM
+369,5,stratum_radiatum_of_uncal_ca2,Cerebral GM
+370,5,stratum_pyramidale_of_uncal_ca2,Cerebral GM
+371,5,stratum_oriens_of_uncal_ca2,Cerebral GM
+372,5,stratum_lacunosum-moleculare_of_uncal_ca3,Cerebral GM
+373,5,stratum_lucidum__of_uncal_ca3,Cerebral GM
+374,5,stratum_pyramidale_of_uncal_ca3,Cerebral GM
+375,5,stratum_oriens_of_uncal_ca3,Cerebral GM
+377,5,lateral_nucleus,Cerebral GM
+404,5,molecular_layer_of_rostral_dentate_gyrus,Cerebral GM
+405,5,granular_layer_of_rostral_dentate_gyrus,Cerebral GM
+407,5,polyform_layer_of_rostral_dentate_gyrus,Cerebral GM
+408,5,stratum_lacunosum-moleculare_of_rostral_ca2,Cerebral GM
+409,5,stratum_radiatum_of_rostral_ca2,Cerebral GM
+410,5,stratum_pyramidale_of_rostral_ca2,Cerebral GM
+411,5,stratum_oriens_of_rostral_ca2,Cerebral GM
+418,5,stratum_lacunosum-moleculare_of_rostral_ca3,Cerebral GM
+419,5,stratum_lucidum__of_rostral_ca3,Cerebral GM
+420,5,stratum_pyramidale_of_rostral_ca3,Cerebral GM
+421,5,stratum_oriens_of_rostral_ca3,Cerebral GM
+422,5,pyramidal_cells_of_uncal_ca4,Cerebral GM
+432,5,pyramidal_cells_of_rostral_ca4,Cerebral GM
+461,5,fimbria,Cerebral GM
+558,5,molecular_layer_of_caudal_dentate_gyrus,Cerebral GM
+559,5,granular_layer_of_caudal_dentate_gyrus,Cerebral GM
+561,5,polyform_layer_of_caudal_dentate_gyrus,Cerebral GM
+562,5,stratum_lacunosum-moleculare_of_caudal_ca1,Cerebral GM
+563,5,stratum_radiatum_of_caudal_ca1,Cerebral GM
+564,5,stratum_pyramidale_of_caudal_ca1,Cerebral GM
+565,5,stratum_oriens_of_caudal_ca1,Cerebral GM
+566,5,stratum_lacunosum-moleculare_of_caudal_ca2,Cerebral GM
+567,5,stratum_radiatum_of_caudal_ca2,Cerebral GM
+568,5,stratum_pyramidale_of_caudal_ca2,Cerebral GM
+569,5,stratum_oriens_of_caudal_ca2,Cerebral GM
+571,5,stratum_lacunosum-moleculare_of_caudal_ca3,Cerebral GM
+572,5,stratum_lucidum__of_caudal_ca3,Cerebral GM
+573,5,stratum_pyramidale_of_caudal_ca3,Cerebral GM
+574,5,stratum_oriens_of_caudal_ca3,Cerebral GM
+575,5,pyramidal_cells_of_caudal_ca4,Cerebral GM
+576,5,caudal_subiculum,Cerebral GM
+2001,5,ctx-rh-bankssts,Cerebral GM
+2002,5,ctx-rh-caudalanteriorcingulate,Cerebral GM
+2003,5,ctx-rh-caudalmiddlefrontal,Cerebral GM
+2005,5,ctx-rh-cuneus,Cerebral GM
+2006,5,ctx-rh-entorhinal,Cerebral GM
+2007,5,ctx-rh-fusiform,Cerebral GM
+2008,5,ctx-rh-inferiorparietal,Cerebral GM
+2009,5,ctx-rh-inferiortemporal,Cerebral GM
+2010,5,ctx-rh-isthmuscingulate,Cerebral GM
+2011,5,ctx-rh-lateraloccipital,Cerebral GM
+2012,5,ctx-rh-lateralorbitofrontal,Cerebral GM
+2013,5,ctx-rh-lingual,Cerebral GM
+2014,5,ctx-rh-medialorbitofrontal,Cerebral GM
+2015,5,ctx-rh-middletemporal,Cerebral GM
+2016,5,ctx-rh-parahippocampal,Cerebral GM
+2017,5,ctx-rh-paracentral,Cerebral GM
+2018,5,ctx-rh-parsopercularis,Cerebral GM
+2019,5,ctx-rh-parsorbitalis,Cerebral GM
+2020,5,ctx-rh-parstriangularis,Cerebral GM
+2021,5,ctx-rh-pericalcarine,Cerebral GM
+2022,5,ctx-rh-postcentral,Cerebral GM
+2023,5,ctx-rh-posteriorcingulate,Cerebral GM
+2024,5,ctx-rh-precentral,Cerebral GM
+2025,5,ctx-rh-precuneus,Cerebral GM
+2026,5,ctx-rh-rostralanteriorcingulate,Cerebral GM
+2027,5,ctx-rh-rostralmiddlefrontal,Cerebral GM
+2028,5,ctx-rh-superiorfrontal,Cerebral GM
+2029,5,ctx-rh-superiorparietal,Cerebral GM
+2030,5,ctx-rh-superiortemporal,Cerebral GM
+2031,5,ctx-rh-supramarginal,Cerebral GM
+2032,5,ctx-rh-frontalpole,Cerebral GM
+2033,5,ctx-rh-temporalpole,Cerebral GM
+2034,5,ctx-rh-transversetemporal,Cerebral GM
+2035,5,ctx-rh-insula,Cerebral GM
+7,6,white_matter_of_forebrain,Cerebral WM
+114,6,optic_nerve,Cerebral WM
+130,6,anterior_commissure,Cerebral WM
+161,6,optic_chiasm,Cerebral WM
+184,6,stria_terminalis,Cerebral WM
+199,6,fornix,Cerebral WM
+208,6,optic_tract,Cerebral WM
+209,6,supraoptic_dicussation,Cerebral WM
+48,7,head_of_caudate,Deep GM
+79,7,putamen,Deep GM
+100,7,olfactory_tubercle,Deep GM
+101,7,core_of_nucleus_accumbens,Deep GM
+102,7,claustrum,Deep GM
+103,7,medial_septal_nucleus,Deep GM
+108,7,basal_nucleus_of_meynert,Deep GM
+111,7,diagonal_band,Deep GM
+117,7,bed_nucleus_of_stria_terminalis,Deep GM
+118,7,body_of_caudate,Deep GM
+119,7,external_segment_of_globus_pallidus,Deep GM
+120,7,ventral_pallidus,Deep GM
+128,7,substantia_innominata,Deep GM
+147,7,preoptic_region_of_hth,Deep GM
+149,7,lateral_preoptic_area,Deep GM
+150,7,median_preoptic_nucleus,Deep GM
+160,7,suprachiasmatic_nucleus,Deep GM
+174,7,temporal_claustrum,Deep GM
+181,7,supraoptic_region_of_hth,Deep GM
+190,7,magnocellular_division_of_reticular_nucleus,Deep GM
+191,7,parvocellular_division_of_reticular_nucleus_(perireticular_nucleus),Deep GM
+192,7,medial_preoptic_nucleus,Deep GM
+193,7,anterior_hypothalamic_nucleus,Deep GM
+194,7,paraventricular_nucleus_of_hypothalamus,Deep GM
+196,7,supraoptic_nucleus,Deep GM
+201,7,stria_medullaris_of_thalamus,Deep GM
+206,7,internal_segment_of_globus_pallidus,Deep GM
+207,7,periventricular_nucleus__supraoptic_portion,Deep GM
+218,7,thalamus,Deep GM
+219,7,anterodorsal_nucleus_of_thalamus,Deep GM
+220,7,anteroventral_nucleus_of_thalamus,Deep GM
+221,7,parataenial_nucleus_of_thalamus,Deep GM
+222,7,parvocellular_division_of_va,Deep GM
+223,7,fasciculosus_nucleus_of_thalamus,Deep GM
+224,7,rhomboid_(central)_nucleus_of_thalamus,Deep GM
+225,7,paraventricular_nucleus,Deep GM
+226,7,zona_incerta,Deep GM
+227,7,periventricular_nucleus__tuberal_portion,Deep GM
+228,7,juxtaparaventricular_lateral_hypothalamic_area,Deep GM
+229,7,dorsomedial_hypothalamic_nucleus,Deep GM
+230,7,lateral_hypothalamic_area__tuberal_part,Deep GM
+232,7,pallidohypothalamic_area,Deep GM
+234,7,medial_corticohypothalamic_tract,Deep GM
+243,7,dorsal_part_of_ventromedial_hypothalamic_nucleus,Deep GM
+244,7,ventral_part_of_ventromedial_hypothalamic_nucleus,Deep GM
+245,7,arcuate_nucleus_of_hypothalamus,Deep GM
+246,7,inferior_thalamic_peduncle,Deep GM
+252,7,anteromedial_nucleus_of_thalamus,Deep GM
+253,7,reuniens_nucleus_(medioventral_nucleus)_of_thalamus,Deep GM
+254,7,reticular_nucleus_of_thalamus,Deep GM
+255,7,central_part_of_ventromedial_hypothalamic_nucleus,Deep GM
+256,7,tuberomammillary_nucleus,Deep GM
+268,7,lateral_tuberal_nuclei,Deep GM
+274,7,ventral_medial_nucleus_of_thalamus,Deep GM
+275,7,posterior_hypothalamic_nucleus,Deep GM
+276,7,mammillothalamic_tract,Deep GM
+282,7,magnocellular_(medial)_division_of_md,Deep GM
+283,7,magnocellular_division_of_va,Deep GM
+284,7,central_medial_nucleus_of_thalamus,Deep GM
+285,7,paracentral_nucleus_of_thalamus,Deep GM
+286,7,intermediodorsal__nucleus_of_thalamus,Deep GM
+297,7,lateral__hypothalamic_area__posterior_part,Deep GM
+298,7,mammillary_peduncle,Deep GM
+303,7,central_dorsal_nucleus_of_thalamus,Deep GM
+304,7,supramammillary_nucleus,Deep GM
+305,7,lateral_part_of_medial_mammillary_nucleus,Deep GM
+306,7,medial_part_of_medial_mammillary_nucleus,Deep GM
+307,7,basal_division_of_medial_mammillary_nucleus,Deep GM
+308,7,lateral_mammillary_nucleus,Deep GM
+309,7,lenticular_fasciculus,Deep GM
+312,7,central_part_of_medial_division_of_md,Deep GM
+313,7,parvocellular_(central)_division_of_md,Deep GM
+314,7,rostral_division_of_vl,Deep GM
+315,7,medial_portion_of_sth,Deep GM
+316,7,laterodorsal_portion_of_sth,Deep GM
+321,7,lateroventral_portion_of_sth,Deep GM
+322,7,thalamic_fasciculus,Deep GM
+349,7,posteroventral_putamen,Deep GM
+350,7,dorsal_subdivision_of_vlc,Deep GM
+378,7,lateral_dorsal_nucleus_of_thalamus,Deep GM
+379,7,densocelllular_(paralamellar)_division_of_md,Deep GM
+380,7,multiform_(lateral)_division_of_md,Deep GM
+381,7,ventral_subdivision_of_vlc,Deep GM
+382,7,medial_subdivision_of_vlc_(area_x),Deep GM
+393,7,tail_of_caudate,Deep GM
+394,7,rostral_division_of_ventral_posterior_lateral_nucleus,Deep GM
+395,7,parvocellular_division_of_vpm,Deep GM
+396,7,lateral_division_of_centromedian_nucleus_of_thalamus,Deep GM
+397,7,medial_division_of_centromedian_nucleus_of_thalamus,Deep GM
+398,7,parafascicular_nucleus_of_thalamus,Deep GM
+399,7,periventricular_area_of_thalamus,Deep GM
+400,7,nucleus_of_the_field_of_forel,Deep GM
+423,7,ventral_posterior_medial_nucleus,Deep GM
+424,7,ventral_posterior_inferior_nucleus,Deep GM
+425,7,lateral_division_of_central_lateral_nucleus,Deep GM
+426,7,subparafascicular_nucleus_of_thalamus,Deep GM
+430,7,lateral_habenular_nucleus,Deep GM
+433,7,parasubthalamic_nucleus,Deep GM
+441,7,lateral_posterior_nucleus_of_thalamus,Deep GM
+442,7,basal_ventral_medial_nucleus,Deep GM
+443,7,dorsal_division_of_central_lateral_nucleus,Deep GM
+444,7,medial_habenular_nucleus,Deep GM
+454,7,anterior_nucleus_of_pulvinar,Deep GM
+458,7,caudal_division_of_ventral_posterior_lateral_nucleus,Deep GM
+478,7,posterior_nucleus_of_thalamus,Deep GM
+479,7,centromedian_nucleus_of_thalamus,Deep GM
+484,7,dorsal_lateral_geniculate_nucleus,Deep GM
+492,7,limitans_nucleus,Deep GM
+493,7,habenular_commissure,Deep GM
+504,7,dorsal_medial_geniculate_nucleus,Deep GM
+505,7,ventral_medial_geniculate_nucleus,Deep GM
+508,7,medial_nucleus_of_pulvinar,Deep GM
+510,7,magnocellular_(medial)_nucleus,Deep GM
+512,7,suprageniculate_nucleus_of_thalamus,Deep GM
+517,7,lateral_nucleus_of_pulvinar,Deep GM
+519,7,inferior_nucleus_of_pulvinar,Deep GM
+578,7,pulvinar_of_thalamus,Deep GM
+811,7,superficial_pulvinar_nucleus,Deep GM
+813,7,diffuse_pulvinar_nucleus,Deep GM
+843,7,infundibular_stalk,Deep GM
+506,8,pineal_body,Other

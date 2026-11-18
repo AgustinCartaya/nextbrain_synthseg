@@ -1,0 +1,37 @@
+[02:50:37] 1. detecting gap planes
+[02:50:51]   1,092,376 short background runs (<= 2.4 mm) along axis 1
+[02:50:52]   global normal: pitch=-8.0 yaw=-4.0 deg (spikiness 0.92)
+[02:50:54]   18 gap planes (coverage / non-cortical runs): 0.03/0.12, 0.26/0.28, 0.07/0.13, 0.09/0.56, 0.09/0.58, 0.14/0.45, 0.15/0.38, 0.05/0.36, 0.11/0.24, 0.06/0.35, 0.04/0.32, 0.05/0.23, 0.09/0.20, 0.22/0.28, 0.16/0.48, 0.04/0.09, 0.08/0.24, 0.08/0.14
+[02:50:54] 2. block misalignment
+[02:51:01]   misalignment per plane (vox): (+0,-2) (-0,+0) (-1,+0) (+0,+2) (+0,+1) (+0,+0) (+0,-1) (+0,-0) (-0,-0) (+2,-2) (-0,+1) (-0,+0) (+0,+0) (+0,-0)
+[02:51:01]   block translations (vox): [[0, -1], [0, 1], [0, 1], [0, 1], [0, -1], [0, 0], [0, 0], [0, 0], [0, -1], [0, -1], [0, 1], [0, 1], [0, 0], [0, 0], [0, 0]]
+[02:51:04] 3. filling gaps
+[02:52:35]   axis 1: 18 planes, 1,381,037 gap voxels, 1,091,378 filled with tissue
+[02:52:35] 4. filling cracks
+[02:53:16]   333,278 crack voxels filled
+[02:53:16] 5. filling enclosed holes
+[02:53:27]   11,364 hole voxels filled
+[02:53:28] done in 171.1 s, 5,207,400 voxels changed
+	Command being timed: "python3 /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/fill_holes/manual/restore.py outputs/methods_comparison/v2/EX9-19_seg_0.2mm_v2.nii.gz outputs/methods_comparison/v2_restore/EX9-19_seg_0.2mm_v2_restored.nii.gz"
+	User time (seconds): 216.44
+	System time (seconds): 41.63
+	Percent of CPU this job got: 143%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:59.27
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10371988
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1679511
+	Voluntary context switches: 262
+	Involuntary context switches: 3509
+	Swaps: 0
+	File system inputs: 29096
+	File system outputs: 44096
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

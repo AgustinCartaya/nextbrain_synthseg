@@ -1,0 +1,40 @@
+[02:11:33] 1. detecting gap planes
+[02:11:40]   1,037,183 short background runs (<= 2.4 mm) along axis 1
+[02:11:41]   global normal: pitch=-18.5 yaw=-3.0 deg (spikiness 0.65)
+[02:11:42]     rejected candidate plane: coverage 0.037, non-cortical runs 0.05
+[02:11:42]     rejected candidate plane: coverage 0.019, non-cortical runs 0.10
+[02:11:42]     rejected candidate plane: coverage 0.021, non-cortical runs 0.06
+[02:11:42]   12 gap planes (coverage / non-cortical runs): 0.09/0.24, 0.06/0.09, 0.15/0.20, 0.07/0.47, 0.08/0.21, 0.08/0.18, 0.04/0.12, 0.05/0.39, 0.09/0.48, 0.21/0.46, 0.04/0.12, 0.05/0.12
+[02:11:43] 2. block misalignment
+[02:11:46]   misalignment per plane (vox): (-2,-1) (+0,+0) (-2,+0) (-2,+1) (+0,+1) (+0,+0) (-2,+0) (+0,-1) (+0,+1) (-1,-0) (+0,+2)
+[02:11:46]   block translations (vox): [[-1, 0], [1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, -1]]
+[02:11:50] 3. filling gaps
+[02:12:52]   axis 1: 12 planes, 811,762 gap voxels, 624,816 filled with tissue
+[02:12:52] 4. filling cracks
+[02:13:47]   177,720 crack voxels filled
+[02:13:47] 5. filling enclosed holes
+[02:14:00]   5,842 hole voxels filled
+[02:14:01] done in 148.2 s, 2,547,852 voxels changed
+	Command being timed: "python3 /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/fill_holes/manual/restore.py /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v1/P57-16_seg_0.2mm.nii.gz /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v1_restore/P57-16_seg_0.2mm_restored.nii.gz"
+	User time (seconds): 205.24
+	System time (seconds): 47.07
+	Percent of CPU this job got: 163%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:34.41
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10374636
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1660173
+	Voluntary context switches: 238
+	Involuntary context switches: 467
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 38648
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

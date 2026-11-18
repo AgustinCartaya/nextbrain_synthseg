@@ -1,0 +1,41 @@
+[02:50:36] 1. detecting gap planes
+[02:50:42]   549,162 short background runs (<= 2.4 mm) along axis 1
+[02:50:50]   global normal: pitch=-11.0 yaw=-1.5 deg (spikiness 0.87)
+[02:50:50]     rejected candidate plane: coverage 0.027, non-cortical runs 0.02
+[02:50:50]     rejected candidate plane: coverage 0.017, non-cortical runs 0.02
+[02:50:51]     rejected candidate plane: coverage 0.036, non-cortical runs 0.01
+[02:50:51]     rejected candidate plane: coverage 0.029, non-cortical runs 0.00
+[02:50:51]   9 gap planes (coverage / non-cortical runs): 0.05/0.22, 0.05/0.44, 0.11/0.67, 0.03/0.67, 0.06/0.42, 0.09/0.63, 0.02/0.16, 0.15/0.64, 0.05/0.63
+[02:50:51] 2. block misalignment
+[02:50:54]   misalignment per plane (vox): (+0,+0) (+0,+0) (+0,+0) (-0,+0) (-1,-1) (+0,+2) (+0,+0)
+[02:50:54]   block translations (vox): [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+[02:50:54] 3. filling gaps
+[02:51:22]   axis 1: 9 planes, 257,275 gap voxels, 205,313 filled with tissue
+[02:51:22] 4. filling cracks
+[02:52:07]   109,887 crack voxels filled
+[02:52:07] 5. filling enclosed holes
+[02:52:20]   775 hole voxels filled
+[02:52:22] done in 106.0 s, 315,975 voxels changed
+	Command being timed: "python3 /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/fill_holes/manual/restore.py outputs/methods_comparison/v2/P41-16_seg_0.2mm_v2.nii.gz outputs/methods_comparison/v2_restore/P41-16_seg_0.2mm_v2_restored.nii.gz"
+	User time (seconds): 371.07
+	System time (seconds): 21.84
+	Percent of CPU this job got: 348%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:52.63
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11093964
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1355797
+	Voluntary context switches: 266
+	Involuntary context switches: 42803
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 29912
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

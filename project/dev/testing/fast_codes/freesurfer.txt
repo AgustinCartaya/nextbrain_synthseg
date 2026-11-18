@@ -1,0 +1,20 @@
+### Next brain
+
+mri_histo_atlas_segment_fireants \
+ --i /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/correct_cortex/data/outputs/synthetic_image_creation/Dataset001_chnaged_restored_complete_0.4/imagesTr/synth_00000_0000.nii.gz \
+ --o /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/correct_cortex/data/outputs/nextbrain_for_changed_restored/synth_00000_0000.nii.gz \
+ --device cuda:3 \
+ --side left \
+ --mode invivo \
+ --skip_bf
+
+
+mri_vol2vol \
+--mov /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/correct_cortex/synthetic_images_creation/generated/synthetic_t1w/nextbrain/case-2.nii.gz/SuperSynth/ribbon.mgz \
+--targ /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/correct_cortex/data/inputs/changed_restored_recon_holes_0.2mm/case-2.nii.gz \
+--regheader --interp nearest \
+--o /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/correct_cortex/synthetic_images_creation/generated/synthetic_t1w/nextbrain/case-2.nii.gz/SuperSynth/ribbon_resampled.nii.gz
+
+
+
+

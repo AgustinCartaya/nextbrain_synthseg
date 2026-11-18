@@ -1,0 +1,37 @@
+[02:11:39] 1. detecting gap planes
+[02:13:16]   881,914 short background runs (<= 2.4 mm) along axis 1
+[02:13:18]   global normal: pitch=-19.5 yaw=1.0 deg (spikiness 0.66)
+[02:13:19]   7 gap planes (coverage / non-cortical runs): 0.05/0.22, 0.07/0.32, 0.15/0.55, 0.16/0.33, 0.14/0.27, 0.04/0.70, 0.04/0.26
+[02:13:19] 2. block misalignment
+[02:13:29]   misalignment per plane (vox): (-0,+0) (+0,-0) (+0,-1) (+1,-0) (-0,+2) (+0,-0) (-0,+0)
+[02:13:29]   block translations (vox): [[0, 0], [0, 0], [0, 0], [0, 0], [0, 1], [0, -1], [0, -1], [0, 0]]
+[02:13:40] 3. filling gaps
+[02:14:49]   axis 1: 7 planes, 566,827 gap voxels, 458,784 filled with tissue
+[02:14:49] 4. filling cracks
+[02:16:26]   214,264 crack voxels filled
+[02:16:26] 5. filling enclosed holes
+[02:16:52]   1,734 hole voxels filled
+[02:16:55] done in 316.6 s, 1,838,414 voxels changed
+	Command being timed: "python3 /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/fill_holes/manual/restore.py /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v1/P58-16_seg_0.2mm.nii.gz /home/agustin/phd/synthseg_nextbrain/project/nextbrain_atlas_files/registered_images/creating_segmentations/outputs/methods_comparison/v1_restore/P58-16_seg_0.2mm_restored.nii.gz"
+	User time (seconds): 289.92
+	System time (seconds): 144.51
+	Percent of CPU this job got: 130%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 5:31.75
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 22777984
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2409437
+	Voluntary context switches: 272
+	Involuntary context switches: 1091
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 49728
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

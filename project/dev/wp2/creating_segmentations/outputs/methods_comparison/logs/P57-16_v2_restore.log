@@ -1,0 +1,38 @@
+[02:50:35] 1. detecting gap planes
+[02:50:42]   757,677 short background runs (<= 2.4 mm) along axis 1
+[02:50:50]   global normal: pitch=-18.0 yaw=-2.0 deg (spikiness 0.29)
+[02:50:50]     rejected candidate plane: coverage 0.038, non-cortical runs 0.04
+[02:50:50]   11 gap planes (coverage / non-cortical runs): 0.02/0.23, 0.06/0.14, 0.05/0.15, 0.05/0.20, 0.05/0.38, 0.06/0.16, 0.04/0.14, 0.04/0.25, 0.05/0.45, 0.03/0.12, 0.03/0.10
+[02:50:50] 2. block misalignment
+[02:50:54]   misalignment per plane (vox): (-7,-0) (-1,+0) (+1,+0) (+0,+0) (-1,-0) (+0,+0) (+0,+0) (+0,+0) (+0,-0) (+0,+0) (-0,+2)
+[02:50:54]   block translations (vox): [[-4, 0], [2, 0], [1, 0], [1, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, -1]]
+[02:50:58] 3. filling gaps
+[02:51:42]   axis 1: 11 planes, 476,175 gap voxels, 344,637 filled with tissue
+[02:51:42] 4. filling cracks
+[02:52:21]   140,019 crack voxels filled
+[02:52:21] 5. filling enclosed holes
+[02:52:33]   3,084 hole voxels filled
+[02:52:34] done in 119.2 s, 2,975,683 voxels changed
+	Command being timed: "python3 /home/agustin/phd/synthseg_nextbrain/project/dev/wp2/fill_holes/manual/restore.py outputs/methods_comparison/v2/P57-16_seg_0.2mm_v2.nii.gz outputs/methods_comparison/v2_restore/P57-16_seg_0.2mm_v2_restored.nii.gz"
+	User time (seconds): 440.52
+	System time (seconds): 24.39
+	Percent of CPU this job got: 372%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:04.80
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10370528
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1328432
+	Voluntary context switches: 322
+	Involuntary context switches: 43302
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 39224
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
