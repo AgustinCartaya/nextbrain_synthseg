@@ -1,0 +1,88 @@
+fixed_tree_training/
+    - data_shared/
+        - generation/
+            - images/
+            - labels/
+                - nxbsimplified/
+                - nxb16/
+                - nxbsupersynth/
+            - plans/
+            - templates/
+            - trees/
+
+        - shared_preprocessed/
+            - nnUNetPlans_3d_fullres/
+
+    - models/
+        - nxbsimplified/
+            - nnUNet_raw/
+                - Dataset101_nxbsimplified
+                    - imagesTr/
+                        # links to fixed_tree_training/generation/images/
+                    - labelsTr/
+                        # links to fixed_tree_training/generation/labels/nxbsimplified/
+                    - dataset.json
+                    - label_space.json
+            - nnUNet_preprocessed/
+                - Dataset101_nxbsimplified
+                    - gt_segmentations
+                    - nnUNetPlans_3d_fullres
+                        # links to fixed_tree_training/shared_preprocessed/nnUNetPlans_3d_fullres/
+                    - all other files
+            - nnUNet_results/
+                - Dataset101_nxbsimplified/
+                    - nnUNetTrainer__nnUNetResEncUNetMPlans__3d_fullres/
+                        # all the folds and data
+            - logs/
+                Dataset101_nxbsimplified/
+
+        - nxb16/
+            - nnUNet_raw/
+                - Dataset101_nxb16
+                    - imagesTr/
+                        # links to fixed_tree_training/generation/images/
+                    - labelsTr/
+                        # links to fixed_tree_training/generation/labels/nxb16/
+                    - dataset.json
+                    - label_space.json
+            - nnUNet_preprocessed/
+                - Dataset101_nxb16
+                    - gt_segmentations
+                    - nnUNetPlans_3d_fullres
+                        # links to fixed_tree_training/shared_preprocessed/nnUNetPlans_3d_fullres/
+                    - all other files
+            - nnUNet_results/
+                - Dataset101_nxb16/
+                    - nnUNetTrainer__nnUNetResEncUNetMPlans__3d_fullres/
+                        # all the folds and data
+            - logs/
+                Dataset101_nxb16/
+
+        - nxbsupersynth/
+            - nnUNet_raw/
+                - Dataset101_nxbsupersynth
+                    - imagesTr/
+                        # links to fixed_tree_training/generation/images/
+                    - labelsTr/
+                        # links to fixed_tree_training/generation/labels/nxbsupersynth/
+                    - dataset.json
+                    - label_space.json
+            - nnUNet_preprocessed/
+                - Dataset101_nxbsupersynth
+                    - gt_segmentations
+                    - nnUNetPlans_3d_fullres
+                        # links to fixed_tree_training/shared_preprocessed/nnUNetPlans_3d_fullres/
+                    - all other files
+            - nnUNet_results/
+                - Dataset101_nxbsupersynth/
+                    - nnUNetTrainer__nnUNetResEncUNetMPlans__3d_fullres/
+                        # all the folds and data
+            - logs/
+                Dataset101_nxbsupersynth/
+
+    - generate_data:
+        # necessary scripts to generate the 1K iages and save at data shared
+
+
+
+

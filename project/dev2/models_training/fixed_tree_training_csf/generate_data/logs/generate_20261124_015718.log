@@ -1,0 +1,5 @@
+1. HR templates
+case-1: crop {'lo': [-26, -30, -60], 'hi': [497, 925, 599]}, super-resolution x1, sigma 0.0 mm
+    case-1_hr0.2mm.nii.gz: [523, 955, 659] voxels
+case-2: crop {'lo': [-60, -31, -60], 'hi': [477, 938, 645]}, super-resolution x1, sigma 0.0 mm
+    case-2_hr0.2mm.nii.gz: [537, 969, 705] voxels

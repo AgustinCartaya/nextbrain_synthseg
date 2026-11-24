@@ -1,0 +1,41 @@
+{
+  "background": 0,
+  "values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "names": [
+    "background",
+    "white_matter",
+    "gray_matter",
+    "cerebellum_white_matter",
+    "cerebellum_gray_matter",
+    "caudate_and_accumbens",
+    "putamen",
+    "white_thalamus",
+    "gray_thalamus",
+    "pallidum",
+    "substantia_nigra_and_stn_and_red_nucleus",
+    "gray_brainstem_nuclei",
+    "white_brainstem_nuclei",
+    "gray_hypothalamus",
+    "white_hypothalamus",
+    "cerebellar_other",
+    "hippocampal_white_matter"
+  ]
+}

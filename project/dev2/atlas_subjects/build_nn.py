@@ -12,7 +12,10 @@ github.com/acasamitjana/ERC_reconstruction, with two changes:
   * each block is resampled only inside its own bounding box, so fine grids fit
     in memory;
   * where blocks overlap, the label from the block whose histology section is
-    closest (through-plane) wins, instead of the last block processed.
+    closest (through-plane) wins, instead of the last block processed;
+  * labels can be remapped only inside cerebellum blocks (block names starting
+    with 'C' in block2slab_mapping.csv), e.g. 611 -> 846, leaving the same label
+    in brainstem ('B') blocks untouched (--cerebellum-remap).
 
 Usage:
     python build_nn.py \
@@ -21,6 +24,7 @@ Usage:
         --res 0.2
 """
 import argparse
+import csv
 import itertools
 import os
 import time
@@ -33,8 +37,14 @@ def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument('--case-dir', required=True,
                    help='Case directory containing labels_blocks/ and mri_rotated/ eg. ../NextBrain-Case-1/P57-16')
-    p.add_argument('--out-dir', required=True,  help='Output folder')
+    p.add_argument('--out-dir', required=True,
+                   help='Output folder; the volume is saved as <out-dir>/rec_nn_<res>mm/<name>.nii.gz')
+    p.add_argument('--name', default=None,
+                   help='Name used for the output files (default: basename of --case-dir, e.g. P57-16)')
     p.add_argument('--res', type=float, default=0.2, help='Isotropic output voxel size in mm (default 0.2)')
+    p.add_argument('--cerebellum-remap', nargs='*', default=['611:846'], metavar='OLD:NEW',
+                   help='Label remaps applied only inside cerebellum (C*) blocks (default 611:846; '
+                        'pass the flag with no values to disable)')
     p.add_argument('--chunk', type=int, default=64, help='Output slabs processed at once (memory/speed trade-off)')
     return p.parse_args()
 
@@ -56,10 +66,14 @@ def target_grid(mri_path, res):
 def main():
     args = parse_args()
     case_dir = os.path.abspath(args.case_dir)
-    case = os.path.basename(case_dir)
+    case = args.name or os.path.basename(case_dir)
     blocks_dir = os.path.join(case_dir, 'labels_blocks')
     blocks = sorted((b for b in os.listdir(blocks_dir)
                      if os.path.exists(os.path.join(blocks_dir, b, 'LABELS.nii.gz'))), key=int)
+
+    with open(os.path.join(case_dir, 'block2slab_mapping.csv')) as f:
+        block_names = {r['BLOCK_NUM']: r['BLOCK_NAME'] for r in csv.DictReader(f)}
+    cb_remap = [tuple(int(x) for x in m.split(':')) for m in args.cerebellum_remap]
 
     shape, affine = target_grid(os.path.join(case_dir, 'mri_rotated', 'mri.nii.gz'), args.res)
     print(f'{case}: {len(blocks)} blocks -> grid {shape} at {args.res} mm')
@@ -75,6 +89,13 @@ def main():
         lab = np.asanyarray(img.dataobj)
         if lab.ndim == 2:
             lab = lab[..., None]
+        name = block_names[b]
+        if name.startswith('C') and cb_remap:
+            lab = np.array(lab)  # writable copy
+            for old, new in cb_remap:
+                n = int(np.count_nonzero(lab == old))
+                lab[lab == old] = new
+                print(f'  block {b:>2} ({name}): remapped {n} voxels {old} -> {new}')
         nb = np.array(lab.shape[:3])
         dz = float(np.linalg.norm(img.affine[:3, 2]))  # section spacing in mm
 
@@ -114,12 +135,13 @@ def main():
             cur_seg[take] = vals[take]
             cur_best[take] = dist[take]
             filled += int(np.count_nonzero(take))
-        print(f'  block {b:>2}: shape {lab.shape},section spacing {dz:.2f} mm, '
+        print(f'  block {b:>2} ({name}): shape {lab.shape},section spacing {dz:.2f} mm, '
               f'{len(np.unique(lab)) - 1} labels, {filled} voxels written')
     del best
 
-    os.makedirs(args.out_dir, exist_ok=True)
-    out = os.path.join(args.out_dir, f'{case}_seg_{args.res:g}mm.nii.gz')
+    rec_dir = os.path.join(args.out_dir, f'rec_nn_{args.res:g}mm')
+    os.makedirs(rec_dir, exist_ok=True)
+    out = os.path.join(rec_dir, f'{case}.nii.gz')
     hdr = nib.Nifti1Header()
     hdr.set_data_dtype(np.uint16)
     hdr.set_xyzt_units('mm')

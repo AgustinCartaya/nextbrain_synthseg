@@ -1,0 +1,26 @@
+1. HR templates
+case-1: crop {'lo': [-26, -30, -60], 'hi': [497, 925, 599]}, super-resolution x1, sigma 0.0 mm
+    case-1_hr0.2mm.nii.gz: [523, 955, 659] voxels
+case-2: crop {'lo': [-60, -31, -60], 'hi': [477, 938, 645]}, super-resolution x1, sigma 0.0 mm
+    case-2_hr0.2mm.nii.gz: [537, 969, 705] voxels
+case-3: crop {'lo': [18, -4, -37], 'hi': [501, 979, 748]}, super-resolution x1, sigma 0.0 mm
+    case-3_hr0.2mm.nii.gz: [483, 983, 785] voxels
+case-4: crop {'lo': [-35, -9, -51], 'hi': [442, 990, 724]}, super-resolution x1, sigma 0.0 mm
+    case-4_hr0.2mm.nii.gz: [477, 999, 775] voxels
+case-5: crop {'lo': [-49, -40, -60], 'hi': [458, 935, 690]}, super-resolution x1, sigma 0.0 mm
+    case-5_hr0.2mm.nii.gz: [507, 975, 750] voxels
+    level nxb_all         233 labels
+    level nxb18            19 labels  <- image synthesised from this level (IT)
+
+2. 5 images (0..4) on ['cuda:2']
+[worker 0 cuda:2] synth_00000: [262, 478, 330], 3.6 s, T2, spacing [0.4, 0.4, 2.13] mm, ETA 0 min
+[worker 0 cuda:2] synth_00001: [269, 485, 353], 2.7 s, FLAIR, spacing [0.4, 0.57, 0.4] mm, ETA 0 min
+[worker 0 cuda:2] synth_00002: [242, 492, 393], 2.8 s, T1, spacing [0.6, 0.6, 0.6] mm, ETA 0 min
+[worker 0 cuda:2] synth_00003: [239, 500, 388], 2.8 s, FLAIR, spacing [2.74, 0.4, 0.4] mm, ETA 0 min
+[worker 0 cuda:2] synth_00004: [254, 488, 375], 2.7 s, T1, spacing [0.45, 0.45, 0.45] mm, ETA 0 min
+[worker 0 cuda:2] finished: 5 images in 0.2 min
+    done in 1.2 min, worker exit codes [0]
+
+3. dataset.json
+    Dataset101_nxbsimplified_csf: 5 cases, 233 labels (level nxb_all)
+    Dataset102_nxb18: 5 cases, 19 labels (level nxb18)

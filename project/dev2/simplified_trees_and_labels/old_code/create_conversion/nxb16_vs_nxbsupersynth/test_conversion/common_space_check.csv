@@ -1,0 +1,13 @@
+common_id,common_name,status,vol_nxb16_mm3,vol_nxbsupersynth_mm3,vol_only_nxb16_mm3,vol_only_nxbsupersynth_mm3,best_dice,labels_only_in_nxb16_side,labels_only_in_nxbsupersynth_side
+0,background,direct,1549528.6,1549528.6,0.0,0.0,1.0,,
+1,cerebral_white_matter,merged,189036.1,190796.1,0.0,1760.0,0.9954,,102 108 117 128 174
+2,cerebral_gray_matter,merged,291452.6,290714.3,738.4,0.0,0.9987,108 117 128,
+3,cerebellum_white_matter,merged,12614.9,12614.9,0.0,0.0,1.0,,
+4,cerebellum_cortex,direct,49390.5,49390.5,0.0,0.0,1.0,,
+5,thalamus,merged,7161.3,7209.3,0.0,47.9,0.9967,,433 506
+6,caudate,partial,4551.2,4551.2,0.0,0.0,1.0,,
+7,putamen,approximate,6000.5,4978.9,1021.7,0.0,0.9069,102 174,
+8,pallidum,direct,1365.4,1365.4,0.0,0.0,1.0,,
+9,substantia_nigra_stn_red_nucleus,direct,858.1,858.1,0.0,0.0,1.0,,
+10,brainstem,partial,8591.8,8547.7,44.1,0.0,0.9974,506,
+11,hypothalamus,merged,828.1,824.2,3.8,0.0,0.9977,433,

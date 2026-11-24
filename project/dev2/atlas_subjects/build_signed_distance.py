@@ -13,6 +13,9 @@ reconstruction time (the geometry of every block and the co-registered MRI):
      (typically the first/last ones of a block, which is what produces the
      "block gaps") are ignored; the voxels they cover are interpolated between,
      or copied from, the nearest usable sections of the block.
+  0. Optional label remap inside cerebellum blocks only (block names starting with
+     'C' in block2slab_mapping.csv), e.g. 611 -> 846, leaving the same label in
+     brainstem ('B') blocks untouched (--cerebellum-remap, default 611:846).
   3. Blocks are mosaicked; where they overlap, the block with the closest usable
      section wins.
   4. Labels where the MRI has no tissue are removed (leaks into sulci/background).
@@ -28,9 +31,9 @@ reconstruction time (the geometry of every block and the co-registered MRI):
 Not handled: misalignment between blocks ("block steps"); that is residual
 registration error and needs a post-hoc correction (e.g. restore.py shift step).
 
-Outputs (in --out-dir):
-  <case>_seg_<res>mm_v2.nii.gz        labels (NextBrain / AllenAtlasLUT ids)
-  <case>_seg_<res>mm_v2_steps.nii.gz  (only with --save-steps) how each voxel was obtained:
+Outputs (in <out-dir>/rec_sd_<res>mm/, or rec_sd_like-<ref>/ with --like):
+  <case>.nii.gz        labels (NextBrain / AllenAtlasLUT ids)
+  <case>_steps.nii.gz  (only with --save-steps) how each voxel was obtained:
         1 = interpolated between two consecutive sections
         2 = bridged over missing sections / copied from the nearest usable section
         3 = MRI-guided fill (only with --mri-fill)
@@ -46,6 +49,7 @@ Usage:
 
 """
 import argparse
+import csv
 import itertools
 import os
 import time
@@ -62,10 +66,16 @@ def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument('--case-dir', required=True,
                    help='Case directory containing labels_blocks/ and mri_rotated/ eg. ../NextBrain-Case-1/P57-16')
-    p.add_argument('--out-dir', required=True,  help='Output folder')
+    p.add_argument('--out-dir', required=True,
+                   help='Output folder; the volume is saved as <out-dir>/rec_sd_<res>mm/<name>.nii.gz')
+    p.add_argument('--name', default=None,
+                   help='Name used for the output files (default: basename of --case-dir, e.g. P57-16)')
     p.add_argument('--res', type=float, default=0.2, help='Isotropic output voxel size in mm (default 0.2)')
     p.add_argument('--like', default=None,
                    help='Optional NIfTI whose grid (shape + affine) is used instead of --res')
+    p.add_argument('--cerebellum-remap', nargs='*', default=['611:846'], metavar='OLD:NEW',
+                   help='Label remaps applied only inside cerebellum (C*) blocks (default 611:846; '
+                        'pass the flag with no values to disable)')
     p.add_argument('--min-section-frac', type=float, default=0.3,
                    help='A section is "missing" if its labelled area is below this fraction of the '
                         'median labelled area of its block (default 0.3)')
@@ -83,7 +93,7 @@ def parse_args():
     p.add_argument('--mri-fill', action='store_true',
                    help='Fill unlabelled voxels inside the MRI brain mask (closes the sulci, see above)')
     p.add_argument('--save-steps', action='store_true',
-                   help='Also save <case>_seg_<res>mm_v2_steps.nii.gz (how each voxel was obtained)')
+                   help='Also save <case>_steps.nii.gz (how each voxel was obtained)')
     return p.parse_args()
 
 
@@ -220,11 +230,14 @@ def main():
     args = parse_args()
     t0 = time.time()
     case_dir = os.path.abspath(args.case_dir)
-    case = os.path.basename(case_dir)
+    case = args.name or os.path.basename(case_dir)
     blocks_dir = os.path.join(case_dir, 'labels_blocks')
     blocks = sorted((b for b in os.listdir(blocks_dir)
                      if os.path.exists(os.path.join(blocks_dir, b, 'LABELS.nii.gz'))), key=int)
     mri = nib.load(os.path.join(case_dir, 'mri_rotated', 'mri.nii.gz'))
+    with open(os.path.join(case_dir, 'block2slab_mapping.csv')) as f:
+        block_names = {r['BLOCK_NUM']: r['BLOCK_NAME'] for r in csv.DictReader(f)}
+    cb_remap = [tuple(int(x) for x in m.split(':')) for m in args.cerebellum_remap]
 
     if args.like:
         ref = nib.load(args.like)
@@ -244,10 +257,18 @@ def main():
     tot_missing = tot_sections = 0
     for b in blocks:
         img = nib.load(os.path.join(blocks_dir, b, 'LABELS.nii.gz'))
-        r = reconstruct_block(np.asanyarray(img.dataobj), img.affine, shape, affine, res,
+        name = block_names[b]
+        blk = np.asanyarray(img.dataobj)
+        if name.startswith('C') and cb_remap:
+            blk = np.array(blk)  # writable copy
+            for old, new in cb_remap:
+                n = int(np.count_nonzero(blk == old))
+                blk[blk == old] = new
+                log(f'  block {b:>2} ({name}): remapped {n} voxels {old} -> {new}')
+        r = reconstruct_block(blk, img.affine, shape, affine, res,
                               args.min_section_frac, args.sdt_cap_mm, args.inplane_stride)
         if r is None:
-            log(f'  block {b:>2}: nothing to write, skipped')
+            log(f'  block {b:>2} ({name}): nothing to write, skipped')
             continue
         box, lab, dist, bridged, info = r
         take = (lab > 0) & (dist < best[box])
@@ -255,7 +276,7 @@ def main():
         best[box][take] = dist[take]
         steps[box][take] = np.where(bridged[take], STEP_BRIDGED, STEP_INTERP)
         tot_missing += info['n_missing']; tot_sections += info['n_sections']
-        log(f'  block {b:>2}: {info["n_sections"]} sections ({info["n_missing"]} missing), '
+        log(f'  block {b:>2} ({name}): {info["n_sections"]} sections ({info["n_missing"]} missing), '
             f'spacing {info["dz"]:.2f} mm, {info["n_labels"]} labels, {int(take.sum())} voxels written')
     del best
     log(f'  {tot_missing} of {tot_sections} sections treated as missing')
@@ -302,8 +323,9 @@ def main():
         del d, ind
 
     # ---- save and report --------------------------------------------------------------------
-    os.makedirs(args.out_dir, exist_ok=True)
-    base = os.path.join(args.out_dir, f'{case}_seg_{tag}_v2')
+    rec_dir = os.path.join(args.out_dir, f'rec_sd_{tag}')
+    os.makedirs(rec_dir, exist_ok=True)
+    base = os.path.join(rec_dir, case)
     outputs = [(seg, '.nii.gz', np.uint16)]
     if args.save_steps:
         outputs.append((steps, '_steps.nii.gz', np.uint8))

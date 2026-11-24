@@ -1,0 +1,7 @@
+Running
+
+To launch
+
+To do
+- script to compare supersynth with nxbsupersynth model
+

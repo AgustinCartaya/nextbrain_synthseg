@@ -1,0 +1,52 @@
+{
+  "channel_names": {
+    "0": "synthetic"
+  },
+  "labels": {
+    "background": 0,
+    "brain_stem": 1,
+    "cerebral_white_matter": 2,
+    "cerebral_cortex": 3,
+    "cerebellum_white_matter": 4,
+    "cerebellum_cortex": 5,
+    "thalamus": 6,
+    "caudate": 7,
+    "putamen": 8,
+    "pallidum": 9,
+    "hippocampus": 10,
+    "amygdala": 11,
+    "accumbens_area": 12,
+    "optic_chiasm": 13,
+    "hypothal_nomb": 14,
+    "fornix": 15,
+    "mammillarybody": 16,
+    "basal_forebrain": 17,
+    "septalnuc": 18
+  },
+  "numTraining": 1000,
+  "file_ending": ".nii.gz",
+  "name": "Dataset103_nxbsupersynth",
+  "description": "Synthetic images (generator_double_tree), level nxbsupersynth; image synthesised from level nxb16. Labels are indices; label_space.json maps them to raw values.",
+  "level": "nxbsupersynth",
+  "original_label_values": [
+    0,
+    16,
+    41,
+    42,
+    46,
+    47,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    58,
+    85,
+    820,
+    822,
+    844,
+    866,
+    870
+  ]
+}

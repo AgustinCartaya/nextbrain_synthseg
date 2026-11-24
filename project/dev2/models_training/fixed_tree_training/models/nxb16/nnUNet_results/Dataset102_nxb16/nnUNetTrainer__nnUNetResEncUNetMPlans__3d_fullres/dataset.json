@@ -1,0 +1,48 @@
+{
+  "channel_names": {
+    "0": "synthetic"
+  },
+  "labels": {
+    "background": 0,
+    "white_matter": 1,
+    "gray_matter": 2,
+    "cerebellum_white_matter": 3,
+    "cerebellum_gray_matter": 4,
+    "caudate_and_accumbens": 5,
+    "putamen": 6,
+    "white_thalamus": 7,
+    "gray_thalamus": 8,
+    "pallidum": 9,
+    "substantia_nigra_and_stn_and_red_nucleus": 10,
+    "gray_brainstem_nuclei": 11,
+    "white_brainstem_nuclei": 12,
+    "gray_hypothalamus": 13,
+    "white_hypothalamus": 14,
+    "cerebellar_other": 15,
+    "hippocampal_white_matter": 16
+  },
+  "numTraining": 1000,
+  "file_ending": ".nii.gz",
+  "name": "Dataset102_nxb16",
+  "description": "Synthetic images (generator_double_tree), level nxb16; image synthesised from level nxb16. Labels are indices; label_space.json maps them to raw values.",
+  "level": "nxb16",
+  "original_label_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ]
+}

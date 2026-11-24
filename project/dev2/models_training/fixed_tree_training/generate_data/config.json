@@ -1,0 +1,188 @@
+{
+  "grid": {
+    "target_voxel_mm": 0.4
+  },
+  "labels": {
+    "tree": "../../../simplified_trees_and_labels/data/outputs/nxbsimplified/nextbrain_tree_allen_gyral_simplified.json",
+    "background": 0,
+    "unassigned": "background",
+    "output_labels": "templates"
+  },
+  "merging": {
+    "levels": {
+      "nxb_all": null,
+      "nxb16": {
+        "script": "../../../simplified_trees_and_labels/nxbsimplified_to_nxb16.py",
+        "tree": "../../../simplified_trees_and_labels/data/outputs/nxb16/nextbrain_tree_nxb16.json"
+      },
+      "nxbsupersynth": {
+        "script": "../../../simplified_trees_and_labels/nxbsimplified_to_nxbsupersynth.py",
+        "tree": "../../../simplified_trees_and_labels/data/outputs/nxbsupersynth/nextbrain_tree_nxbsupersynth.json",
+        "options": {
+          "side": "R",
+          "claustrum": false
+        }
+      }
+    },
+    "principal": "nxb16"
+  },
+  "template": {
+    "hr_voxel_mm": 0.2,
+    "sigma_mm": 0.0,
+    "margin_mm": 12.0
+  },
+  "patch": {
+    "size": null
+  },
+  "acquisition": {
+    "lowres_prob": 0.8,
+    "iso_prob": 0.3,
+    "max_iso_mm": 1.5,
+    "max_aniso_mm": 3.0,
+    "alpha": [
+      0.970873786407767,
+      1.03
+    ],
+    "random_thickness": true,
+    "contrasts": [
+      "T1",
+      "T2",
+      "FLAIR",
+      "PD"
+    ]
+  },
+  "morphology": {
+    "pairs": [
+      [
+        "background",
+        "surface_structures_of_forebrain_l1"
+      ],
+      [
+        "surface_structures_of_forebrain_l1",
+        "white_matter_of_forebrain_l1"
+      ],
+      [
+        "background",
+        "gray_matter_of_the_hindbrain_l1"
+      ],
+      [
+        "gray_matter_of_the_hindbrain_l1",
+        "white_matter_of_hindbrain_l1"
+      ],
+      [
+        "basal_nuclei_basal_ganglia_l4",
+        "white_matter_of_forebrain_l1"
+      ],
+      [
+        "thalamus_l3",
+        "white_matter_of_forebrain_l1"
+      ],
+      [
+        "background",
+        "gray_matter_of_forebrain_l1"
+      ],
+      [
+        "background",
+        "white_matter_of_forebrain_l1"
+      ],
+      [
+        "background",
+        "allocortex_l4",
+        {
+          "n_iter": 1
+        }
+      ],
+      [
+        "background",
+        "pons_l3",
+        {
+          "n_iter": {
+            "randint": [
+              1,
+              3
+            ]
+          },
+          "prob": 0.3
+        }
+      ]
+    ],
+    "n_iter": {
+      "randint": [
+        1,
+        3
+      ]
+    },
+    "prob": 0.5
+  },
+  "spatial": {
+    "rotation_deg": [
+      -15.0,
+      15.0
+    ],
+    "zoom": [
+      0.85,
+      1.15
+    ],
+    "shear": [
+      -0.03,
+      0.03
+    ],
+    "translation_mm": 0.0,
+    "elastic_dmax_mm": 10.0,
+    "elastic_ctrl": {
+      "randint": [
+        2,
+        7
+      ]
+    }
+  },
+  "partial_volume": {
+    "method": "downsample",
+    "top_k": 8,
+    "smooth_sigma_vox": 0.5
+  },
+  "tree": {
+    "colors_mu": [
+      0.0,
+      255.0
+    ],
+    "colors_sigma": [
+      0.255,
+      2.55
+    ],
+    "min_sigma": 0.0,
+    "intensity_scale": 255.0,
+    "resolution": "acquisition"
+  },
+  "bias": {
+    "prob": 1.0,
+    "vmax": 0.5,
+    "ctrl": 5
+  },
+  "motion": {
+    "prob": 0.3,
+    "shots": 3,
+    "rotation_deg": [
+      -10.0,
+      10.0
+    ],
+    "translation_mm": [
+      -2.0,
+      2.0
+    ]
+  },
+  "noise": {
+    "sigma": [
+      0.0,
+      0.1
+    ],
+    "space": "lowres"
+  },
+  "normalization": {
+    "method": "minmax",
+    "percentiles": [
+      0.5,
+      99.5
+    ]
+  }
+}

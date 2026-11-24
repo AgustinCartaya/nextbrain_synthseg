@@ -1,0 +1,6 @@
+
+claude --resume 720375b2-fac7-40e5-8c60-521bc9f4cb78
+
+
+tmux a -t images (nextbrain para mrixfields)
+tmux a -t images3 (segmentacion de 3T con nxb16)

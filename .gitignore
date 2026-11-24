@@ -16,6 +16,7 @@ git commit -m "Refresh gitignore rules"
 *.git
 *.nii.gz
 *.nii
+*.b2nd
 
 
 # Ignore model weights
@@ -40,7 +41,8 @@ softwares
 data
 
 project/nextbrain_atlas_files
-
+project/dev2/models_training/fixed_tree_training/data_shared
+project/dev2/models_training/fixed_tree_training_csf/data_shared
 
 
 

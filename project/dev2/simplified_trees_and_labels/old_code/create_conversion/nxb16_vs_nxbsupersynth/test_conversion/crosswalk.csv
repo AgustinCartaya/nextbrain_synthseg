@@ -1,0 +1,35 @@
+nxb16_id,nxb16_name,nxbsupersynth_id,nxbsupersynth_name,common_id_from_nxb16,common_id_from_nxbsupersynth,volume_mm3,pct_of_nxb16_class,pct_of_nxbsupersynth_class,nxbsimplified_labels
+0,background,0,background,0,0,1549528.6,100.0,100.0,0
+1,white_matter,41,cerebral_white_matter,1,1,188766.8,99.66,99.08,7 68 100 120 130 209
+1,white_matter,58,accumbens_area,1,255,263.6,0.14,14.12,208
+1,white_matter,85,optic_chiasm,1,255,118.0,0.06,60.37,161
+1,white_matter,822,fornix,1,1,269.2,0.14,100.0,199
+2,gray_matter,41,cerebral_white_matter,2,1,738.4,0.25,0.39,108 117 128
+2,gray_matter,42,cerebral_cortex,2,2,284655.6,98.04,100.0,3 99 113 125 157
+2,gray_matter,53,hippocampus,2,2,2916.0,1.0,71.8,320 326 340 341 342 344 345 346 347 364 365 367 369 370 371 373 374 375 404 405 407 409 410 411 419 420 421 422 432 558 559 561 563 564 565 567 568 569 572 573 574 575 576
+2,gray_matter,54,amygdala,2,2,1819.3,0.63,100.0,214 215 216 217 238 240 242 277 278 279 295 301 377
+2,gray_matter,58,accumbens_area,2,255,33.4,0.01,1.79,111
+2,gray_matter,870,septalnuc,2,2,178.2,0.06,100.0,103
+3,cerebellum_white_matter,46,cerebellum_white_matter,3,3,12146.7,100.0,96.29,846
+4,cerebellum_gray_matter,47,cerebellum_cortex,4,4,49390.5,100.0,100.0,595 597
+5,caudate_and_accumbens,50,caudate,6,6,4551.2,90.56,100.0,48 118 184 393
+5,caudate_and_accumbens,58,accumbens_area,6,255,474.5,9.44,25.41,101
+6,putamen,41,cerebral_white_matter,7,1,1021.7,17.03,0.54,102 174
+6,putamen,51,putamen,7,7,4978.9,82.97,100.0,79 349
+7,white_thalamus,49,thalamus,5,5,4231.7,100.0,58.7,190 191 201 218 222 226 246 254 276 283 284 285 303 312 314 322 350 381 382 394 396 397 398 424 425 426 430 442 444 458 478 479 484 492 493 517 519
+8,gray_thalamus,49,thalamus,5,5,2929.6,100.0,40.64,219 220 221 223 224 225 252 253 274 282 286 313 378 379 380 395 399 400 423 441 443 454 504 508 510 512 578 811 813
+9,pallidum,52,pallidum,8,8,1365.4,100.0,100.0,119 206
+10,substantia_nigra_and_stn_and_red_nucleus,866,basal_forebrain,9,9,858.1,100.0,100.0,310 315 316 321 352 385
+11,gray_brainstem_nuclei,16,brain_stem,10,10,4297.6,95.9,50.28,414 465 496 521 541 654 666 687 765
+11,gray_brainstem_nuclei,58,accumbens_area,10,255,106.1,2.37,5.68,412 435 498 843
+11,gray_brainstem_nuclei,85,optic_chiasm,10,255,77.4,1.73,39.63,114
+12,white_brainstem_nuclei,16,brain_stem,10,10,4250.1,80.44,49.72,451 531 580 611 662 697
+12,white_brainstem_nuclei,49,thalamus,10,5,44.1,0.83,0.61,506
+12,white_brainstem_nuclei,58,accumbens_area,10,255,989.3,18.72,52.99,384
+13,gray_hypothalamus,820,hypothal_nomb,11,11,442.0,63.13,90.33,147 149 150 160 181 192 193 194 196 207 227 228 229 230 232 243 244 245 255 268
+13,gray_hypothalamus,844,mammillarybody,11,11,258.2,36.87,77.09,256 275 297 304 308
+14,white_hypothalamus,49,thalamus,11,5,3.8,3.0,0.05,433
+14,white_hypothalamus,820,hypothal_nomb,11,11,47.3,37.02,9.67,234 309
+14,white_hypothalamus,844,mammillarybody,11,11,76.7,59.98,22.91,298 305 306 307
+15,cerebellar_other,46,cerebellum_white_matter,3,3,468.2,100.0,3.71,715 721 751 752
+16,hippocampal_white_matter,53,hippocampus,2,2,1145.2,100.0,28.2,339 343 354 368 372 408 418 461 562 566 571

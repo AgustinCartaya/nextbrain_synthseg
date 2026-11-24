@@ -1,0 +1,161 @@
+TODO: train and evaluate an nxb18 nnU-Net (nxb16 + ventricles + CSF)
+=====================================================================
+FORBIDEN TO MODIFY DELETE OR ADD ANY FILE OUTSIDE /home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training_csf
+IF YOU NEED TO SOMETHING SPECIFIC WRITE THE CODE INSIDE THIS FOLDER.
+
+Goal
+----
+Reproduce in fixed_tree_training_csf/ what fixed_tree_training/ did for nxb16: same folder
+structure, same scripts and the same evaluation on MRIxFields. The difference is the labels:
+nxb18 = the 16 nxb16 classes + ventricles (17) + CSF (18). At the end,
+models/nxb18/ must look like fixed_tree_training/models/nxb16/:
+
+    models/nxb18/
+      nnUNet_raw/Dataset102_nxb18/            (already created by the generator)
+      nnUNet_preprocessed/Dataset102_nxb18/
+      nnUNet_results/Dataset102_nxb18/nnUNetTrainer__nnUNetResEncUNetMPlans__3d_fullres/
+        fold_0..4/, crossval_results_folds_0_1_2_3_4/, plans.json, dataset.json, ...
+      logs/
+      predictions/mrixfields/
+        predict.sh, logs/, <contrast>/<field>/<case>.nii.gz    (raw label values 0..18)
+      evaluation/
+        mrixfields/nextbrain_nxb18/           Dice + volumes of the 16 nxb16 structures vs NextBrain
+        mrixfields/supersynth_ventricles_csf/ Dice + volumes of ventricles and CSF vs SuperSynth
+        TODO.txt
+
+Reference implementation (copy, then adapt; DO NOT modify anything in fixed_tree_training/):
+    fixed_tree_training/README.md, env.sh, 01_preprocess.sh .. 06_predict.sh,
+    make_splits.py, share_images.py, map_labels.py
+    fixed_tree_training/models/nxb16/predictions/mrixfields/predict.sh
+    fixed_tree_training/models/nxb16/evaluation/mrixfields/nextbrain_nxb16/
+        evaluate.py, make_results_visual.py (-> results_visual.ipynb), results_summary.md
+
+Conda envs: "nxb" for the generator, the evaluation and the notebooks; "nnunet" for every
+nnUNetv2_* command. Machine: 4 GPUs (check `nvidia-smi` before launching anything: GPUs 0-1
+are often used by other jobs), 128 cores, ~9 TB free on /home.
+
+
+Already done (2026-11-24)
+-------------------------
+- simplified_trees_and_labels/nxbsimplified_to_nxbsimplified_csf.py
+    -> data/outputs/nxbsimplified_csf/ (MT tree with ventricles_of_forebrain_l1 + 5 label maps
+       with ventricles = 50 and CSF = 24)
+- simplified_trees_and_labels/nxbsimplified_csf_to_nxb18.py
+    -> data/outputs/nxb18/nextbrain_tree_nxb18.json (IT tree, 8 colours incl. CSF)
+- generate_data/: config.json, generate.py (levels nxb_all + nxb18, nets nxbsimplified_csf +
+  nxb18, dataset ids 101 + 102), README.md, launch.sh
+- generate_data/visualize_generation/visualize_generation.ipynb
+- 5 images (synth_00000..00004) generated in data_shared/generation (same seeds as the full
+  run; the full run skips them).
+
+
+Step 1. Generate the 1000 images  (env nxb)
+-------------------------------------------
+    cd generate_data && ./launch.sh --gpus 2 3      # GPUs that are free
+    tail -f logs/generate_*.log
+Check: `grep -H numTraining models/*/nnUNet_raw/*/dataset.json` -> 1000 for both datasets
+(if missing: `python generate_data/generate.py --finalize`). Re-run visualize_generation.ipynb
+on a sample of the 1000 to check ventricles/CSF look right.
+
+
+Step 2. Copy and adapt the training scripts  (from fixed_tree_training/)
+------------------------------------------------------------------------
+Copy env.sh, 01_preprocess.sh, 02_train.sh, 03_launch_folds.sh, 04_crossval.sh, 05_cleanup.sh,
+06_predict.sh, make_splits.py, share_images.py, map_labels.py and README.md. Adapt:
+- env.sh: nets `nxb18` (DATASET_ID=102, Dataset102_nxb18) and `nxbsimplified_csf`
+  (101, Dataset101_nxbsimplified_csf); remove nxb16 / nxbsimplified / nxbsupersynth.
+  Only nxb18 is trained now; keep nxbsimplified_csf in env.sh so it can be trained later.
+- Usage lines / comments / examples of every script: net names, dataset ids
+  (`pkill -f "nnUNetv2_train 102"`), "three nets" -> nxb18 (one net for now).
+- make_splits.py, share_images.py, map_labels.py: logic unchanged (check docstrings only).
+  share_images.py works with a single net (it fills the shared store).
+- README.md: rewrite for this experiment (nets table: nxb18 = 19 labels, nxbsimplified_csf =
+  233 labels; the run-everything steps with nxb18 only; empty results table to fill at step 7).
+- Do not copy reorganization.txt / preprocess_all.log.
+Check: `bash -n` on every .sh, `source env.sh nxb18 && echo $nnUNet_raw $DATASET_NAME`.
+
+
+Step 3. Preprocess nxb18  (env nnunet, a few hours, background)
+---------------------------------------------------------------
+    nohup bash 01_preprocess.sh nxb18 > preprocess_nxb18.log 2>&1 &
+Check: models/nxb18/logs/preprocess_*.log shows 5 folds of ~200 validation cases (one held-out
+template each, splits_templates.json) and
+`ls data_shared/shared_preprocessed/nnUNetPlans_3d_fullres/*.b2nd | wc -l` = 1000.
+Also check in nnUNet_preprocessed/Dataset102_nxb18/dataset_fingerprint.json / plans that the
+19 labels are there and the spacing is 0.4 mm.
+
+
+Step 4. Train the 5 folds  (env nnunet)
+---------------------------------------
+    export nnUNet_n_proc_DA=12          # only 5 runs: more DA workers than the 8 used for 15 runs
+    bash 03_launch_folds.sh nxb18 "<free gpus>"
+Follow: models/nxb18/logs/train_*_fold*.log, fold_*/progress.png.
+Resume: EXTRA="--c" bash 03_launch_folds.sh nxb18 "<same gpus>".
+(nxb16 took ~1 day per fold with 15 runs sharing 4 GPUs.)
+
+
+Step 5. Cross-validation, final network, cleanup  (env nnunet)
+--------------------------------------------------------------
+    bash 04_crossval.sh nxb18
+    bash 05_cleanup.sh nxb18
+Write the CV Dice (mean, per fold, per label, postprocessing chosen) in README.md "Results",
+in the same format as fixed_tree_training/README.md, and compare the 16 shared labels with
+the nxb16 row (does adding ventricles/CSF change the other structures?).
+
+
+Step 6. Predict MRIxFields  (env nnunet)
+----------------------------------------
+Test data: reuse fixed_tree_training/data_shared/test/mrixfields (948 images: T1w, T2w, FLAIR x
+3T, 7T; segmentations/nextbrain and segmentations/supersynth). Do not copy it: make
+data_shared/test a relative symlink to ../../fixed_tree_training/data_shared/test.
+Copy fixed_tree_training/models/nxb16/predictions/mrixfields/predict.sh to
+models/nxb18/predictions/mrixfields/predict.sh and change `env.sh nxb16` -> `env.sh nxb18`
+plus the comments (postprocessing: keep off by default unless 04_crossval.sh found a real gain).
+    bash models/nxb18/predictions/mrixfields/predict.sh "<free gpus>"
+Check: every <contrast>/<field> folder has as many predictions as images, values in 0..18.
+
+
+Step 7. Evaluate  (env nxb)
+---------------------------
+7a. models/nxb18/evaluation/mrixfields/nextbrain_nxb18/evaluate.py, adapted from
+    nextbrain_nxb16/evaluate.py (same CLI: --contrasts, --fields, --workers, --cache_gt; same
+    output tables in results/).
+    - The NextBrain references of MRIxFields have NO ventricles (50) and NO CSF (24) (checked:
+      they are background), so against NextBrain only the 16 nxb16 structures can be scored.
+      Map the references with map_segmentation(seg, "nxb16") exactly as before; predicted 17/18
+      count as "not that structure" (the "other" bin of the confusion matrix).
+    - Reuse the mapped references of nxb16 (read-only):
+      --cache_gt ../../../../../fixed_tree_training/models/nxb16/evaluation/mrixfields/nextbrain_nxb16/gt_nxb16_cache
+      (identical to recomputing them; saves hours). Never write into fixed_tree_training/.
+    - Also save confusion_3T.npz / confusion_7T.npz (19 predicted classes x 16+bg reference),
+      to see where the reference tissue goes when the network predicts ventricles/CSF.
+    - Add compare_nxb16.py (or a section of the summary): per contrast x field x structure,
+      Dice of nxb18 vs nxb16 (read fixed_tree_training/.../nextbrain_nxb16/results/*.csv),
+      with the paired difference per case.
+7b. models/nxb18/evaluation/mrixfields/supersynth_ventricles_csf/evaluate.py: Dice and volumes
+    of ventricles and CSF against segmentations/supersynth (only T1w and FLAIR exist; 3T and 7T).
+    SuperSynth ventricles = {4, 5, 14, 15, 43, 44} (same set as
+    other_codes/add_csf_to_labels SS_VENTRICLE_LABELS), CSF = {24}. Same CLI and table format as
+    7a. Caveat to state in the summary: SuperSynth CSF covers all the extra-cerebral CSF of a
+    whole-head scan, the training CSF is the rim built by the combined approach, so the CSF
+    Dice measures agreement in definition as much as accuracy; ventricles are the meaningful
+    number. Also report ventricle volumes vs SuperSynth (Pearson r), esp. for the R subjects
+    with enlarged ventricles.
+7c. results_summary.md + make_results_visual.py -> results_visual.ipynb, in the same style as
+    nextbrain_nxb16 (numbers first, then image | reference | nxb18 | disagreement). Must answer:
+    - Is nxb18 better/worse than nxb16 on the 16 structures, per contrast and field?
+    - nxb16 summary point 1b: on T2w, nxb16 filled the enlarged ventricles of the R subjects
+      with tissue labels. Does nxb18 label them as ventricles, and does that raise the T2w Dice
+      of the surrounding structures (worst cases sub-R0411, sub-R0345, sub-R0370)?
+    - Where does nxb18 put CSF (rim, sulci, outside the brain)? Any CSF/ventricle predicted
+      inside tissue?
+    Run the notebook so the figures are saved in it.
+7d. models/nxb18/evaluation/TODO.txt with what is left (as in nxb16/evaluation/TODO.txt).
+
+
+Step 8. Wrap-up
+---------------
+- README.md: results table (CV + MRIxFields), disk use, how to rerun every step.
+- Final check of the tree of models/nxb18/ against the layout at the top of this file.
+- Report: CV Dice, MRIxFields Dice per contrast/field vs nxb16, ventricle/CSF results, and
+  anything that failed or was skipped.

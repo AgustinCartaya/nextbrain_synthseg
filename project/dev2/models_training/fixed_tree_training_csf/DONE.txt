@@ -1,0 +1,62 @@
+DONE.txt: progress of TODO.txt (nxb18 nnU-Net)
+==============================================
+GPUs allowed: 1, 2, 3 (GPU 0 is used by another job). Only files inside fixed_tree_training_csf/
+are written.
+
+NOW
+---
+Step 4: training the 5 folds of nxb18 (started 2026-11-24 02:41, env nnunet, background)
+    export nnUNet_n_proc_DA=12; bash 03_launch_folds.sh nxb18 "1 2 3"
+    folds 0,3 -> GPU 1 | folds 1,4 -> GPU 2 | fold 2 -> GPU 3
+    logs: models/nxb18/logs/train_nnUNetResEncUNetMPlans_nnUNetTrainer_fold<k>.log
+    stop: pkill -f "nnUNetv2_train 102"   resume: EXTRA="--c" bash 03_launch_folds.sh nxb18 "1 2 3"
+    status 02:56: all 5 folds running, ~43 s/epoch (1000 epochs -> ~12 h, ETA ~15:00 2026-11-24),
+    EMA pseudo Dice 0.13-0.15 after 19 epochs, no errors.
+    status 14:45: epochs 937-975 / 1000, EMA pseudo Dice 0.81-0.84, all 5 alive.
+    ETA: fold 2 ~15:00, the others ~15:30.
+    progress: grep -c "Epoch time" models/nxb18/nnUNet_results/Dataset102_nxb18/*/fold_*/training_log_*.txt
+
+COMPLETED
+---------
+- Step 3 (2026-11-24 02:33-02:40, 7 min): plan + preprocess OK. 19 labels, spacing 0.4 mm,
+  patch 128x192x96, batch 2 (ResEnc M). 5 folds of 800 train / 200 val (fold k = template
+  case-(k+1)). 1000 images moved to data_shared/shared_preprocessed (55 GB) and linked;
+  nnUNet_preprocessed/Dataset102_nxb18 = 11 GB. Log: preprocess_nxb18.log.
+- Step 1 (2026-11-24 02:14-02:31): 1000 images, 17 min on GPUs 1-3, exit 0, no errors
+  (generate_data/logs/generate_20261124_021359.log). numTraining = 1000 in both datasets.
+  data_shared/generation = 33 GB. visualize_generation.ipynb re-run on 50 random images (saved).
+  Ventricles / CSF in every image: ventricles 66k-502k voxels (0.4 mm), CSF 16k-3.9M voxels
+  (CSF varies a lot: morphology pairs grow/shrink the rim). No image without ventricles or CSF.
+- Step 2 (scripts): env.sh, 01..06_*.sh, make_splits.py, share_images.py, map_labels.py copied
+  from fixed_tree_training/ and adapted (nets nxb18 = 102, nxbsimplified_csf = 101; usage
+  lines/comments). Logic unchanged. `bash -n` OK; `source env.sh nxb18` OK.
+  README.md rewritten for this experiment.
+- Step 6 (part): models/nxb18/predictions/mrixfields/predict.sh (from nxb16: env.sh nxb18,
+  default GPUs "1 2 3", comments). `bash -n` OK.
+- Step 7a/7b (code, not run yet; need the predictions):
+    nextbrain_nxb18/evaluate.py, nextbrain_nxb18/compare_nxb16.py,
+    supersynth_ventricles_csf/evaluate.py (all in models/nxb18/evaluation/mrixfields/)
+  Tested on 6 nxb16 predictions (output in a scratch folder): evaluate.py reproduces the nxb16
+  per_case.csv exactly (max |Dice diff| = 0); compare and SuperSynth scripts run.
+- Step 6 (part): data_shared/test -> ../../fixed_tree_training/data_shared/test (symlink).
+
+DECISIONS (not in TODO.txt)
+---------------------------
+- Generation run directly with generate.py (not launch.sh) so the run can be tracked; same
+  options and output as launch.sh --gpus 1 2 3.
+
+- 7a evaluate.py reads the nxb16 mapped references read-only (--gt_cache_ro, default) and can
+  only write a cache inside this folder; it also writes per_case_csf.csv (predicted ventricles /
+  CSF, on NextBrain tissue vs background) and confusion_<field>.npz (17 x 19).
+- 7b: SuperSynth segmentations exist for T1w, T2w AND FLAIR (TODO said T1w/FLAIR only), same
+  grid as the images -> evaluate all three contrasts.
+
+WARNINGS / ERRORS
+-----------------
+- models/nxb18/logs/train_*_fold*.log (nohup stdout) are buffered and lag ~10 min behind; the
+  up-to-date log of each fold is nnUNet_results/.../fold_<k>/training_log_*.txt.
+- generate.py default `-n` is now 5 on disk (changed by someone else after my 5-image test);
+  the first 1000-image launch (logs/generate_20261124_021126.log) therefore generated nothing.
+  Not reverted; relaunched with an explicit `-n 1000`.
+- generate_data/logs/generate_20261124_015718.log: an earlier run (not mine) that stopped while
+  checking the templates; no process left, nothing to clean.

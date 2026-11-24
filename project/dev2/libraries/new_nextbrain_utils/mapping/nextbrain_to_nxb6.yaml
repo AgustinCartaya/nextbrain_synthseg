@@ -1,0 +1,358 @@
+Combined Structures:
+- Background:
+  - 0
+  - 50
+- White Matter:
+  - 7
+  - 68
+  - 120
+  - 130
+  - 199
+  - 100
+  - 161
+  - 208
+  - 209
+- Gray Matter:
+  - 103
+  - 108
+  - 111
+  - 117
+  - 128
+  - 99
+  - 113
+  - 125
+  - 157
+  - 344
+  - 369
+  - 409
+  - 567
+  - 340
+  - 563
+  - 419
+  - 373
+  - 572
+  - 345
+  - 370
+  - 374
+  - 410
+  - 420
+  - 564
+  - 573
+  - 341
+  - 568
+  - 371
+  - 375
+  - 411
+  - 421
+  - 565
+  - 569
+  - 574
+  - 342
+  - 346
+  - 326
+  - 347
+  - 576
+  - 558
+  - 404
+  - 364
+  - 405
+  - 559
+  - 365
+  - 561
+  - 407
+  - 367
+  - 575
+  - 422
+  - 432
+  - 320
+  - 238
+  - 277
+  - 278
+  - 279
+  - 301
+  - 377
+  - 217
+  - 240
+  - 242
+  - 214
+  - 215
+  - 216
+  - 295
+  - 2001
+  - 2002
+  - 2003
+  - 2005
+  - 2006
+  - 2007
+  - 2008
+  - 2009
+  - 2010
+  - 2011
+  - 2012
+  - 2013
+  - 2014
+  - 2015
+  - 2016
+  - 2017
+  - 2018
+  - 2019
+  - 2020
+  - 2021
+  - 2022
+  - 2023
+  - 2024
+  - 2025
+  - 2026
+  - 2027
+  - 2028
+  - 2029
+  - 2030
+  - 2031
+  - 2032
+  - 2033
+  - 2034
+  - 2035
+  - 3
+  # - Hippocampal White Matter:
+  - 461
+  - 343
+  - 368
+  - 372
+  - 408
+  - 418
+  - 562
+  - 566
+  - 571
+  - 339
+  - 354
+- Cerebellum White Matter:
+  - 846
+# - Cerebellar Other:
+  - 721
+  - 715
+  - 751
+  - 752
+- Cerebellum Gray Matter:
+  - 595
+  - 597
+- Deep Gray Matter:
+# - Caudate and Accumbens:
+  - 48
+  - 118
+  - 393
+  - 101
+  - 184
+# - Putamen:
+  - 79
+  - 349
+  - 102
+  - 174
+# - White Thalamus:
+  - 276
+  - 444
+  - 430
+  - 201
+  - 314
+  - 381
+  - 382
+  - 394
+  - 458
+  - 283
+  - 493
+  - 519
+  - 254
+  - 191
+  - 312
+  - 285
+  - 425
+  - 284
+  - 396
+  - 479
+  - 350
+  - 222
+  - 397
+  - 484
+  - 218
+  - 492
+  - 322
+  - 442
+  - 190
+  - 246
+  - 517
+  - 478
+  - 226
+  - 303
+  - 398
+  - 426
+  - 424
+# - Gray Thalamus:
+  - 400
+  - 274
+  - 395
+  - 423
+  - 811
+  - 441
+  - 504
+  - 512
+  - 510
+  - 378
+  - 221
+  - 379
+  - 313
+  - 282
+  - 225
+  - 224
+  - 399
+  - 286
+  - 223
+  - 454
+  - 380
+  - 813
+  - 219
+  - 220
+  - 252
+  - 253
+  - 443
+  - 508
+  - 578
+  - 505 # ventral_medial_geniculate_nucleus  (added)
+# - Pallidum:
+  - 119
+  - 206
+# - Gray hypothalamus:
+  - 256
+  - 275
+  - 304
+  - 147
+  - 150
+  - 192
+  - 193
+  - 194
+  - 207
+  - 227
+  - 228
+  - 229
+  - 243
+  - 244
+  - 245
+  - 255
+  - 268
+  - 297
+  - 308
+  - 149 #moved here from white hypothalamus following Nellie's suggestion
+  - 160 #moved here from white hypothalamus following Nellie's suggestion
+  - 181 #moved here from white hypothalamus following Nellie's suggestion
+  - 196 #moved here from white hypothalamus following Nellie's suggestion
+  - 230 #moved here from white hypothalamus following Nellie's suggestion
+  - 232 #moved here from white hypothalamus following Nellie's suggestion
+# - White hypothalamus:
+  - 305
+  - 306
+  - 307
+  - 234
+  - 298
+  - 309
+  - 433
+- Brainstem:
+# - Substantia Nigra and STN and Red Nucleus:
+  - 310
+  - 352
+  - 315
+  - 316
+  - 321
+  - 385
+# - Gray Brainstem nuclei:
+  - 496 # pretectal_region
+  - 498 # peripeduncular_nucleus
+  - 465 # PAG
+  - 114 # optic_nerve
+  - 412 # fasciculus_retroflexus_(habenuno-interpeduncular_tract)
+  - 414 # pontine_nucleus
+  - 521 # DR
+  - 654 # inferior_olive
+  - 666 # facial_nucleus
+  - 687 # solitary_tract
+  - 765 # central_gray_of_medulla_oblongata
+  - 843 # infundibular_stalk
+  - 435 # VTA: moved from gray BS to white BS in summer 2024 and then back after further inspectio of Edlow brain
+  - 541 # colliculus: moved from gray BS to white BS in summer 2024 and then back after further inspectio of Edlow brain
+  - 669 # spinal_trigeminal_nucleus  (added)
+  - 693 # ambiguus_nucleus  (added)
+  - 717 # solitary_nucleus  (added)
+  - 724 # hypoglossal_nucleus  (added)
+  - 725 # dorsal_motor_nucleus_of_the_vagus_(vagal_nucleus)  (added)
+  - 771 # spinal_accessory_(supraspinal)_nucleus  (added)
+  - 726 # external_(accessory/lateral)_cuneate_nucleus  (added)
+  - 755 # cuneate_nucleus  (added)
+  - 756 # gracile_nucleus  (added)
+  - 671 # inferior_olive__medial_nucleus  (added)
+  - 685 # inferior_olive__dorsal_nucleus  (added)
+  - 695 # medullary_reticular_formation  (added)
+  - 703 # spinal_(inferior)_vestibular_nucleus  (added)
+  - 507 # superior_colliculus  (added)
+  - 447 # edinger-westphal_nucleus_(accessory_oculomotor_nucleus)  (added)
+  - 464 # oculomotor_nucleus  (added)
+  - 520 # trochlear_nucleus  (added)
+  - 645 # mesencephalic_trigeminal_nucleus  (added)
+  - 401 # parabrachial_pigmented_nucleus  (added)
+  - 436 # interpeduncular_nucleus  (added)
+  - 468 # precommissural_nucleus  (added)
+  - 469 # interstitial_nucleus_of_posterior_commissure  (added)
+  - 542 # parabigeminal_nucleus  (added)
+  - 470 # subcommissural_organ  (added)
+  - 844 # reticular_formation_/_cuneiform_area  (added)
+  - 598 # dorsal_nucleus_of_lateral_lemniscus  (added)
+  - 599 # ventral_nucleus_of_lateral_lemniscus  (added)
+  - 647 # nucleus_of_trapezoid_body  (added)
+  - 649 # medial_superior_olive  (added)
+  - 660 # lateral_superior_olivary_nucleus  (added)
+  - 689 # ventral_cochlear_nucleus  (added)
+  - 731 # dorsal_cochlear_nucleus  (added)
+  - 630 # motor_nucleus_of_trigeminal_nerve  (added)
+  - 659 # principal_sensory_nucleus_of_trigeminal_nerve  (added)
+  - 682 # abducens_nucleus  (added)
+  - 589 # nucleus_coeruleus  (added)
+  - 546 # lateral_parabrachial_nucleus  (added)
+  - 581 # medial_parabrachial_nucleus  (added)
+  - 610 # central_gray_of_pons  (added)
+  - 527 # pontine_reticular_formation  (added)
+  - 683 # superior_vestibular_nucleus  (added)
+  - 690 # lateral_vestibular_nucleus  (added)
+  - 694 # medial_vestibular_nucleus  (added)
+# - White Brainstem nuclei:
+  - 384 # midbrain
+  - 451 # interstitial_nucleus_of_cajal
+  - 506 # pineal_body
+  - 580 # pons
+  - 611 # white_matter_of_hindbrain
+  - 697 # inferior_cerebellar_peduncle
+  - 531 # SCP: moved from gray BS in summer 2024
+  - 662 # medulla: moved from gray BS in summer 2024
+  - 677 # spinal_trigeminal_tract  (added)
+  - 779 # corticospinal_tract  (added)
+  - 655 # amiculum_of_the_olive  (added)
+  - 525 # brachium_of_inferior_colliculus  (added)
+  - 526 # brachium_of_superior_colliculus  (added)
+  - 586 # commissure_of_inferior_colliculus  (added)
+  - 386 # root_of_oculomotor_nerve  (added)
+  - 535 # root_of_trochlear_nerve  (added)
+  - 403 # cerebellothalamic_tract  (added)
+  - 471 # decussation_of_superior_cerebellar_peduncle  (added)
+  - 499 # medial_lemniscus  (added)
+  - 600 # mesencephalic_trigeminal_tract  (added)
+  - 842 # decussation_of_trochlear_nerve_fibres  (added)
+  - 431 # white_matter_of_midbrain  (added)
+  - 472 # posterior_commissure  (added)
+  - 543 # middle_cerebellar_peduncle  (added)
+  - 624 # root_of_facial_nerve  (added)
+  - 415 # pontocerebellar_tract  (added)
+  - 515 # lateral_lemniscus  (added)
+  - 528 # medial_longitudinal_fasciculus  (added)
+  - 591 # central_tegmental_tract  (added)
+  - 592 # spinal_lemniscus_in_hindbrain  (added)
+  - 827 # parietotemporopontine_tract  (added)
+  - 828 # corticonuclear_tract  (added)
+  - 829 # frontopontine_tract  (added)
+  - 617 # rostral_(anterior)_medullary_velum  (added)
+# CSF:
+#   - 50

@@ -31,7 +31,8 @@ Pipeline (each step can be switched off):
                         border is mostly non-cortical tissue
 
 Works on the full label set (any label ids). Tissue classes (to know which labels are
-cortex) come from the NextBrain ontology + L1 mapping via wp1 merge_labels.py
+cortex) come from a YAML grouping of NextBrain labels (default data/inputs/mapping_seg7.yaml,
+group names must match L1_ORDER) via libraries/new_nextbrain_utils/next_brain_mapping.py
 (or use --input-is-l1 for L1 inputs).
 
 CLI:
@@ -45,16 +46,23 @@ CLI:
 import argparse
 import json
 import os
+import sys
 import time
 
 import nibabel as nib
 import numpy as np
 from scipy import ndimage as ndi
 
-# L1 classes (mapping_l1.json)
-L1 = {"Background": 0, "Brainstem": 1, "CSF": 2, "CerebellarGM": 3, "CerebellarWM": 4,
-      "CerebralGM": 5, "CerebralWM": 6, "DeepGM": 7, "Other": 8}
-CORTEX_L1 = (3, 5)          # labels that line sulci (background next to them may be real)
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(HERE, "..", "libraries", "new_nextbrain_utils"))
+from nxb_label_mapping import load_groups, map_segmentation  # noqa: E402
+
+# L1 classes: names = groups of the mapping YAML, values = class id
+L1_ORDER = {"Background": 0, "White Matter": 1, "Gray Matter": 2, "Cerebellum White Matter": 3, "Cerebellum Gray Matter": 4,
+            "Deep Gray Matter": 5, "Brainstem": 6, "CSF": 7}
+OTHER_L1 = 8                # labels not in the mapping (treated as non-cortical tissue)
+CORTEX_L1 = (L1_ORDER["Gray Matter"], L1_ORDER["Cerebellum Gray Matter"])  # line sulci (bg next to them may be real)
+CSF_L1 = (L1_ORDER["CSF"],)
 
 STEP_CODES = {"gap": 1, "crack": 2, "hole": 3, "shift": 4, "mask": 5, "isolated": 6}
 FILL_CODES = (1, 2, 3)      # steps that add tissue (gap, crack, hole)
@@ -68,39 +76,18 @@ def log(msg, verbose=True):
 # =============================================================================
 # Label classes
 # =============================================================================
-MERGE_DIR = "/home/agustin/phd/synthseg_nextbrain/project/dev/wp1/create_merged_segmentations"
-ONTOLOGY = "/home/agustin/phd/synthseg_nextbrain/data/basics/nextbrain_ontology_v1.csv"
-MAPPING_L1 = os.path.join(MERGE_DIR, "data/inputs/mapping_l1.json")
+MAPPING_L1 = os.path.join(HERE, "data", "inputs", "mapping_seg7.yaml")
 
 
-# raw recon labels that are not in the ontology, with the L1 class they get in
-# deep_learning/data/test/changed_recon_holes_0.2mm_L1 (3 = cerebral cortex)
-EXTRA_L1 = {1: 1, 2: 2, 3: 5}
-
-
-def load_l1_lut(max_label, ontology=ONTOLOGY, mapping=MAPPING_L1, input_is_l1=False, extra=None):
+def load_l1_lut(max_label, mapping=MAPPING_L1, input_is_l1=False):
     """
-    LUT original_id -> L1 class, built with wp1/create_merged_segmentations/merge_labels.py
-    (same code that produced the *_L1 files). Labels missing from the ontology -> 8 (Other,
-    i.e. treated as non-cortical tissue).
+    LUT original_id -> L1 class (L1_ORDER), built by mapping every label id 0..max_label
+    with next_brain_mapping.map_segmentation. Labels missing from the mapping -> OTHER_L1.
     """
+    ids = np.arange(max_label + 1)
     if input_is_l1:
-        lut = np.full(max_label + 1, 8, np.uint8)
-        ids = np.arange(min(max_label, 8) + 1)
-        lut[ids] = ids
-        return lut
-    import sys
-    sys.path.insert(0, MERGE_DIR)
-    import merge_labels as ml
-    onto = ml.load_ontology(ontology)
-    with open(mapping) as f:
-        mp = json.load(f)
-    label_map = ml.build_label_map(onto, "L1", mp)
-    lut = ml.build_lut(onto, label_map, max_label, unmapped_value=0, unknown_value=8)
-    for k, v in (EXTRA_L1 if extra is None else extra).items():
-        if k < len(lut):
-            lut[k] = v
-    return lut[: max(max_label, 1) + 1].astype(np.uint8) if len(lut) > max_label else lut.astype(np.uint8)
+        return np.where(ids <= OTHER_L1, ids, OTHER_L1).astype(np.uint8)
+    return map_segmentation(ids, load_groups(mapping), L1_ORDER, unknown=OTHER_L1).astype(np.uint8)
 
 
 # =============================================================================
@@ -525,7 +512,7 @@ def crack_voxels(seg, lut, zooms, max_crack_mm=1.0, axes=(0, 1, 2), cortex=CORTE
 # 5. Enclosed holes
 # =============================================================================
 def hole_voxels(seg, lut, max_cortex_frac=0.3, max_csf_frac=0.02, min_vox=1, cortex=CORTEX_L1,
-                csf=(2,)):
+                csf=CSF_L1):
     """Background components not connected to the volume border whose border voxels are
     mostly non-cortical tissue. Components touching CSF (> max_csf_frac of the border) are
     kept: in NextBrain most of the lateral ventricle is unlabelled background."""
@@ -742,7 +729,7 @@ def restore_array(seg, zooms, lut, affine=None, verbose=True, bmask=None, **kw):
 
 
 def restore_nifti(path, mapping=None, verbose=True, bmask=None, **kw):
-    """mapping: None (NextBrain labels, default ontology + L1 mapping) or a dict of
+    """mapping: None (NextBrain labels, default YAML mapping) or a dict of
     load_l1_lut keyword arguments, e.g. {"input_is_l1": True}.
     bmask: optional path to a brain mask (0 = no label allowed there)."""
     img = nib.load(path)
@@ -761,8 +748,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("input")
     p.add_argument("output")
-    p.add_argument("--ontology", default=ONTOLOGY)
-    p.add_argument("--l1-mapping", default=MAPPING_L1)
+    p.add_argument("--l1-mapping", default=MAPPING_L1, help="YAML grouping NextBrain labels into L1_ORDER classes")
     p.add_argument("--input-is-l1", action="store_true", help="input labels are already L1 (0-8)")
     p.add_argument("--save-steps", action="store_true",
                    help="save the per-voxel step codes to <output>_steps.nii.gz (or --steps-out)")
@@ -779,7 +765,7 @@ def main():
             p.add_argument(f"--{k.replace('_', '-')}", dest=k, type=type(v) if v is not None else int, default=v)
     a = p.parse_args()
     kw = {k: getattr(a, k) for k in DEFAULTS}
-    mp = dict(ontology=a.ontology, mapping=a.l1_mapping, input_is_l1=a.input_is_l1)
+    mp = dict(mapping=a.l1_mapping, input_is_l1=a.input_is_l1)
     out, st, rep = restore_nifti(a.input, mp, bmask=a.bmask, **kw)
     nib.save(out, a.output)
     stem = a.output.replace(".nii.gz", "").replace(".nii", "")

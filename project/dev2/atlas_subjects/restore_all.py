@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Run restore.py on every NIfTI under an input folder, keeping the folder structure.
 
-    originals/nn/case-1.nii.gz  ->  restored/nn/case-1.nii.gz
-    originals/signed_distance/case-1.nii.gz  ->  restored/signed_distance/case-1.nii.gz
+    originals/rec_nn_0.2mm/case-1.nii.gz  ->  restored/rec_nn_0.2mm/case-1.nii.gz
+    originals/rec_sd_0.2mm/case-1.nii.gz  ->  restored/rec_sd_0.2mm/case-1.nii.gz
+
+*_steps.nii.gz files (step maps from build_signed_distance.py --save-steps) are ignored.
 
 Every option that restore_all.py does not know is passed to restore.py as is, e.g.
 --save-steps, --save-reports, --remove-isolated-elements, --bmask, --no-shifts...
@@ -34,13 +36,15 @@ def run(src, dst, extra):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--input-dir', type=Path, default=HERE / 'data/outputs/originals')
-    ap.add_argument('--output-dir', type=Path, default=HERE / 'data/outputs/restored')
-    ap.add_argument('--jobs', type=int, default=4, help='files processed in parallel (default 4)')
+    ap.add_argument('--input-dir', type=Path, default=HERE / 'data/outputs/adria')
+    ap.add_argument('--output-dir', type=Path, default=HERE / 'data/outputs/restored_adria')
+    ap.add_argument('--jobs', type=int, default=5, help='files processed in parallel (default 5)')
     ap.add_argument('--overwrite', action='store_true', help='redo files whose output already exists')
     args, extra = ap.parse_known_args()
 
-    files = sorted(f for pat in ('*.nii.gz', '*.nii') for f in args.input_dir.rglob(pat))
+    # *_steps.nii.gz are step maps written by build_signed_distance.py --save-steps, not segmentations
+    files = sorted(f for pat in ('*.nii.gz', '*.nii') for f in args.input_dir.rglob(pat)
+                   if not f.name.split('.')[0].endswith('_steps'))
     todo = []
     for src in files:
         dst = args.output_dir / src.relative_to(args.input_dir)

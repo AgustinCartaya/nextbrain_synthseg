@@ -1,0 +1,19 @@
+To do in the future:
+Include supersynth visualization to see if deep gm structures share a border with cortex
+
+Already done:
+I want to evaluate the predicted images at /home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training/models/nxb16/predictions/mrixfields
+whith the nextbrain segmentations at /home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training/data_shared/test/mrixfields/segmentations/nextbrain
+
+The evaluation code will have to compare each of the 16 structures and as the nextbrain segmentation have more, the code will heve to use the function map_segmentation
+of the library /home/agustin/phd/synthseg_nextbrain/project/dev2/libraries/new_nextbrain_utils/nxb_label_mapping.py with nxb16.
+
+Write the code to compare both sementation using dice, and volumens.
+comparations should be by modality and by field streght
+it should run using CLI and have the arguments --contrasts (with the modalitites you want to compare, if not givel all availables in both segmentations)
+and same for --fields
+
+save the evaluation code at /home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training/models/nxb16/evaluation/mrixfields/nextbrain_nxb16
+and save the results (tables .csv) at /home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training/models/nxb16/evaluation/mrixfields/nextbrain_nxb16/results
+
+just write the code because the nnunet predictions are not ready. and 

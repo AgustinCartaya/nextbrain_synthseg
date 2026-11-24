@@ -1,0 +1,47 @@
+The brain segmentations at /home/agustin/phd/synthseg_nextbrain/project/dev2/other_codes/add_csf_to_labels/data/inputs/nxbsimplified/labels
+does not have CSF or ventricle labels and I would like to add them
+
+Approach 1 (morphological)
+For the ventricles:
+all background regions inside the WM is ventricle
+
+For the CSF:
+obtain the brain mask
+close the cortex 
+dilate a bit the mask
+and the difference of the original mas with the brain mask is the CSF, excluding the ventricles of course.
+
+Observations:
+1. Remove smalls objects that are not part of the principal component of the closed mask dilated: an abject stay only if it is at least 30% of the size of the biggest component 
+2. the CSF nevertouches directly the white matte: so in the lateals where there is contact with the WM ir deep GM the CSF should be removed because a complete brain would not have it
+
+
+Approach 2 (supersynth)
+Cree imagenes syntheticas a partir de las segmentaciones y las segmente con supersynth: entas en /home/agustin/phd/synthseg_nextbrain/project/dev2/other_codes/add_csf_to_labels/data/inputs/supersynth
+esas imagenes tienen el CSF y los ventriculos ya segmentados
+lo unico que hay que hacer es como un rompecabeza, ponerlos en las segmentaciones /home/agustin/phd/synthseg_nextbrain/project/dev2/other_codes/add_csf_to_labels/data/inputs/nxbsimplified/labels
+
+Para los ventriculos: 
+se agarran los ventriculos de supersynth, se dilatan un poquito y se sobreponen en la sgmentacion.
+luego se elimina todo lo que sobre (lo que yq este ocupado por tejido).
+
+para el cortex:
+directamente se coloca sobre la segmentacion y se elimine lo que ya este ocupado por tejido
+
+label final de los ventriculos 50 y del CSF 24
+
+
+
+Approach 3 (combined)
+
+Para los ventriculos: 
+usa el approach de supersynth
+
+
+para el cortex:
+Haremos algo parecido al approach 1 pero para hacer frente a la observacion 2 hagamoslo mejor:
+    tomemos solo el tejido cortical (incluyendo hipocampo, cerebellar GM y otras areas coritcales)
+    dilatemoslas un poco.
+    eliminemos la mascara del cerebro
+    lo que quede es el CSF
+    

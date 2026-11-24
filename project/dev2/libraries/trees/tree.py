@@ -41,6 +41,7 @@ ancestor (its "representative"); all labels with the same representative
 form one *generation class*.
 """
 
+import importlib
 import json
 import warnings
 from collections import deque
@@ -146,13 +147,64 @@ class Node(object):
         return f'Node({self.name!r}, level={self.level}, parent={self.parent!r}, n_children={len(self.children)})'
 
 
+# Registry of tree types: {tree_type: LabelTree subclass}. Filled automatically when a subclass
+# with a `tree_type` is defined. A JSON file names its type in the top-level "tree_type" field
+# (missing = plain LabelTree), so `load_tree` can rebuild it with the right class.
+TREE_TYPES = {}
+
+
+def tree_class(tree_type):
+    """LabelTree subclass registered as `tree_type` (None -> LabelTree).
+
+    Not registered yet -> imports the module `trees.tree_<tree_type>` (naming convention),
+    whose subclass registers itself when it is defined.
+    """
+    if tree_type is None:
+        return LabelTree
+    if tree_type not in TREE_TYPES:
+        module = f'{__package__}.tree_{tree_type}' if __package__ else f'tree_{tree_type}'
+        try:
+            importlib.import_module(module)
+        except ImportError as e:
+            raise ValueError(f'Unknown tree_type {tree_type!r}: not registered and module '
+                             f'{module!r} could not be imported ({e})') from e
+        if tree_type not in TREE_TYPES:
+            raise ValueError(f'Unknown tree_type {tree_type!r}: module {module!r} does not '
+                             f'define a LabelTree subclass with tree_type = {tree_type!r}')
+    return TREE_TYPES[tree_type]
+
+
+def load_tree(tree):
+    """Tree of the right class from a JSON path, a dict or an existing tree (returned as is).
+
+    The class comes from the "tree_type" field of the file (missing -> plain LabelTree).
+    """
+    if isinstance(tree, LabelTree):
+        return tree
+    if not isinstance(tree, dict):
+        with open(tree) as f:
+            tree = json.load(f)
+    return tree_class(tree.get('tree_type')).from_dict(tree)
+
+
 class LabelTree(object):
     """Resolution-aware label ontology. Build it from JSON or programmatically with `add_node`.
 
-    Subclasses with richer nodes only need to set `node_cls` (see `tree_allen.AllenLabelTree`):
-    reading, writing, `new` and `add_node` all build nodes of that class.
+    Subclasses with richer nodes set `node_cls` (reading, writing, `new` and `add_node` then
+    build nodes of that class) and a unique `tree_type`, which registers them in TREE_TYPES
+    and is written to their JSON files (see `tree_allen.AllenLabelTree`). To read any tree
+    without knowing its class, use `load_tree(path)`.
     """
     node_cls = Node
+    tree_type = None        # plain tree; subclasses give a unique name, e.g. 'allen'
+
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        t = cls.__dict__.get('tree_type')      # only when the subclass declares its own
+        if t is not None:
+            if t in TREE_TYPES and TREE_TYPES[t].__qualname__ != cls.__qualname__:
+                raise ValueError(f'tree_type {t!r} already used by {TREE_TYPES[t].__name__}')
+            TREE_TYPES[t] = cls
 
     def __init__(self, colors, nodes, root='root', contrasts=None, version=None, description='',
                  validate=True):
@@ -170,6 +222,10 @@ class LabelTree(object):
 
     @classmethod
     def from_dict(cls, d):
+        t = d.get('tree_type')
+        if t is not None and not issubclass(cls, tree_class(t)):
+            raise ValueError(f'This is a {t!r} tree ({tree_class(t).__name__}), it cannot be read '
+                             f'as {cls.__name__}. Use load_tree() or {tree_class(t).__name__}.')
         fields = set(cls.node_cls.all_fields())
         unknown = {name: set(spec) - fields for name, spec in d['nodes'].items()}
         unknown = {k: v for k, v in unknown.items() if v}
@@ -194,10 +250,13 @@ class LabelTree(object):
         return cls.from_json(tree)
 
     def to_dict(self, extra=True):
-        """Tree as a JSON-ready dict. `extra=False` drops the nodes' subclass fields."""
-        return {'version': self.version, 'description': self.description, 'colors': self.colors,
-                'contrasts': self.contrasts, 'root': self.root,
-                'nodes': {name: self.nodes[name].to_dict(extra=extra) for name in self.order()}}
+        """Tree as a JSON-ready dict. `extra=False` drops tree_type and the nodes' subclass
+        fields, i.e. gives a plain LabelTree dict."""
+        d = {'tree_type': self.tree_type} if extra and self.tree_type is not None else {}
+        d.update({'version': self.version, 'description': self.description, 'colors': self.colors,
+                  'contrasts': self.contrasts, 'root': self.root,
+                  'nodes': {name: self.nodes[name].to_dict(extra=extra) for name in self.order()}})
+        return d
 
     def to_label_tree(self):
         """The same tree as a plain `LabelTree` (extra node fields dropped)."""
@@ -208,8 +267,9 @@ class LabelTree(object):
         d = self.to_dict()
         c = lambda v: json.dumps(v)
         lines = ['{']
-        for key in ('version', 'description', 'colors', 'contrasts', 'root'):
-            lines.append(f'  {c(key)}: {c(d[key])},')
+        for key in ('tree_type', 'version', 'description', 'colors', 'contrasts', 'root'):
+            if key in d:
+                lines.append(f'  {c(key)}: {c(d[key])},')
         lines.append('  "nodes": {')
         names = list(d['nodes'])
         for i, name in enumerate(names):
@@ -300,8 +360,10 @@ class LabelTree(object):
                 if bad:
                     errors.append(f'{name}: r_max uses unknown contrasts {sorted(bad)}')
             if n.level == 1 and any(v != INF for v in n.r_max.values()):
-                warns.append(f'{name}: r_max on level-1 nodes is ignored (always visible). '
-                             f'Group structures that merge at coarse resolution under a common parent.')
+                # warns.append(f'{name}: r_max on level-1 nodes is ignored (always visible). '
+                #              f'Group structures that merge at coarse resolution under a common parent.')
+                # Warning is too noisy, the generator ignores r_max on level-1 nodes anyway.
+                pass
             if n.level is not None and n.level >= 2 and n.parent in self.nodes:
                 p = self.nodes[n.parent]
                 if p.level >= 2:

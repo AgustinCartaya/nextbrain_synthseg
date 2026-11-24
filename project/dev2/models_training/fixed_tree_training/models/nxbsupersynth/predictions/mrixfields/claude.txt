@@ -1,0 +1,3 @@
+claude --resume 1d3cdc0d-edd2-41ca-95c7-b2a4f9ee5419
+
+PID 3739437 -> /home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training/models/nxbsupersynth/predictions/mrixfields/logs/predict_20261123_013716.log

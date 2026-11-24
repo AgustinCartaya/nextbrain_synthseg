@@ -15,11 +15,12 @@ so an `AllenLabelTree` can be passed to any generator function that takes a `Lab
     tree.to_json(path)                       # write it (allen_* included)
     tree.to_label_tree()                     # plain LabelTree, allen_* dropped
 
-The base `LabelTree.from_json` rejects unknown node fields, so a JSON file with allen_*
-fields must be read with `AllenLabelTree.from_json`.
+Its JSON files carry `"tree_type": "allen"`, so `trees.tree.load_tree(path)` (used by the
+generator) rebuilds them as AllenLabelTree. The base `LabelTree.from_json` rejects them.
 
-To make another kind of tree, follow the same pattern: subclass `Node` declaring
-`EXTRA_FIELDS = {name: converter}` and subclass `LabelTree` setting `node_cls`.
+To make another kind of tree, follow the same pattern in a module `trees/tree_<type>.py`:
+subclass `Node` declaring `EXTRA_FIELDS = {name: converter}` and subclass `LabelTree`
+setting `node_cls` and `tree_type = '<type>'`.
 """
 
 from .tree import LabelTree, Node  # noqa: E402
@@ -34,4 +35,5 @@ class AllenNode(Node):
 class AllenLabelTree(LabelTree):
     """`LabelTree` built from `AllenNode`s."""
 
+    tree_type = 'allen'     # registry name, written as "tree_type" in the JSON files
     node_cls = AllenNode

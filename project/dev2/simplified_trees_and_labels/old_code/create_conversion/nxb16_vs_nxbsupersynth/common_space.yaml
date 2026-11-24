@@ -1,0 +1,140 @@
+# Common label space to compare nxb16, nxbsupersynth and real SuperSynth segmentations.
+#
+# Each common class is the union of some classes of every ontology that cover (almost) the same
+# NextBrain (nxbsimplified) labels. See README.md for the reasoning and test_conversion/ for the
+# numbers and the tests.
+#
+# Ontologies (one list per class):
+#   nxb16          nxbsimplified_to_nxb16.py          (16 classes + background)
+#   nxbsupersynth  nxbsimplified_to_nxbsupersynth.py  (SuperSynth ids, NextBrainToSuperSynth_corrected.yaml)
+#   supersynth     a real mri_super_synth segmentation. Same ids as nxbsupersynth, but:
+#                    * 58 accumbens_area is the real accumbens (in nxbsupersynth it is mostly midbrain)
+#                    * 866 basal_forebrain is the real basal forebrain (in nxbsupersynth it is
+#                      SN + STN + red nucleus)
+#                    * extra labels: ventricles (4/43, 5/44, 14, 15) and WM hypointensities (77)
+#
+# SuperSynth ids: both the Right- and the Left- ids are listed, so either convention works.
+#
+# status (nxb16 vs nxbsupersynth):
+#   direct      1 nxb16 class == 1 nxbsupersynth class (same NextBrain labels)
+#   merged      exact or near-exact after merging classes (best possible dice >= 0.99)
+#   partial     exact on the voxels that are compared, but part of the structure is not compared
+#               (it is in an ignored nxbsupersynth class): caudate without the accumbens core,
+#               brainstem without most of the midbrain (NXB 384) and VTA
+#   approximate some NextBrain labels fall on different sides (best possible dice 0.91);
+#               report it, but read it with care
+#
+# ignore: classes mapped to ignore_label. A class with an empty list in an ontology does not exist
+# there. When two maps are compared, voxels that are ignore_label in either map, or that are in a
+# class the other ontology does not have, are excluded from both maps.
+
+ignore_label: 255
+
+classes:
+  - id: 0
+    name: background
+    status: direct
+    nxb16: [0]                       # background
+    nxbsupersynth: [0]               # background
+    supersynth: [0,                  # background
+                 4, 43,              # lateral ventricle  (background in NextBrain: 88 %)
+                 5, 44,              # inf-lat-vent       (background in NextBrain: 72 %)
+                 14,                 # 3rd ventricle      (background in NextBrain: 82 %)
+                 15]                 # 4th ventricle      (background in NextBrain: 67 %)
+
+  - id: 1
+    name: cerebral_white_matter
+    status: merged
+    nxb16: [1]                       # white_matter
+    nxbsupersynth: [2, 41,           # cerebral_white_matter
+                    821, 822]        # fornix (NXB 199, white_matter in nxb16)
+    supersynth: [2, 41, 821, 822,
+                 77]                 # WM hypointensities (white matter in NextBrain: 90 %)
+
+  - id: 2
+    name: cerebral_gray_matter       # cortex + hippocampus + amygdala + septal nucleus
+    status: merged
+    nxb16: [2,                       # gray_matter (contains hippocampal GM, amygdala, septal nucleus)
+            16]                      # hippocampal_white_matter
+    nxbsupersynth: [3, 42,           # cerebral_cortex
+                    17, 53,          # hippocampus
+                    18, 54,          # amygdala
+                    869, 870]        # septalnuc
+    supersynth: [3, 42, 17, 53, 18, 54, 869, 870]
+
+  - id: 3
+    name: cerebellum_white_matter
+    status: merged
+    nxb16: [3,                       # cerebellum_white_matter
+            15]                      # cerebellar_other (deep cerebellar nuclei)
+    nxbsupersynth: [7, 46]           # cerebellum_white_matter (deep nuclei included)
+    supersynth: [7, 46]
+
+  - id: 4
+    name: cerebellum_cortex
+    status: direct
+    nxb16: [4]                       # cerebellum_gray_matter
+    nxbsupersynth: [8, 47]           # cerebellum_cortex
+    supersynth: [8, 47]
+
+  - id: 5
+    name: thalamus
+    status: merged
+    nxb16: [7, 8]                    # white_thalamus + gray_thalamus
+    nxbsupersynth: [10, 49]          # thalamus (+ pineal body NXB 506, parasubthalamic NXB 433)
+    supersynth: [10, 49]
+
+  - id: 6
+    name: caudate
+    status: partial
+    nxb16: [5]                       # caudate_and_accumbens (includes accumbens core NXB 101)
+    nxbsupersynth: [11, 50]          # caudate (accumbens core is in accumbens_area -> ignored)
+    supersynth: [11, 50,
+                 26, 58]             # real accumbens (NXB 101 54 %, caudate 33 %): caudate_and_accumbens in nxb16
+
+  - id: 7
+    name: putamen
+    status: approximate
+    nxb16: [6]                       # putamen (includes claustrum NXB 102, 174)
+    nxbsupersynth: [12, 51]          # putamen (claustrum is in cerebral_white_matter)
+    supersynth: [12, 51]
+
+  - id: 8
+    name: pallidum
+    status: direct
+    nxb16: [9]                       # pallidum
+    nxbsupersynth: [13, 52]          # pallidum
+    supersynth: [13, 52]
+
+  - id: 9
+    name: substantia_nigra_stn_red_nucleus
+    status: direct
+    nxb16: [10]                      # substantia_nigra_and_stn_and_red_nucleus
+    nxbsupersynth: [865, 866]        # "basal_forebrain": in NextBrainToSuperSynth_corrected.yaml it
+                                     # holds exactly SN, STN and red nucleus (NXB 310 315 316 321 352 385)
+    supersynth: []                   # not a SuperSynth class (SN/STN/RN fall in WM and brain stem)
+
+  - id: 10
+    name: brainstem
+    status: partial
+    nxb16: [11, 12]                  # gray_brainstem_nuclei + white_brainstem_nuclei
+    nxbsupersynth: [16]              # brain_stem (midbrain NXB 384, VTA 435, ... are in accumbens_area)
+    supersynth: [16]
+
+  - id: 11
+    name: hypothalamus
+    status: merged
+    nxb16: [13, 14]                  # gray_hypothalamus + white_hypothalamus
+    nxbsupersynth: [819, 820,        # hypothal_nomb
+                    843, 844]        # mammillarybody
+    supersynth: [819, 820, 843, 844]
+
+ignore:
+  nxb16: []
+  nxbsupersynth: [26, 58,            # accumbens_area: 53 % midbrain (NXB 384), 25 % accumbens core,
+                                     # 14 % optic tract, + VTA, infundibulum, diagonal band, ...
+                  85]                # optic_chiasm: 60 % optic chiasm (WM in nxb16), 40 % optic nerve
+                                     # (gray_brainstem_nuclei in nxb16)
+  supersynth: [85,                   # optic_chiasm (same reason)
+               865, 866]             # real basal forebrain (NXB 128, 120, 108, 101, 111): gray matter
+                                     # in nxb16 but cerebral white matter in nxbsupersynth

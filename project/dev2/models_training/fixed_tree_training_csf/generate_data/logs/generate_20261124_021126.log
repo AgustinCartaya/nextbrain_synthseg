@@ -1,0 +1,23 @@
+1. HR templates
+/home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training_csf/data_shared/generation/templates/case-1_hr0.2mm.nii.gz: reused (same source and settings)
+    case-1_hr0.2mm.nii.gz: [523, 955, 659] voxels
+/home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training_csf/data_shared/generation/templates/case-2_hr0.2mm.nii.gz: reused (same source and settings)
+    case-2_hr0.2mm.nii.gz: [537, 969, 705] voxels
+/home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training_csf/data_shared/generation/templates/case-3_hr0.2mm.nii.gz: reused (same source and settings)
+    case-3_hr0.2mm.nii.gz: [483, 983, 785] voxels
+/home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training_csf/data_shared/generation/templates/case-4_hr0.2mm.nii.gz: reused (same source and settings)
+    case-4_hr0.2mm.nii.gz: [477, 999, 775] voxels
+/home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training_csf/data_shared/generation/templates/case-5_hr0.2mm.nii.gz: reused (same source and settings)
+    case-5_hr0.2mm.nii.gz: [507, 975, 750] voxels
+    level nxb_all         233 labels
+    level nxb18            19 labels  <- image synthesised from this level (IT)
+
+2. 5 images (0..4) on ['cuda:1', 'cuda:2', 'cuda:3']
+[worker 2 cuda:3] finished: 0 images in 0.0 min
+[worker 0 cuda:1] finished: 0 images in 0.0 min
+[worker 1 cuda:2] finished: 0 images in 0.0 min
+    done in 1.0 min, worker exit codes [0, 0, 0]
+
+3. dataset.json
+    Dataset101_nxbsimplified_csf: 5 cases, 233 labels (level nxb_all)
+    Dataset102_nxb18: 5 cases, 19 labels (level nxb18)

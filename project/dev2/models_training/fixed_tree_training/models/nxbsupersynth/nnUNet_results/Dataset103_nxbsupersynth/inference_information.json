@@ -1,0 +1,34 @@
+{
+    "all_results": {
+        "nnUNetTrainer__nnUNetResEncUNetMPlans__3d_fullres": 0.8048791545841154
+    },
+    "best_model_or_ensemble": {
+        "postprocessing_file": "/home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training/models/nxbsupersynth/nnUNet_results/Dataset103_nxbsupersynth/nnUNetTrainer__nnUNetResEncUNetMPlans__3d_fullres/crossval_results_folds_0_1_2_3_4/postprocessing.pkl",
+        "result_on_crossval_post_pp": 0.8049220765419132,
+        "result_on_crossval_pre_pp": 0.8048791545841154,
+        "selected_model_or_models": [
+            {
+                "configuration": "3d_fullres",
+                "plans_identifier": "nnUNetResEncUNetMPlans",
+                "trainer": "nnUNetTrainer"
+            }
+        ],
+        "some_plans_file": "/home/agustin/phd/synthseg_nextbrain/project/dev2/models_training/fixed_tree_training/models/nxbsupersynth/nnUNet_results/Dataset103_nxbsupersynth/nnUNetTrainer__nnUNetResEncUNetMPlans__3d_fullres/crossval_results_folds_0_1_2_3_4/plans.json"
+    },
+    "considered_models": [
+        {
+            "configuration": "3d_fullres",
+            "plans": "nnUNetResEncUNetMPlans",
+            "trainer": "nnUNetTrainer"
+        }
+    ],
+    "dataset_name_or_id": "Dataset103_nxbsupersynth",
+    "ensembling_allowed": false,
+    "folds": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ]
+}
